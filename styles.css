@@ -196,8 +196,12 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:6
 /* ---------- web projects ---------- */
 .proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
 @media(max-width:780px){.proj-grid{grid-template-columns:1fr}}
-.proj{position:relative;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;transition:border-color .5s,transform .4s var(--ease-out)}
+.proj{position:relative;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;transition:border-color .5s,transform .4s var(--ease-out),box-shadow .5s}
 .proj:hover{border-color:var(--gold-40);transform:translateY(-2px)}
+/* featured (Claude-built) tiles: gold label tag + gold glow */
+.proj.featured{border-color:var(--gold-40);box-shadow:0 0 0 1px var(--gold-22),0 0 30px -6px rgba(248,184,40,.32)}
+.proj.featured:hover{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold-40),0 0 38px -4px rgba(248,184,40,.45)}
+.proj-flag{display:inline-block;font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#000;background:var(--gold);border-radius:5px;padding:3px 8px;line-height:1.4;margin-bottom:11px}
 .proj-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
 .proj-type{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
 .proj-name{font-size:18px;font-weight:800;line-height:1.2;color:var(--white);transition:color var(--t-base)}

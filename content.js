@@ -228,7 +228,8 @@ window.SITE = {
 
   /* Web projects grid. Each item: name, type (mono label), tags[] (tech chips),
      href + external (true = open in new tab with arrow; false = same tab, no arrow).
-     Optional links[] adds extra secondary links inside the card (e.g. album sites). */
+     Optional links[] adds extra secondary links inside the card (e.g. album sites).
+     Optional flag (e.g. "Claude Code") adds a gold label tag + gold glow to the tile. */
   projects: {
     eyebrow: "Selected work",
     titleHtml: 'Web <span class="gold">projects</span>',
@@ -240,6 +241,7 @@ window.SITE = {
         tags: ["Claude AI", "Sanity CMS", "Github"],
         href: "https://denizen-designs.com/",
         external: true,
+        flag: "Claude Code",
       },
       {
         name: "Applicant Review Tool",
@@ -247,6 +249,7 @@ window.SITE = {
         tags: ["Claude AI", "Github"],
         href: "/app/",
         external: false,
+        flag: "Claude Code",
       },
       {
         name: "Aiden",
@@ -286,6 +289,13 @@ window.SITE = {
           { label: "Temporary Time", href: "https://temporarytime.webflow.io/" },
           { label: "Drastic Measures", href: "https://drasticmeasures.webflow.io/" },
         ],
+      },
+      {
+        name: "Pipestone Golf",
+        type: "Business Website",
+        tags: ["Webflow"],
+        href: "https://www.pipestone.golf/",
+        external: true,
       },
     ],
   },

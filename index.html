@@ -36,7 +36,7 @@
       href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=6" />
+    <link rel="stylesheet" href="styles.css?v=7" />
   </head>
   <body>
     <!-- logo mark -->
@@ -466,7 +466,7 @@
     </footer>
 
     <!-- editable content (edit content.js, then bump ?v= to refresh cache) -->
-    <script src="content.js?v=6"></script>
+    <script src="content.js?v=7"></script>
     <script>
       const S = window.SITE || {};
       function esc(s) {
@@ -607,6 +607,7 @@
           tags: ["Claude AI", "Sanity CMS", "Github"],
           href: "https://denizen-designs.com/",
           external: true,
+          flag: "Claude Code",
         },
         {
           name: "Applicant Review Tool",
@@ -614,6 +615,7 @@
           tags: ["Claude AI", "Github"],
           href: "/app/",
           external: false,
+          flag: "Claude Code",
         },
         {
           name: "Aiden",
@@ -659,6 +661,13 @@
               href: "https://drasticmeasures.webflow.io/",
             },
           ],
+        },
+        {
+          name: "Pipestone Golf",
+          type: "Business Website",
+          tags: ["Webflow"],
+          href: "https://www.pipestone.golf/",
+          external: true,
         },
       ];
 
@@ -824,8 +833,11 @@
                   .join("")}</div>`
               : "";
             const cover = `<a class="proj-cover" href="${esc(p.href)}"${p.external ? ' target="_blank" rel="noopener noreferrer"' : ""} aria-label="Open ${esc(p.name)}"></a>`;
-            return `<div class="proj">
-      <div class="proj-top"><div><div class="proj-type">${esc(p.type)}</div><h4 class="proj-name">${esc(p.name)}</h4></div>${arrow}</div>
+            const flag = p.flag
+              ? `<span class="proj-flag">${esc(p.flag)}</span>`
+              : "";
+            return `<div class="proj${p.flag ? " featured" : ""}">
+      <div class="proj-top"><div>${flag}<div class="proj-type">${esc(p.type)}</div><h4 class="proj-name">${esc(p.name)}</h4></div>${arrow}</div>
       <div class="proj-tags">${tags}</div>${extra}${cover}
     </div>`;
           }).join("");
