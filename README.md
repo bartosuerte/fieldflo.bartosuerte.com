@@ -1,4 +1,4 @@
-# fieldflow.bartosuerte.com
+# fieldflo.bartosuerte.com
 
 William R. Barton's interactive resume **and** the Applicant Review Tool, in one repo.
 
@@ -30,7 +30,7 @@ Anthropic API key server-side and is **gitignored**. To run live AI: set `const 
 `app/index.html`, put your key in `app/claude-proxy.php` (`$API_KEY = 'sk-ant-...'`), and upload the proxy.
 
 ## Deploy (SiteGround)
-Upload the repo contents into the `fieldflow.bartosuerte.com` document root, with `/app` as a subfolder.
+Upload the repo contents into the `fieldflo.bartosuerte.com` document root, with `/app` as a subfolder.
 Include `app/claude-proxy.php` (with key) — it's not in git. After any CSS/content change, bump the
 `?v=N` query in the `<link>`/`<script>` tags so browsers fetch fresh.
 

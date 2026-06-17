@@ -1,6 +1,6 @@
 <?php
 /**
- * OPTIONAL - Live Claude proxy for fieldflow.bartosuerte.com/app (the Applicant Review Tool)
+ * OPTIONAL - Live Claude proxy for fieldflo.bartosuerte.com/app (the Applicant Review Tool)
  * ---------------------------------------------------------
  * The site works fully WITHOUT this file (client-side engine).
  * Enable this only if you want the "Ask" / "Tailor" features to

@@ -1,6 +1,6 @@
 name: Deploy to SiteGround
 
-# Publishes the site to fieldflow.bartosuerte.com whenever you push to main.
+# Publishes the site to fieldflo.bartosuerte.com whenever you push to main.
 # Same proven FTPS setup as your resume.bartosuerte.com / review.bartosuerte.com repos.
 on:
   push:
@@ -22,7 +22,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps           # encrypted transfer (SiteGround supports this on port 21)
           port: 21
-          server-dir: /fieldflow.bartosuerte.com/public_html/   # live folder on SiteGround (confirm path in File Manager; trailing slash required)
+          server-dir: /fieldflo.bartosuerte.com/public_html/   # live folder on SiteGround (confirm path in File Manager; trailing slash required)
           # dry-run: true          # uncomment for a safe no-op preview run, then remove
           #
           # Files that live in the repo but must NOT be published to the web root.

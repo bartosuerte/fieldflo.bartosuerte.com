@@ -1,5 +1,5 @@
 /* ============================================================
-   content.js — ALL editable text for fieldflow.bartosuerte.com (resume at /)
+   content.js — ALL editable text for fieldflo.bartosuerte.com (resume at /)
    ------------------------------------------------------------
    This is the ONE file to edit your site's words. index.html reads
    from window.SITE below and fills the page in. (The HTML also keeps
