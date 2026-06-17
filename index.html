@@ -98,8 +98,6 @@
           <a
             class="btn btn-gold"
             href="/app/"
-            target="_blank"
-            rel="noopener noreferrer"
             >Applicant Review Tool
             <svg
               width="13"
@@ -394,8 +392,6 @@
               class="btn btn-gold"
               href="/app/"
               data-cref="proof.ctaHref"
-              target="_blank"
-              rel="noopener noreferrer"
               ><span data-c="proof.ctaLabel">Open it live</span>
               <svg
                 width="13"
@@ -420,9 +416,7 @@
             class="proof-media"
             href="/app/"
             data-cref="proof.imageHref"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Open the Applicant Review Tool in a new tab"
+            aria-label="Open the Applicant Review Tool"
           >
             <img
               src="app-laptop.png"
@@ -466,8 +460,6 @@
             >
             <a
               href="/app/"
-              target="_blank"
-              rel="noopener"
               >→ application review tool</a
             >
             <a
@@ -490,7 +482,7 @@
     </footer>
 
     <!-- editable content (edit content.js, then bump ?v= to refresh cache) -->
-    <script src="content.js?v=3"></script>
+    <script src="content.js?v=4"></script>
     <script>
       const S = window.SITE || {};
       function esc(s) {
@@ -547,60 +539,40 @@
       ];
       const SKILLS = (S.skills && S.skills.groups) || [
         {
-          cat: "Visual & Brand",
+          cat: "Visual & brand",
           items: [
-            ["Graphic design", 80],
-            ["Branding", 85],
-            ["Photography & video", 80],
             ["Adobe Suite", 95],
             ["Figma", 85],
+            ["Brand Development", 85],
           ],
         },
         {
           cat: "Web design & build",
           items: [
-            ["Webflow", 85],
-            ["Responsive web design", 90],
-            ["Visual layout & hierarchy", 90],
-            ["Shopify", 80],
-            ["HTML / CSS", 85],
+            ["Webflow", 80],
+            ["HTML / CSS / Java", 70],
           ],
         },
         {
-          cat: "AI & technical (growing)",
+          cat: "AI & technical · growing",
           items: [
-            ["Claude (cowork + Code)", 80],
-            ["AI-assisted builds", 70],
-            ["Automation (Zapier / Klaviyo)", 80],
-          ],
-        },
-        {
-          cat: "Ways of working",
-          items: [
-            ["Client collaboration", 90],
-            ["Bias to action / shipping", 90],
-            ["Brand & creative direction", 85],
-            ["SOPs / process", 80],
+            ["Claude (Cowork + Code)", 80],
+            ["AI-assisted Builds", 70],
           ],
         },
       ];
       const TOOLS = (S.skills && S.skills.tools) || [
         ["Webflow", 1],
         ["Figma", 1],
-        ["Photoshop", 1],
-        ["Illustrator", 1],
-        ["Lightroom", 1],
-        ["Premiere", 1],
-        ["InDesign", 0],
-        ["Claude Code", 0],
-        ["cowork", 0],
+        ["Photoshop", 0],
+        ["Illustrator", 0],
+        ["Lightroom", 0],
+        ["Premiere", 0],
+        ["Claude Code", 1],
         ["VS Code", 0],
         ["Shopify", 0],
         ["Klaviyo", 0],
         ["Zapier", 0],
-        ["Make.com", 0],
-        ["Zoho One", 0],
-        ["NetSuite", 0],
       ];
       const SERVICES = (S.services && S.services.items) || [
         {
@@ -684,7 +656,7 @@
                 ? `<a class="btn btn-outline" href="${esc(n.portfolio.href)}" target="_blank" rel="noopener noreferrer">${esc(n.portfolio.label)} ${EXT("currentColor")}</a>`
                 : "") +
               (n.tool
-                ? `<a class="btn btn-gold" href="${esc(n.tool.href)}" target="_blank" rel="noopener noreferrer">${esc(n.tool.label)} ${EXT("#000")}</a>`
+                ? `<a class="btn btn-gold" href="${esc(n.tool.href)}"${ext(n.tool.href)}>${esc(n.tool.label)} ${EXT("#000")}</a>`
                 : "");
         }
 
