@@ -36,7 +36,7 @@
       href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=5" />
+    <link rel="stylesheet" href="styles.css?v=6" />
   </head>
   <body>
     <!-- logo mark -->
@@ -72,6 +72,7 @@
           <a href="#work">Experience</a>
           <a href="#skills">Skills</a>
           <a href="#services">Capabilities</a>
+          <a href="#projects">Projects</a>
           <a
             class="btn btn-outline"
             href="https://bartosuerte.com"
@@ -336,6 +337,21 @@
       </div>
     </section>
 
+    <!-- ============ WEB PROJECTS ============ -->
+    <section id="projects">
+      <div class="wrap reveal">
+        <div class="eyebrow" data-c="projects.eyebrow">Selected work</div>
+        <h2 class="section-title" data-ch="projects.titleHtml">
+          Web <span class="gold">projects</span>
+        </h2>
+        <p class="section-sub" data-c="projects.sub">
+          A sampling of sites and apps I have designed and built, from business
+          sites and portfolios to headless commerce and AI-built tools.
+        </p>
+        <div class="proj-grid" id="projGrid"></div>
+      </div>
+    </section>
+
     <!-- ============ AI PROOF / FEATURED (bottom) ============ -->
     <section id="proof">
       <div class="wrap reveal">
@@ -450,7 +466,7 @@
     </footer>
 
     <!-- editable content (edit content.js, then bump ?v= to refresh cache) -->
-    <script src="content.js?v=5"></script>
+    <script src="content.js?v=6"></script>
     <script>
       const S = window.SITE || {};
       function esc(s) {
@@ -582,6 +598,67 @@
           i: "AI-assisted builds",
           h: "New: building with Claude",
           p: "Functional prototypes and custom tools built in a Claude-native workflow - like the review tool at the bottom of this page.",
+        },
+      ];
+      const PROJECTS = (S.projects && S.projects.items) || [
+        {
+          name: "Denizen Designs",
+          type: "Business Website",
+          tags: ["Claude AI", "Sanity CMS", "Github"],
+          href: "https://denizen-designs.com/",
+          external: true,
+        },
+        {
+          name: "Applicant Review Tool",
+          type: "Web App",
+          tags: ["Claude AI", "Github"],
+          href: "/app/",
+          external: false,
+        },
+        {
+          name: "Aiden",
+          type: "Headless E-Commerce",
+          tags: ["Webflow", "Shopify", "Smootify"],
+          href: "https://www.withaiden.com/",
+          external: true,
+        },
+        {
+          name: "Parashoot",
+          type: "Studio Portfolio",
+          tags: ["Webflow"],
+          href: "https://parashoot-atypical.webflow.io/",
+          external: true,
+        },
+        {
+          name: "Lauren Pecson-Anderson",
+          type: "Video Portfolio",
+          tags: ["Webflow"],
+          href: "https://www.laurenvpecson.com/",
+          external: true,
+        },
+        {
+          name: "Colin Mauro",
+          type: "Video Portfolio",
+          tags: ["Webflow"],
+          href: "https://collin-mauro.webflow.io/",
+          external: true,
+        },
+        {
+          name: "Bayonne",
+          type: "Musician Site",
+          tags: ["Webflow"],
+          href: "https://www.bayonneofficial.com/",
+          external: true,
+          links: [
+            {
+              label: "Temporary Time",
+              href: "https://temporarytime.webflow.io/",
+            },
+            {
+              label: "Drastic Measures",
+              href: "https://drasticmeasures.webflow.io/",
+            },
+          ],
         },
       ];
 
@@ -727,6 +804,31 @@
           (s, i) => `
     <div class="svc">${i === 3 ? '<span class="svc-badge">New</span>' : ""}<div class="si">${esc(s.i)}</div><h4>${esc(s.h)}</h4><p>${esc(s.p)}</p></div>`,
         ).join("");
+
+        // web projects
+        const projGrid = document.getElementById("projGrid");
+        if (projGrid)
+          projGrid.innerHTML = PROJECTS.map((p) => {
+            const arrow = p.external
+              ? `<span class="proj-arrow">${EXT("currentColor")}</span>`
+              : "";
+            const tags = (p.tags || [])
+              .map((t) => `<span class="tool">${esc(t)}</span>`)
+              .join("");
+            const extra = (p.links || []).length
+              ? `<div class="proj-extra">${p.links
+                  .map(
+                    (l) =>
+                      `<a href="${esc(l.href)}" target="_blank" rel="noopener noreferrer">${esc(l.label)} ${EXT("currentColor")}</a>`,
+                  )
+                  .join("")}</div>`
+              : "";
+            const cover = `<a class="proj-cover" href="${esc(p.href)}"${p.external ? ' target="_blank" rel="noopener noreferrer"' : ""} aria-label="Open ${esc(p.name)}"></a>`;
+            return `<div class="proj">
+      <div class="proj-top"><div><div class="proj-type">${esc(p.type)}</div><h4 class="proj-name">${esc(p.name)}</h4></div>${arrow}</div>
+      <div class="proj-tags">${tags}</div>${extra}${cover}
+    </div>`;
+          }).join("");
 
         document.getElementById("yr").textContent = new Date().getFullYear();
       }

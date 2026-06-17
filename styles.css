@@ -193,6 +193,25 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:6
 .svc h4{font-size:17px;font-weight:800;margin-bottom:8px}
 .svc p{color:var(--muted);font-size:13.8px}
 
+/* ---------- web projects ---------- */
+.proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(max-width:780px){.proj-grid{grid-template-columns:1fr}}
+.proj{position:relative;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;transition:border-color .5s,transform .4s var(--ease-out)}
+.proj:hover{border-color:var(--gold-40);transform:translateY(-2px)}
+.proj-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+.proj-type{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.proj-name{font-size:18px;font-weight:800;line-height:1.2;color:var(--white);transition:color var(--t-base)}
+.proj:hover .proj-name{color:var(--gold)}
+.proj-arrow{flex:0 0 auto;color:var(--muted);margin-top:2px;transition:color var(--t-base),transform var(--t-base)}
+.proj-arrow svg{display:block}
+.proj:hover .proj-arrow{color:var(--gold);transform:translate(2px,-2px)}
+.proj-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+.proj-tags .tool{font-size:11px;padding:5px 10px}
+.proj-extra{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px;position:relative;z-index:2}
+.proj-extra a{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--muted);border:1px solid var(--line);border-radius:var(--r-control-sm);padding:5px 10px;transition:var(--t-base)}
+.proj-extra a:hover{border-color:var(--gold-40);color:var(--gold)}
+.proj-cover{position:absolute;inset:0;border-radius:14px;z-index:1}
+
 /* ---------- footer (matches the tool) ---------- */
 footer{border-top:1px solid var(--line);padding:60px 0 50px}
 .foot-grid{display:flex;justify-content:space-between;align-items:flex-start;gap:30px;flex-wrap:wrap}

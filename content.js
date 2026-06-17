@@ -29,6 +29,7 @@ window.SITE = {
       { label: "Experience", href: "#work" },
       { label: "Skills", href: "#skills" },
       { label: "Capabilities", href: "#services" },
+      { label: "Projects", href: "#projects" },
     ],
     portfolio: { label: "View Portfolio", href: "https://bartosuerte.com" },
     tool: {
@@ -221,6 +222,70 @@ window.SITE = {
         i: "AI-assisted Builds",
         h: "Building with Claude",
         p: "Functional prototypes and custom tools built in a Claude-native workflow - like the review tool at the bottom of this page.",
+      },
+    ],
+  },
+
+  /* Web projects grid. Each item: name, type (mono label), tags[] (tech chips),
+     href + external (true = open in new tab with arrow; false = same tab, no arrow).
+     Optional links[] adds extra secondary links inside the card (e.g. album sites). */
+  projects: {
+    eyebrow: "Selected work",
+    titleHtml: 'Web <span class="gold">projects</span>',
+    sub: "A sampling of sites and apps I have designed and built, from business sites and portfolios to headless commerce and AI-built tools.",
+    items: [
+      {
+        name: "Denizen Designs",
+        type: "Business Website",
+        tags: ["Claude AI", "Sanity CMS", "Github"],
+        href: "https://denizen-designs.com/",
+        external: true,
+      },
+      {
+        name: "Applicant Review Tool",
+        type: "Web App",
+        tags: ["Claude AI", "Github"],
+        href: "/app/",
+        external: false,
+      },
+      {
+        name: "Aiden",
+        type: "Headless E-Commerce",
+        tags: ["Webflow", "Shopify", "Smootify"],
+        href: "https://www.withaiden.com/",
+        external: true,
+      },
+      {
+        name: "Parashoot",
+        type: "Studio Portfolio",
+        tags: ["Webflow"],
+        href: "https://parashoot-atypical.webflow.io/",
+        external: true,
+      },
+      {
+        name: "Lauren Pecson-Anderson",
+        type: "Video Portfolio",
+        tags: ["Webflow"],
+        href: "https://www.laurenvpecson.com/",
+        external: true,
+      },
+      {
+        name: "Colin Mauro",
+        type: "Video Portfolio",
+        tags: ["Webflow"],
+        href: "https://collin-mauro.webflow.io/",
+        external: true,
+      },
+      {
+        name: "Bayonne",
+        type: "Musician Site",
+        tags: ["Webflow"],
+        href: "https://www.bayonneofficial.com/",
+        external: true,
+        links: [
+          { label: "Temporary Time", href: "https://temporarytime.webflow.io/" },
+          { label: "Drastic Measures", href: "https://drasticmeasures.webflow.io/" },
+        ],
       },
     ],
   },
