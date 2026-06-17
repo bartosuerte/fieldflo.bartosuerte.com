@@ -1,0 +1,12 @@
+# NEVER commit the live proxy — it holds the real API key.
+# The repo ships app/claude-proxy.example.php (no key); copy it to
+# app/claude-proxy.php and add your key only on the server.
+app/claude-proxy.php
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
+.fuse_hidden*

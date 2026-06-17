@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Applicant Review Tool · FieldFlō Sr. Product Designer · by William Barton</title>
+<meta name="description" content="Drag in any applicant's resume, cover letter, or portfolio and grade it against the FieldFlō Senior Product Designer posting. Built by William Barton." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://fieldflow.bartosuerte.com/app" />
+<meta property="og:title" content="Applicant Review Tool · by William Barton" />
+<meta property="og:description" content="Drag in any applicant's resume, cover letter, or portfolio and grade it against the FieldFlō Senior Product Designer posting. Built by William Barton." />
+<meta property="og:image" content="/barton-og.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Applicant Review Tool · by William Barton" />
+<meta name="twitter:description" content="Drag in any applicant's resume, cover letter, or portfolio and grade it against the FieldFlō Senior Product Designer posting. Built by William Barton." />
+<meta name="twitter:image" content="/barton-og.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<!-- In-browser document parsers (free CDNs). Tool still grades TXT/MD if these ever fail to load. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="stylesheet" href="styles.css?v=2" />
+</head>
+<body>
+
+<!-- reusable logo mark -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="logoB" viewBox="0 0 351 351">
+    <path class="st0" d="M316,35v281H35V35h281M349.8,0H1.3C.6,0,0,.6,0,1.3v348.4c0,.7.6,1.3,1.3,1.3h348.4c.7,0,1.3-.6,1.3-1.3V1.3c0-.7-.5-1.3-1.2-1.3h0Z"/>
+    <path class="st0" d="M132.4,273.6c-27.8-8.6-42.3-27.3-42.3-54s1.1-15.6,3.9-22c4.5-10.9,11.4-19.2,20.9-25.6-10-9.7-15.3-23.4-15.3-40.4s5.3-29.2,15.6-39.5c12.5-12.8,30-19.2,52.9-19.2h92.9v205.1h-97.7c-11.7.1-22.3-1.3-30.9-4.4h0ZM220.3,238.6v-44h-57c-11.7,0-20.3,2.5-25.9,7.5-4.7,4.2-7,9.2-7,15.9s2.2,11.4,6.7,14.8c5,3.9,13.1,5.8,23.7,5.8h59.5ZM220.3,155.9v-43.7h-54.5c-9.5,0-15.8,2.2-20.3,7-1.9,2-3.1,3.9-3.9,6.1-1.1,2.5-1.4,5.8-1.4,9.5s.5,6.1,1.9,8.9c2.5,5.3,8.1,12.2,25.9,12.2h52.3Z"/>
+  </symbol>
+</svg>
+
+<!-- cursor-following gradient field -->
+<div id="bgfx" aria-hidden="true">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+  <div class="blob b4"></div>
+</div>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#top">
+      <svg class="logo-svg"><use href="#logoB"/></svg>
+      <span class="who">APPLICANT REVIEW TOOL<span>Built by William R. Barton</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#intake">Review</a>
+      <a href="#ask">Ask</a>
+      <a href="#how">How it works</a>
+      <a id="navLoad" class="btn btn-outline-gold">Load My Application</a>
+      <a class="btn btn-gold-white" href="/">View Interactive Resume
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4 11 13"/><path d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h6"/></svg>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<header id="top" class="hero">
+  <div class="wrap">
+    <div class="badge"><span class="dot"></span>Grading against: FieldFlō · Sr. Product Designer</div>
+    <h1>APPLICANT<br><span class="l2">REVIEW TOOL</span></h1>
+    <p class="lead">Drop in a candidate's resume, cover letter, or portfolio link. The tool reads the documents and grades them against the FieldFlō Senior Product Designer posting - across six role-specific categories, with evidence pulled from their own words.</p>
+
+    <div class="note-card">
+      <div class="nh">↳ A note from William, to whoever's reading</div>
+      <p>I built this instead of just emailing a PDF. It grades <em>any</em> applicant - including me - fairly against your own posting, so drag in whoever you're weighing. If someone scores higher than I do, you should probably talk to them. But I figured the person who ships the team something useful before day one is at least worth a conversation.</p>
+      <div class="sig">- William R. Barton</div>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== INTAKE ===================== -->
+<section id="intake" style="border-top:none;padding-top:8px">
+  <div class="wrap">
+    <div class="intake">
+      <div>
+        <div class="drop" id="drop">
+          <div class="ic">📄</div>
+          <h3>Drag &amp; drop application files</h3>
+          <p>or click to browse - resume, cover letter, portfolio docs</p>
+          <div class="types">PDF · DOCX · TXT · MD &nbsp;·&nbsp; scanned PDFs &amp; images AI-scanned</div>
+          <input type="file" id="fileInput" multiple accept=".pdf,.docx,.txt,.md,.png,.jpg,.jpeg,.webp,.gif" style="display:none" />
+        </div>
+        <div class="url-field">
+          <input id="urlInput" placeholder="Portfolio / website URL (optional) - e.g. https://…" />
+        </div>
+        <div class="intake-actions">
+          <button class="btn btn-gold" id="gradeBtn" disabled>⚖️ Grade applicant</button>
+          <button class="btn btn-outline-gold" id="loadWill">Load my application</button>
+          <button class="btn btn-ghost" id="resetBtn">Reset</button>
+        </div>
+      </div>
+      <div class="filelist">
+        <h4>Loaded documents</h4>
+        <div id="fileListBody"><div class="fl-empty">No files yet.<br>Drop some in, or load my application as an example.</div></div>
+      </div>
+    </div>
+    <div id="sitePreview"></div>
+  </div>
+</section>
+
+<!-- ===================== RESULTS ===================== -->
+<section id="results">
+  <div class="wrap">
+    <div class="eyebrow">The read</div>
+    <h2 class="section-title">Match report</h2>
+    <p class="section-sub" id="reportSub"></p>
+
+    <div class="grade-hero">
+      <div class="ring" id="ring"><div class="inner"><div class="lett" id="ringLett">-</div><div class="num" id="ringNum">0 / 100</div></div></div>
+      <div class="gh-txt">
+        <h3 id="ghName">Applicant</h3>
+        <div class="verdict" id="ghVerdict"></div>
+        <div class="vs" id="ghStack"></div>
+      </div>
+    </div>
+
+    <div class="cat-grid" id="catGrid"></div>
+
+    <div id="aiAnalysis"></div>
+
+    <div class="profile" id="profile"></div>
+  </div>
+</section>
+
+<!-- ===================== ASK ===================== -->
+<section id="ask">
+  <div class="wrap reveal">
+    <div class="eyebrow">Conversational</div>
+    <h2 class="section-title">Ask the application <span class="gold">anything</span></h2>
+    <p class="section-sub">Curious about a specific skill, the AI tooling, or whether the candidate fits your stack? Ask directly - answers are pulled from the loaded documents. (With William loaded, you'll hear it in his voice.)</p>
+    <div class="ask-card">
+      <div class="ask-ctx" id="askCtx">Currently answering about: <b>no applicant loaded</b></div>
+      <div class="chat" id="chat">
+        <div class="msg bot"><span class="who">Tool</span>Load an applicant above, then ask me anything - how they use AI, whether they have a portfolio, how they fit this role.</div>
+      </div>
+      <div class="suggest" id="suggest"></div>
+      <div class="ask-input">
+        <input id="askInput" placeholder="Type a question…" />
+        <button class="btn btn-gold" id="askBtn">Ask</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== HOW IT WORKS ===================== -->
+<section id="how">
+  <div class="wrap reveal">
+    <div class="eyebrow">Transparency</div>
+    <h2 class="section-title">How it works</h2>
+    <div class="meta-note">
+      <h4>↳ Honest by design - because reasoning clearly about AI is the job</h4>
+      <p><b>Parsing:</b> Your files are read entirely <b>in your browser</b> (pdf.js for PDFs, mammoth.js for Word, native for text). Nothing is uploaded - no server, no storage, no tracking.</p>
+      <p><b>Grading:</b> A client-side relevance engine scores the documents against six categories derived from the FieldFlō posting, citing the exact phrases that matched. It's a real signal-coverage model - not a black box, and not rigged. A weak application will score weak, mine included.</p>
+      <p><b>Optional live Claude:</b> the same UI can call real Claude through a small server-side proxy for generative grading and answers - off by default to keep this free. This whole tool was itself designed and built with Claude.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <svg class="logo-svg" style="width:54px;height:54px;margin-bottom:18px"><use href="#logoB"/></svg>
+        <h3>William R.<br><span class="gold">Barton</span></h3>
+        <p style="color:var(--gold);font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px">Graphic &amp; Web Designer</p>
+        <p style="color:var(--muted);max-width:380px;font-size:14.5px">Brand, web, and an emerging Claude AI build workflow. This tool is a sample of how I think about your product.</p>
+      </div>
+      <div class="contact">
+        <a href="mailto:barton@bartosuerte.com">→ barton@bartosuerte.com</a>
+        <a href="tel:+15122340620">→ (512) 234-0620</a>
+        <a href="https://bartosuerte.com" target="_blank" rel="noopener">→ bartosuerte.com</a>
+        <a href="https://linkedin.com/in/bartosuerte" target="_blank" rel="noopener">→ linkedin.com/in/bartosuerte</a>
+        <a style="color:var(--muted-2)">→ Chattanooga, TN · He / Him</a>
+      </div>
+    </div>
+    <div class="foot-meta">
+      Built with Claude · in-browser parsing (pdf.js + mammoth.js) · client-side relevance engine · optional live-Claude via PHP proxy<br>
+      © <span id="yr"></span> William R. Barton - Applicant Review Tool.
+    </div>
+  </div>
+</footer>
+
+<!-- document viewer modal -->
+<div class="modal-overlay" id="docModal">
+  <div class="modal">
+    <div class="modal-head">
+      <span class="mtag" id="docModalTag">DOC</span>
+      <span class="mtitle" id="docModalTitle">Document</span>
+      <span class="mclose" id="docModalClose" title="Close">×</span>
+    </div>
+    <div class="modal-body" id="docModalBody"></div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   LIVE CLAUDE SWITCH
+   false = 100% free, runs locally in the browser (default).
+   true  = uses claude-proxy.php to (a) read & grade websites and
+           (b) answer the "Ask" box with real Claude.
+   See README → "Connect live Claude" for setup.
+   ============================================================ */
+const LIVE_AI=true;   // ← live Claude ON. Set to false to run 100% local/free.
+
+// Sent to Claude for the qualitative analysis (live mode only)
+const JD_SUMMARY="FieldFlō - Senior Product Designer. AI-native vertical SaaS for specialty subcontractors in construction (demolition, asbestos abatement, environmental remediation) - compliance-heavy, operationally complex. Design end-to-end experiences across estimating, planning, field execution, and back-office workflows; improve clarity, defaults, and information hierarchy. Use Claude heavily for prototyping, design execution, research synthesis, and engineering handoffs. Strong systems thinking across flows, states, edge cases and roles (field→office→finance). High-ownership, fast-moving, ships in hours/days. Required: 3-5 yrs designing complex digital products, 2+ yrs B2B SaaS; heavy hands-on Claude use; a portfolio of shipped product design; comfort with ambiguity. Nice to have: vertical SaaS, construction/field service, AI/ML features (document extraction, copilots), multi-role workflows, 2nd/3rd designer in a growing org.";
+
+if(window.pdfjsLib){ pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js'; }
+
+/* =========================================================
+   CATEGORIES - derived from the FieldFlō Sr. Product Designer JD
+   ========================================================= */
+const CATEGORIES=[
+ {name:"AI-Native Workflow", why:"Looking for someone 'unapologetically AI-native' - Claude woven through daily design.",
+  target:11, signals:[["claude code",3],["claude",3],["cowork",2],["cursor",2],["ai-native",3],["ai augmented",2],["ai-augmented",2],["prototyp",2],["github",2],["copilot",2],["llm",2],["machine learning",2],["prompt",2],["automation",1],[" ai ",2]]},
+ {name:"Product Design Craft", why:"End-to-end product & UX - hierarchy, flows, usable interfaces.",
+  target:11, signals:[["information hierarchy",3],["product design",3],["user flow",2],["wireframe",2],["design system",2],["usability",2],["end-to-end",2],["interface",2],["ux",2],["ui",2],["user experience",2],["prototype",1]]},
+ {name:"Systems Thinking & Workflows", why:"Reason across flows, states, edge cases, and multi-role workflows.",
+  target:9, signals:[["systems thinking",3],["multi-role",2],["workflow",2],["edge case",2],["scalable",2],["framework",2],["integration",2],["complex",2],["states",1],["process",1],["system",1]]},
+ {name:"B2B SaaS & Domain Fit", why:"B2B SaaS, ideally vertical / operational / compliance-heavy (construction, field service).",
+  target:9, requires:["construction","subcontractor","field service","abatement","demolition","remediation","vertical"],
+  signals:[["b2b",3],["saas",3],["construction",3],["subcontractor",3],["field service",3],["compliance",3],["abatement",2],["demolition",2],["remediation",2],["vertical",2],["investor relations",2],["regulated",2],["operations",1],["platform",1]]},
+ {name:"Ownership & Bias to Action", why:"High-ownership, fast-moving - thinks in hours and days, and ships.",
+  target:9, signals:[["bias to action",3],["ownership",2],["shipped",2],["ship",2],["launched",2],["drove",2],["autonomy",2],["independent",2],["fast",1],["end-to-end",1],["built",1],["own",1],["lead",1]]},
+ {name:"Evidence & Portfolio", why:"A portfolio of shipped work plus concrete, measurable results.",
+  target:8, signals:[["portfolio",2],["case study",3],["http",2],["behance",2],["dribbble",2],["figma",1],["%",2],["increase",1],["revenue",1],["results",1],["metric",2],["shipped",1],["example",1]]},
+];
+
+const SKILL_LEXICON=[
+ ["AI-native workflow (Claude)",["claude","ai-native","cowork","claude code"]],
+ ["AI prototyping",["prototyp","ai augmented","ai-augmented"]],
+ ["UI / UX design",["ui","ux","user experience","interface"]],
+ ["Product & systems thinking",["systems thinking","product design","information hierarchy"]],
+ ["Web design / development",["webflow","web design","front-end","react","html"]],
+ ["Automation & integrations",["zapier","automation","integration","klaviyo","netsuite","zoho"]],
+ ["Version control (GitHub)",["github","git ","branch"]],
+ ["Figma",["figma"]],
+ ["Adobe / visual design",["photoshop","illustrator","indesign","adobe","branding"]],
+ ["Compliance-aware work",["compliance","investor relations","regulated"]],
+ ["E-commerce",["e-commerce","ecommerce","shopify"]],
+ ["Photography / video",["photograph","video","lightroom","premiere"]],
+ ["Measurable results",["%","increase","revenue","conversion"]],
+];
+
+/* =========================================================
+   STATE
+   ========================================================= */
+const state={ files:[], url:"", applicant:null }; // applicant={name,text,isWilliam}
+
+/* =========================================================
+   FILE PARSING (in-browser)
+   ========================================================= */
+async function pdfText(file){
+  if(!window.pdfjsLib) throw new Error("pdf reader unavailable");
+  const buf=await file.arrayBuffer();
+  const pdf=await pdfjsLib.getDocument({data:buf}).promise;
+  let out="";
+  for(let i=1;i<=pdf.numPages;i++){ const pg=await pdf.getPage(i); const tc=await pg.getTextContent();
+    out+=tc.items.map(it=>it.str).join(" ")+"\n"; }
+  return out;
+}
+async function docxText(file){
+  if(!window.mammoth) throw new Error("docx reader unavailable");
+  const buf=await file.arrayBuffer();
+  const r=await mammoth.extractRawText({arrayBuffer:buf});
+  return r.value||"";
+}
+async function extractText(file){
+  const ext=(file.name.split('.').pop()||'').toLowerCase();
+  if(['png','jpg','jpeg','webp','gif'].includes(ext)) return {image:true,text:""};
+  if(ext==='pdf') return {text:await pdfText(file)};
+  if(ext==='docx') return {text:await docxText(file)};
+  return {text:await file.text()}; // txt, md, fallback
+}
+
+/* =========================================================
+   INTAKE UI
+   ========================================================= */
+const drop=document.getElementById('drop'), fileInput=document.getElementById('fileInput'),
+      fileListBody=document.getElementById('fileListBody'), gradeBtn=document.getElementById('gradeBtn');
+
+drop.addEventListener('click',()=>fileInput.click());
+fileInput.addEventListener('change',e=>addFiles([...e.target.files]));
+['dragenter','dragover'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add('drag');}));
+['dragleave','drop'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove('drag');}));
+drop.addEventListener('drop',e=>{ if(e.dataTransfer?.files?.length) addFiles([...e.dataTransfer.files]); });
+
+async function addFiles(list){
+  for(const f of list){
+    const ext=(f.name.split('.').pop()||'').toLowerCase();
+    const rec={name:f.name, status:'parsing', text:'', image:false, scanned:false, ext, blobUrl:URL.createObjectURL(f)};
+    state.files.push(rec); renderFiles();
+    try{ const r=await extractText(f);
+      if(r.image){
+        rec.image=true;
+        // image file: in live mode, run AI vision OCR so the words count toward the grade
+        if(LIVE_AI){ rec.status='scanning'; renderFiles(); await ocrInto(rec,f); }
+        else { rec.status='image'; }
+      }
+      else if((r.text||'').trim().length<2){
+        // PDF/DOCX with no selectable text (scanned/flattened): fall back to AI vision OCR
+        if(LIVE_AI){ rec.status='scanning'; renderFiles(); await ocrInto(rec,f); }
+        else { rec.status='empty'; }
+      }
+      else { rec.text=r.text; rec.status='ok'; }
+    }catch(err){ rec.status='error'; rec.err=err.message; }
+    renderFiles();
+  }
+}
+/* read a File as base64 (no data: prefix) */
+function fileToBase64(file){
+  return new Promise((res,rej)=>{ const fr=new FileReader();
+    fr.onload=()=>{ const s=String(fr.result||''); res(s.slice(s.indexOf(',')+1)); };
+    fr.onerror=()=>rej(new Error('read failed')); fr.readAsDataURL(file); });
+}
+function mimeFor(ext){
+  return {pdf:'application/pdf',png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',webp:'image/webp',gif:'image/gif'}[ext]||'application/octet-stream';
+}
+/* AI vision scan: send the raw file to the proxy and store the transcription */
+async function ocrInto(rec,file){
+  try{
+    const data=await fileToBase64(file);
+    const r=await fetch('./claude-proxy.php',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({mode:'ocr', media_type:(file.type||mimeFor(rec.ext)), data})});
+    if(!r.ok) throw new Error('proxy HTTP '+r.status);
+    const j=await r.json();
+    const t=(j&&j.text?j.text:'').trim();
+    if(t.length>=2){ rec.text=t; rec.scanned=true; rec.status='ok'; }
+    else if(j&&j.error){ rec.status='scanfail'; rec.err=String(j.error).slice(0,80); }   // proxy reached, Claude/API issue
+    else { rec.status=rec.image?'image':'empty'; }                                        // genuinely no text
+  }catch(e){ rec.status='scanfail'; rec.err=String(e.message||e).slice(0,80); }            // proxy unreachable (e.g. local file://)
+}
+function fileExt(n){return (n.split('.').pop()||'?').toUpperCase().slice(0,4);}
+function renderFiles(){
+  if(!state.files.length && !state.url){ fileListBody.innerHTML='<div class="fl-empty">No files yet.<br>Drop some in, or load my application as an example.</div>'; gradeBtn.disabled=true; return; }
+  let html=state.files.map((f,i)=>{
+    let stat,cls='';
+    if(f.status==='parsing'){stat='<span class="spin"></span> reading…';}
+    else if(f.status==='scanning'){stat='<span class="spin"></span> AI scanning…';}
+    else if(f.status==='ok'){stat='✓ '+f.text.trim().split(/\s+/).length+' words'+(f.scanned?' · AI-scanned':'');cls='ok';}
+    else if(f.status==='image'){stat='image - listed, not scanned';}
+    else if(f.status==='scanfail'){stat='AI scan unavailable'+(f.err?' - '+esc(f.err):'');cls='err';}
+    else if(f.status==='empty'){stat='no text found';cls='err';}
+    else {stat='couldn\'t read - try TXT/paste';cls='err';}
+    const canView = f.status!=='parsing' && (f.blobUrl || (f.text&&f.text.trim()));
+    return `<div class="fitem"><div class="fic">${fileExt(f.name)}</div>
+      <div class="fmeta"><div class="fname">${esc(f.name)}</div><div class="fstat ${cls}">${stat}</div></div>
+      ${canView?`<button class="fview" data-view="${i}">View Doc</button>`:''}
+      <div class="fx" data-rm="${i}">×</div></div>`;
+  }).join('');
+  if(state.url){ let u=state.url; if(!/^https?:\/\//i.test(u)) u='https://'+u;
+    html+=`<div class="fitem"><div class="fic">URL</div><div class="fmeta"><div class="fname">${esc(state.url)}</div><div class="fstat ok">✓ portfolio link</div></div><a class="fview" href="${esc(u)}" target="_blank" rel="noopener noreferrer">Open URL</a><div class="fx" data-rmurl="1">×</div></div>`; }
+  fileListBody.innerHTML=html;
+  const ready=state.files.some(f=>f.status==='ok')||state.url;
+  gradeBtn.disabled=!ready;
+}
+fileListBody.addEventListener('click',e=>{
+  const rm=e.target.getAttribute('data-rm'); const rmu=e.target.getAttribute('data-rmurl');
+  const view=e.target.getAttribute('data-view');
+  if(view!==null && view!==undefined){ openDoc(+view); return; }
+  if(rm!==null && rm!==undefined){ const f=state.files[+rm]; if(f&&f.blobUrl)URL.revokeObjectURL(f.blobUrl); state.files.splice(+rm,1); renderFiles(); }
+  if(rmu){ state.url=''; document.getElementById('urlInput').value=''; renderFiles(); }
+});
+
+/* ---- document viewer modal ---- */
+function openDoc(i){
+  const f=state.files[i]; if(!f) return;
+  const ext=(f.ext||fileExt(f.name)).toLowerCase();
+  const isImg=['png','jpg','jpeg','webp','gif'].includes(ext);
+  document.getElementById('docModalTag').textContent=(ext||'doc').toUpperCase().slice(0,4);
+  document.getElementById('docModalTitle').textContent=f.name;
+  const body=document.getElementById('docModalBody');
+  if(ext==='pdf' && f.blobUrl){ body.innerHTML=`<iframe src="${f.blobUrl}#view=FitH" title="${esc(f.name)}"></iframe>`; }
+  else if(isImg && f.blobUrl){ body.innerHTML=`<img src="${f.blobUrl}" alt="${esc(f.name)}">`; }
+  else if(f.text && f.text.trim()){ body.innerHTML=`<pre class="doc-text">${esc(f.text)}</pre>`; }
+  else if(f.blobUrl){ body.innerHTML=`<iframe src="${f.blobUrl}" title="${esc(f.name)}"></iframe>`; }
+  else { body.innerHTML=`<div class="doc-none">Preview unavailable for this file.</div>`; }
+  document.getElementById('docModal').classList.add('open');
+}
+function closeDoc(){ const m=document.getElementById('docModal'); m.classList.remove('open'); document.getElementById('docModalBody').innerHTML=''; }
+document.getElementById('docModalClose').addEventListener('click',closeDoc);
+document.getElementById('docModal').addEventListener('click',e=>{ if(e.target.id==='docModal') closeDoc(); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeDoc(); });
+document.getElementById('urlInput').addEventListener('input',e=>{ state.url=e.target.value.trim(); renderFiles(); });
+document.getElementById('resetBtn').addEventListener('click',resetAll);
+function resetAll(){
+  state.files.forEach(f=>{ if(f.blobUrl) URL.revokeObjectURL(f.blobUrl); });
+  closeDoc();
+  state.files=[]; state.url=''; state.applicant=null;
+  document.getElementById('urlInput').value='';
+  document.getElementById('results').style.display='none';
+  document.getElementById('sitePreview').innerHTML='';
+  document.getElementById('askInput').value='';
+  document.getElementById('chat').innerHTML='<div class="msg bot"><span class="who">Tool</span>Load an applicant above, then ask me anything - how they use AI, whether they have a portfolio, how they fit this role.</div>';
+  setAskContext(null); renderFiles(); window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* =========================================================
+   GRADING ENGINE
+   ========================================================= */
+function combinedText(){
+  let t=state.files.filter(f=>f.status==='ok').map(f=>f.text).join("\n\n");
+  if(state.url) t+="\n\n"+state.url;
+  return t;
+}
+// match short alphanumeric signals on a word boundary (so "ui" doesn't hit "build");
+// phrases, hyphenated terms and symbols (%, ai-native) match as substrings.
+function hasSignal(text, term){
+  if(term.includes(' ') || /[^a-z0-9]/.test(term)) return text.includes(term);
+  return new RegExp('\\b'+term).test(text);
+}
+function gradeCategory(cat, lower, sentences){
+  let raw=0; const matched=[];
+  cat.signals.forEach(([term,w])=>{ if(hasSignal(lower,term)){ raw+=w; matched.push(term.trim()); } });
+  let cap=97;
+  // a category can't be an "excellent" domain fit with zero domain terms present
+  if(cat.requires && !cat.requires.some(t=>hasSignal(lower,t))) cap=Math.min(cap,60);
+  // read honest "no portfolio yet / still in progress" disclosures instead of rewarding the word
+  if(cat.name.indexOf('Evidence')===0){
+    if(/(no|without|don't have|do not have|not a)[^.]{0,34}portfolio|portfolio[^.]{0,18}(yet|in progress|still|isn't|not)|still in progress|not (yet )?published/.test(lower)){
+      cap=Math.min(cap,45);
+      const i=matched.indexOf('portfolio'); if(i>-1){ matched.splice(i,1); raw-=2; }
+    }
+  }
+  // diminishing-returns curve: moderate coverage ~70, you must earn 90+
+  const k=cat.target*0.72;
+  let score = raw>0 ? Math.round(100*(1-Math.exp(-raw/k))) : 0;
+  score = Math.max(0, Math.min(score, cap));
+  // evidence sentences containing matched terms
+  const ev=[]; const seen=new Set();
+  for(const term of matched){
+    for(const s of sentences){
+      if(hasSignal(s.toLowerCase(),term) && !seen.has(s) && s.length<240){ seen.add(s); ev.push({s,term}); break; }
+    }
+    if(ev.length>=3) break;
+  }
+  return {score, matched:[...new Set(matched)].slice(0,6), ev, capped:(cap<97?cap:0)};
+}
+function band(score){
+  if(score>=85)return["Excellent","var(--green)"]; if(score>=70)return["Strong","#9ad36a"];
+  if(score>=55)return["Moderate","var(--gold)"]; if(score>=38)return["Light","#e0a23b"];
+  if(score>0)return["Minimal","var(--red)"]; return["No evidence","var(--muted-2)"];
+}
+function letter(avg){
+  if(avg>=90)return"A"; if(avg>=85)return"A-"; if(avg>=80)return"B+"; if(avg>=75)return"B";
+  if(avg>=70)return"B-"; if(avg>=65)return"C+"; if(avg>=58)return"C"; if(avg>=50)return"C-";
+  if(avg>=40)return"D"; return"F";
+}
+function catSummary(cat,res){
+  const [b]=band(res.score);
+  if(res.score===0) return `No clear signals for ${cat.name.toLowerCase()} in the documents provided.`;
+  const found=res.matched.slice(0,4).join(", ");
+  const lead={Excellent:"Excellent match.",Strong:"Strong match.",Moderate:"Moderate match.",Light:"Light coverage.",Minimal:"Minimal coverage."}[b]||"";
+  let note="";
+  if(res.capped===60) note=" Capped - no vertical/construction domain terms found.";
+  else if(res.capped===45) note=" Capped - candidate states their portfolio is still in progress.";
+  return `${lead} The documents reference ${found}${res.matched.length>4?", and more":""}.${note}`;
+}
+
+let SITE_REVIEW=null; // {ok, words, text} when live-Claude fetched the URL
+async function grade(){
+  let text=combinedText();
+  if(text.trim().length<40 && !state.url){ alert("Add at least one readable document (or a portfolio URL) first."); return; }
+
+  // LIVE mode: actually fetch + review the website content server-side, fold it into the grade
+  SITE_REVIEW=null;
+  if(LIVE_AI && state.url){
+    gradeBtn.disabled=true; gradeBtn.innerHTML='<span class="spin"></span> reviewing site…';
+    const site=await fetchSiteText(state.url);
+    if(site.text && site.text.length>40){ SITE_REVIEW={ok:true, words:site.text.split(/\s+/).length, text:site.text}; text+="\n\n"+site.text; }
+    else { SITE_REVIEW={ok:false, status:site.status||0, reason:site.error||''}; }
+    gradeBtn.disabled=false; gradeBtn.innerHTML='⚖️ Grade applicant';
+  }
+
+  const lower=" "+text.toLowerCase().replace(/\s+/g,' ')+" ";
+  const sentences=text.replace(/\s+/g,' ').split(/(?<=[.!?])\s+|•|•|\n/).map(s=>s.trim()).filter(s=>s.length>14);
+
+  const results=CATEGORIES.map(cat=>({cat,...gradeCategory(cat,lower,sentences)}));
+  const avg=Math.round(results.reduce((s,r)=>s+r.score,0)/results.length);
+  const lett=letter(avg);
+
+  // applicant identity + profile
+  const name = state.applicant?.isWilliam ? "William R. Barton" : guessName();
+  state.applicant = state.applicant?.isWilliam ? state.applicant : {name, text, isWilliam:false};
+  setAskContext(state.applicant);
+
+  renderReport(name, avg, lett, results, text);
+  renderSitePreview();
+  document.getElementById('results').style.display='block';
+  document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
+
+  // LIVE mode: Claude's qualitative read (complements the deterministic score)
+  if(LIVE_AI){ runAnalysis(name, text); }
+  else { document.getElementById('aiAnalysis').innerHTML=''; }
+
+  // LIVE mode: ask Claude for the real applicant name + a meaningful pull quote
+  if(LIVE_AI && !state.applicant.isWilliam){ refineName(text); refineQuote(text); }
+}
+
+/* Live Claude: pick the most meaningful verbatim line (prefers the cover
+   letter) and replace the heuristic pull quote. Silent no-op on failure. */
+async function refineQuote(text){
+  try{
+    const r=await fetch('./claude-proxy.php',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({mode:'quote', name:(state.applicant?.name||''), text:(text||'').slice(0,12000)})});
+    const j=await r.json();
+    let q=(j&&j.answer?String(j.answer):'').trim().replace(/^["'“”]+|["'“”]+$/g,'').trim();
+    if(!q || q.length<20) return;                                   // empty or too short to be meaningful
+    if(/not configured|live ai error|forbidden|cross-origin/i.test(q)) return;
+    const el=document.getElementById('pquoteText'); if(el) el.textContent=q;
+  }catch(e){ /* keep the heuristic quote */ }
+}
+
+/* Live Claude: identify the real applicant name from the documents and
+   replace the first-line guess across the report. Silent no-op on failure. */
+async function refineName(text){
+  try{
+    const r=await fetch('./claude-proxy.php',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({mode:'name', text:(text||'').slice(0,6000)})});
+    const j=await r.json();
+    let nm=(j&&j.answer?String(j.answer):'').trim().replace(/^["']+|["']+$/g,'').replace(/\.$/,'');
+    if(!nm) return;
+    if(/^applicant$/i.test(nm)) return;                       // Claude couldn't determine it
+    if(nm.length>50 || /[\n@:]|\bnot\b|configured|error|forbidden|cross-origin/i.test(nm)) return; // not a clean name
+    applyName(nm);
+  }catch(e){ /* keep the guessed name */ }
+}
+function applyName(name){
+  if(state.applicant) state.applicant.name=name;
+  const gh=document.getElementById('ghName'); if(gh) gh.textContent=name;
+  const sub=document.getElementById('reportSub');
+  if(sub) sub.textContent=`${name} · graded across ${CATEGORIES.length} role-specific categories · overall is the average of category scores.`;
+  const ph=document.querySelector('#profile h3'); if(ph) ph.textContent=name;
+  setAskContext(state.applicant);
+}
+
+/* ---- AI Analysis (live Claude) ---- */
+async function runAnalysis(name, text){
+  const box=document.getElementById('aiAnalysis');
+  box.innerHTML=`<div class="ai-panel"><div class="aih"><span class="lbl">AI analysis</span><span class="badge2">Claude · qualitative read</span></div><div class="aithinking"><span class="spin"></span> Claude is reading the documents…</div></div>`;
+  try{
+    const r=await fetch('./claude-proxy.php',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({mode:'analyze', name, text:(text||'').slice(0,12000), jd:JD_SUMMARY})});
+    const j=await r.json();
+    if(!j||!j.answer || /not configured|Live AI error|cross-origin/i.test(j.answer)) throw new Error(j&&j.answer?j.answer:'no response');
+    box.innerHTML=`<div class="ai-panel"><div class="aih"><span class="lbl">AI analysis</span><span class="badge2">Claude · qualitative read · complements the score</span></div><div class="aibody">${fmtAnalysis(j.answer)}</div></div>`;
+  }catch(e){
+    box.innerHTML=`<div class="ai-panel"><div class="aih"><span class="lbl">AI analysis</span><span class="badge2">unavailable</span></div><div class="aithinking">Couldn't reach live Claude (${esc(String(e.message||e)).slice(0,80)}). The numeric report above is unaffected.</div></div>`;
+  }
+}
+function fmtAnalysis(t){
+  // turn the labelled plain-text sections + bullets into clean HTML
+  const lines=esc(t).split(/\r?\n/).map(l=>l.trim()).filter(Boolean);
+  let html='', inList=false;
+  const labels=/^(VERDICT|STRENGTHS|GAPS|GAPS ?\/? ?VERIFY|QUESTIONS|INTERVIEW QUESTIONS)\s*:?/i;
+  for(let l of lines){
+    const m=l.match(labels);
+    if(m){ if(inList){html+='</ul>';inList=false;} html+=`<span class="alabel">${m[1].replace(/INTERVIEW /i,'')}</span>`; l=l.replace(labels,'').trim(); if(!l)continue; }
+    if(/^[-•]\s+/.test(l)){ if(!inList){html+='<ul>';inList=true;} html+=`<li>${l.replace(/^[-•]\s+/,'')}</li>`; }
+    else if(/^\d+[.)]\s+/.test(l)){ if(!inList){html+='<ul>';inList=true;} html+=`<li>${l.replace(/^\d+[.)]\s+/,'')}</li>`; }
+    else { if(inList){html+='</ul>';inList=false;} html+=`<p style="margin-bottom:6px">${l}</p>`; }
+  }
+  if(inList)html+='</ul>';
+  return html;
+}
+
+/* Website embed + (optional) content review */
+function renderSitePreview(){
+  const box=document.getElementById('sitePreview');
+  if(!state.url){ box.innerHTML=''; return; }
+  let url=state.url; if(!/^https?:\/\//i.test(url)) url='https://'+url;
+  let status, note;
+  if(SITE_REVIEW && SITE_REVIEW.ok){ status='<span class="se-status ok">✓ content reviewed - '+SITE_REVIEW.words+' words folded into the grade</span>'; note='Live mode: the page text was fetched server-side and scored alongside the documents.'; }
+  else if(SITE_REVIEW && !SITE_REVIEW.ok){
+    const why = SITE_REVIEW.reason==='bot_challenge' ? 'the site returned a bot / JavaScript challenge to the automated request'
+              : (SITE_REVIEW.status>=400 ? 'the site returned HTTP '+SITE_REVIEW.status+' to the automated request'
+              : 'the site blocked the server-side request');
+    status='<span class="se-status">visual embed only - page text not read</span>';
+    note='Live mode is on, but '+why+'. This is normal with Cloudflare / bot protection: your browser passes the check, an automated fetch does not - so no page text (including any error page) is folded into the grade. The visual embed below still counts as a portfolio signal.';
+  }
+  else { status='<span class="se-status">visual embed - counts as a portfolio signal</span>'; note='Visual preview only. To have the tool read & grade the page text, enable live Claude (see “How it works”). Some sites also block being embedded.'; }
+  box.innerHTML=`<div class="site-embed">
+    <div class="se-head">🔗 <b>Portfolio / website</b> ${esc(url)} ${status}<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">open ↗</a></div>
+    <div class="se-frame">
+      <iframe src="${esc(url)}" loading="lazy" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+        onload="this.parentElement.querySelector('.se-fallback').style.display='none'"></iframe>
+      <div class="se-fallback" style="display:flex">If nothing loads, this site blocks embedding.<a class="btn btn-ghost" href="${esc(url)}" target="_blank" rel="noopener noreferrer">Open the site in a new tab ↗</a></div>
+    </div>
+    <div class="se-note">${note}</div>
+  </div>`;
+  // reveal fallback only if iframe fails to load within 4s
+  const fr=box.querySelector('iframe'), fb=box.querySelector('.se-fallback');
+  let loaded=false; fr.addEventListener('load',()=>{loaded=true; fb.style.display='none';});
+  setTimeout(()=>{ if(!loaded) fb.style.display='flex'; },4000);
+}
+async function fetchSiteText(url){
+  try{
+    const r=await fetch('./claude-proxy.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode:'fetch_url',url})});
+    const j=await r.json(); return {text:(j&&j.text)?j.text:'', status:(j&&j.status)||0, error:(j&&j.error)||''};
+  }catch(e){ return {text:'', status:0, error:'unreachable'}; }
+}
+
+function renderReport(name, avg, lett, results, text){
+  document.getElementById('reportSub').textContent =
+    `${name} · graded across ${results.length} role-specific categories · overall is the average of category scores.`;
+  document.getElementById('ghName').textContent=name;
+  document.getElementById('ringLett').textContent=lett;
+  document.getElementById('ringNum').textContent=avg+" / 100";
+  const strong=results.filter(r=>r.score>=70).map(r=>r.cat.name);
+  const gaps=results.filter(r=>r.score<55).map(r=>r.cat.name);
+  document.getElementById('ghVerdict').innerHTML =
+    `Overall <b style="color:var(--gold)">${avg}/100 (${lett})</b> against the FieldFlō Sr. Product Designer posting. `+
+    (strong.length?`Strongest in <b>${strong.slice(0,3).join(", ")}</b>. `:``)+
+    (gaps.length?`Lighter on <b>${gaps.slice(0,2).join(", ")}</b>.`:`Well-rounded across the board.`);
+  document.getElementById('ghStack').textContent =
+    "Categories: "+results.map(r=>r.cat.name+" "+r.score).join("  ·  ");
+
+  // category cards (keyword chips + a summary; AI upgrades the summary text in live mode)
+  document.getElementById('catGrid').innerHTML = results.map((r,i)=>{
+    const [b,col]=band(r.score);
+    const chips = r.matched.length? `<div class="chips">${r.matched.map(m=>`<span class="chip">${esc(m)}</span>`).join("")}</div>`:"";
+    return `<div class="cat">
+      <div class="ch"><div><div class="cname">${r.cat.name}</div></div><div class="cscore">${r.score}</div></div>
+      <div class="cwhy">${r.cat.why}</div>
+      <div class="ctrack"><div class="cfill" data-w="${r.score}" style="background:linear-gradient(90deg,var(--gold-dim),${col})"></div></div>
+      <div class="csum" data-cat="${i}"><b style="color:${col}">${b}.</b> ${catSummary(r.cat,r).replace(/^\w+ match\.\s?|^\w+ coverage\.\s?/,'')}</div>
+      ${chips}
+    </div>`;
+  }).join("");
+  // animate bars
+  requestAnimationFrame(()=>document.querySelectorAll('#catGrid .cfill').forEach(f=>f.style.width=f.dataset.w+'%'));
+  animateRing(avg);
+  if(LIVE_AI) runCategorySummaries(results, name, text);
+
+  // profile
+  renderProfile(name, text, results);
+}
+
+/* Live Claude: one call returns a short summary for every category, which
+   replaces the templated summary text in each card (keyword chips stay). */
+async function runCategorySummaries(results, name, text){
+  results.forEach((r,i)=>{ const el=document.querySelector('#catGrid .csum[data-cat="'+i+'"]'); if(el) el.insertAdjacentHTML('beforeend',' <span class="aitag"><span class="spin"></span> summarizing…</span>'); });
+  try{
+    const cats=results.map(r=>({name:r.cat.name, score:r.score}));
+    const r=await fetch('./claude-proxy.php',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({mode:'categories', name, text:(text||'').slice(0,12000), jd:JD_SUMMARY, categories:cats})});
+    const j=await r.json();
+    if(!j||!j.answer||/not configured|Live AI error|cross-origin|forbidden/i.test(j.answer)) throw new Error('unavailable');
+    let map=null; try{ map=JSON.parse(j.answer.replace(/```json|```/gi,'').trim()); }catch(_){}
+    results.forEach((res,i)=>{
+      const el=document.querySelector('#catGrid .csum[data-cat="'+i+'"]'); if(!el) return;
+      const [b,col]=band(res.score);
+      const s=map ? (map[res.cat.name] || map[res.cat.name.trim()]) : null;
+      if(s){ el.innerHTML='<b style="color:'+col+'">'+b+'.</b> '+esc(String(s))+' <span class="aitag">· AI</span>'; }
+      else { const tag=el.querySelector('.aitag'); if(tag) tag.remove(); }
+    });
+  }catch(e){
+    document.querySelectorAll('#catGrid .aitag').forEach(t=>t.remove()); // keep the templated summaries
+  }
+}
+
+function renderProfile(name, text, results){
+  const quote = state.applicant?.isWilliam ? WILLIAM.quote : extractQuote(text);
+  const skills = detectSkills(text);
+  document.getElementById('profile').innerHTML = `
+    <div class="pe">Candidate profile</div>
+    <h3>${esc(name)}</h3>
+    <div class="pquote"><span class="qm">“</span><span id="pquoteText">${esc(quote)}</span><span class="qm">”</span></div>
+    <div class="clab" style="margin-bottom:12px">Key skills this candidate brings</div>
+    <div class="pskills">${skills.map(s=>`<div class="sk"><b>▸</b><span>${esc(s)}</span></div>`).join("")}</div>`;
+}
+
+/* ---- profile helpers ---- */
+function guessName(){
+  const first=state.files.find(f=>f.status==='ok');
+  if(first){
+    const line=(first.text.split(/\n/).map(s=>s.trim()).find(s=>s.length>0)||"");
+    const words=line.split(/\s+/);
+    if(words.length>=2 && words.length<=5 && /^[A-Z]/.test(line) && line.length<46 && !/[@:0-9]/.test(line)) return line.replace(/\s{2,}/g,' ');
+    return first.name.replace(/\.[^.]+$/,'').replace(/[_-]+/g,' ');
+  }
+  return "Applicant";
+}
+function extractQuote(text){
+  const sents=text.replace(/\s+/g,' ').split(/(?<=[.!?])\s+/).map(s=>s.trim());
+  const cues=["i'm a strong fit","strong fit","why i","i'm a","i believe","i bring","i can ","i'm confident","confident that","i'd ","good fit","fit for","i think i","i would love","i am a","i am confident"];
+  let best=null,bestScore=0;
+  for(const s of sents){
+    if(s.length<35||s.length>260) continue;
+    const sl=s.toLowerCase(); let sc=0;
+    cues.forEach(c=>{if(sl.includes(c))sc+=2;});
+    if(/\bi\b|\bmy\b/.test(sl))sc+=1;
+    if(sc>bestScore){bestScore=sc;best=s;}
+  }
+  return best || (sents.find(s=>s.length>40 && /\bi\b/i.test(s)) || "No personal statement found in the provided documents.");
+}
+function detectSkills(text){
+  const lower=" "+text.toLowerCase()+" ";
+  const found=SKILL_LEXICON.filter(([_,terms])=>terms.some(t=>lower.includes(t))).map(([d])=>d);
+  return found.length? found.slice(0,12) : ["No standout skills auto-detected - review documents directly."];
+}
+
+function animateRing(target){
+  const ring=document.getElementById('ring'), num=document.getElementById('ringNum');
+  let c=0; const step=()=>{ c+=Math.max(1,Math.round(target/30)); if(c>=target)c=target;
+    ring.style.setProperty('--p',c); num.textContent=c+" / 100"; if(c<target)requestAnimationFrame(step); };
+  step();
+}
+
+/* ---- utils ---- */
+function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function highlight(htmlStr, term){
+  if(!term) return htmlStr;
+  try{ const re=new RegExp('('+term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','ig'); return htmlStr.replace(re,'<mark>$1</mark>'); }
+  catch(e){ return htmlStr; }
+}
+
+gradeBtn.addEventListener('click',grade);
+
+/* =========================================================
+   WILLIAM demo application (embedded text)
+   ========================================================= */
+const WILLIAM={
+  name:"William R. Barton",
+  quote:"I'm a web, brand, and graphic designer actively moving into building with AI - I use Claude (cowork + Claude Code) to make real things, including this review tool and an in-progress finance app. I'd rather show the work than overclaim a title.",
+  files:[
+    {name:"William_Barton_Resume.pdf", text:
+`WILLIAM R. BARTON - Graphic & Web Designer
+Chattanooga, TN · barton@bartosuerte.com · bartosuerte.com · He/Him
+SUMMARY
+A web, brand, and graphic designer with 15+ years creating clean, on-brand digital work. I build primarily in Webflow and am actively transitioning to a Claude AI workflow - cowork + Claude Code in VS Code - for custom builds beyond a visual builder's limits, with working knowledge of GitHub for version control. Currently building a personal-finance web app with this workflow.
+EXPERIENCE
+Bartosuerte - Graphic & Web Designer (2009-Present, Remote)
+- Design and build responsive, on-brand websites end-to-end - from brief and wireframes to a shipped site - primarily in Webflow.
+- Deliver full creative services across branding, graphic design, and photography for a recurring roster of clients.
+- Increasingly use Claude (cowork + Claude Code, in VS Code) to build custom features beyond Webflow's defaults; version with GitHub.
+- Apply strong visual hierarchy and clean layout so visitors find what they need quickly.
+- Build marketing automations and integrations (Klaviyo, Zapier, Google Workspace) connecting content and operations.
+Humble & Fume - Creative Marketing Director (2020-2022, Remote)
+- Replaced legacy systems with a scalable Webflow + Klaviyo framework that improved conversion tracking and campaign effectiveness - a systems redesign, not a reskin.
+- Owned communications in a compliance-sensitive, investor-relations-heavy environment.
+- Drove a 20% increase in email marketing revenue.
+One Tree Forest Films - Digital Designer & Photographer (2018-2020)
+- Produced cross-platform digital assets and photography aligned to client specs and brand systems; fast-paced, deadline-driven production.
+Windship Trading - Junior Designer & Web Manager (2011-2016)
+- Managed an e-commerce platform end-to-end; grew online sales through optimized merchandising and clean UX.
+SKILLS: Web design & development (Webflow), graphic design, branding, photography & videography, visual layout & hierarchy, Claude AI workflow (cowork + Claude Code in VS Code - actively developing), GitHub, Figma, Adobe Suite (Photoshop, Illustrator, InDesign, Lightroom, Premiere, After Effects), Shopify, email marketing (Klaviyo), automation & integrations (Zapier, Google Workspace).`},
+    {name:"William_Barton_CoverNote.txt", text:
+`Why I'm a fit for the Senior Product Designer role:
+I'm a web, brand, and graphic designer with 15+ years of turning vague briefs into clean, usable, on-brand work, and I'm actively building my workflow around exactly what this role values - Claude (cowork + Claude Code) for prototyping and custom builds. I'm using it to make real things right now, including this review tool and an in-progress finance app, so AI isn't a buzzword for me; it's where I'm actively heading.
+I'll be honest: I don't have a published product portfolio yet, and the AI-augmented product I'd most want to show is still in progress. But I'd welcome the chance to walk you through how I'm building it, or to do a short live exercise on a real FieldFlō workflow - I'd rather show the thinking than tell you about it. Bias to action is the part of this role I'm most excited about.
+This space rewards systems thinking under real constraints: at Humble & Fume I rebuilt a legacy marketing system into a scalable, measurable framework inside a compliance-heavy, investor-relations environment. Different industry, same instinct - bring clarity to complex, high-stakes workflows.
+Portfolio / site: https://bartosuerte.com`}
+  ],
+  url:"https://bartosuerte.com"
+};
+
+/* =========================================================
+   ASK ENGINE (adapts to loaded applicant)
+   ========================================================= */
+const WILLIAM_QA=[
+  {k:["ai","claude","tool","workflow","prototype","stack","cursor","github","code"], a:"Claude is my daily driver. I work concepts in cowork, then hand Claude Code a detailed build prompt, version source in GitHub, and refine in Cursor. I'm building a personal-finance SaaS product this exact way right now - so 'AI-native' isn't aspirational, it's how I already operate."},
+  {k:["portfolio","sample","shipped","example","published","work"], a:"Straight answer: I don't have a published product portfolio yet, and the AI-augmented product I'd most want to show is still in progress. But this very tool is an AI-augmented build, and I'd happily walk you through the finance app live - I'd rather show the thinking than just describe it."},
+  {k:["construction","subcontractor","field","domain","compliance","industry","abatement","demolition"], a:"I haven't worked construction directly, but I've designed inside compliance-heavy, high-stakes workflows - at Humble & Fume I owned communications in an investor-relations and cannabis-regulation environment. Same instinct your domain needs: clarity in complex, regulated, real-world processes."},
+  {k:["systems","thinking","complex","workflow","flows","edge"], a:"I think in systems. At Humble & Fume I replaced a legacy setup with a scalable Webflow + Klaviyo framework - designing the repeatable system, not a one-off page. I reason across flows, states, and roles."},
+  {k:["b2b","saas","product design","experience","years","background"], a:"15+ years across web, brand, and product, increasingly building functional products end-to-end. My titles read creative/marketing, but the work has shifted hard toward product: requirements, flows, prototypes, and shipped interfaces - now with AI in the loop."},
+  {k:["why","fit","hire","strong","good","interested","role"], a:"Three reasons: I already work AI-native (Claude all day), I think in systems under real constraints, and I ship. I'm most excited by the stage you're at: a deep product, an outdated UI with no design legacy to fight, and huge room for visible impact."},
+  {k:["ui","ux","design","visual","hierarchy","usability"], a:"I hold UI and UX in tension: where does the eye go first, how many clicks does a task take, and is the same action scattered across three places when it should live in one? That human-factors lens is how I'd move a product off an engineer-built foundation."},
+  {k:["location","remote","where","based","time","hours"], a:"I'm in Chattanooga, TN (Eastern) and I work great remote - independent, self-directed, used to owning outcomes without hand-holding."},
+  {k:["contact","email","reach","talk","call"], a:"Easiest is barton@bartosuerte.com or (512) 234-0620. Site: bartosuerte.com. Happy to do a short live exercise on a real workflow."},
+];
+const SUGGEST_W=["How do they use AI in their work?","Do they have a portfolio?","Why are they a fit for product design?","Any compliance / regulated experience?","How do they think about UI vs UX?"];
+const SUGGEST_G=["What's their AI / tooling experience?","Do they have a portfolio?","What's their strongest area?","Any B2B SaaS experience?","What are their key skills?"];
+
+let LIVE_STATUS=''; // appended to the Ask header once checkLive() resolves
+function setAskContext(applicant){
+  const ctx=document.getElementById('askCtx');
+  document.getElementById('suggest').innerHTML='';
+  if(!applicant){ ctx.innerHTML='Currently answering about: <b>no applicant loaded</b>'+LIVE_STATUS; renderSuggest([]); return; }
+  ctx.innerHTML=`Currently answering about: <b>${esc(applicant.name)}</b>`+(applicant.isWilliam?` - in his voice`:` - from loaded documents`)+LIVE_STATUS;
+  renderSuggest(applicant.isWilliam?SUGGEST_W:SUGGEST_G);
+}
+function renderSuggest(list){
+  document.getElementById('suggest').innerHTML=list.map(s=>`<button>${esc(s)}</button>`).join('');
+}
+document.getElementById('suggest').addEventListener('click',e=>{ if(e.target.tagName==='BUTTON') sendAsk(e.target.textContent); });
+document.getElementById('askBtn').addEventListener('click',()=>sendAsk());
+document.getElementById('askInput').addEventListener('keydown',e=>{ if(e.key==='Enter') sendAsk(); });
+
+function answerWilliam(q){
+  const ql=q.toLowerCase(); let best=null,sc=0;
+  WILLIAM_QA.forEach(e=>{ let s=0; e.k.forEach(k=>{ if(ql.includes(k))s+=2; }); if(s>sc){sc=s;best=e;} });
+  return best&&sc>0 ? best.a : "Good question - best answered directly: barton@bartosuerte.com. In short: 15+ years in design, now building products end-to-end with an AI-native (Claude) workflow.";
+}
+function answerFromDocs(q,applicant){
+  const STOP=new Set("the a an and or to of in for with on at by we you your our as is are be will across both how that this not it its do does".split(" "));
+  const qt=(q.toLowerCase().match(/[a-z][a-z+\-]{2,}/g)||[]).filter(w=>!STOP.has(w));
+  const sents=applicant.text.replace(/\s+/g,' ').split(/(?<=[.!?])\s+|•|•/).map(s=>s.trim()).filter(s=>s.length>20&&s.length<260);
+  let best=null,bestScore=0;
+  sents.forEach(s=>{ const sl=s.toLowerCase(); let sc=0; qt.forEach(t=>{ if(sl.includes(t))sc++; }); if(sc>bestScore){bestScore=sc;best=s;} });
+  if(!best||bestScore===0) return `I couldn't find that in ${applicant.name}'s documents. Try asking about their experience, tools, or skills.`;
+  return `From ${applicant.name}'s documents: “${best}”`;
+}
+function pushMsg(text,who){
+  const chat=document.getElementById('chat');
+  const d=document.createElement('div'); d.className='msg '+(who==='you'?'you':'bot');
+  d.innerHTML=(who==='you'?'':'<span class="who">'+(state.applicant?.isWilliam?'William':'Tool')+'</span>')+esc(text);
+  chat.appendChild(d); chat.scrollTop=chat.scrollHeight;
+}
+let asking=false;
+async function sendAsk(text){
+  const input=document.getElementById('askInput');
+  const q=(typeof text==='string'?text:input.value).trim(); if(!q||asking)return;
+  pushMsg(q,'you'); input.value='';
+  if(!state.applicant){ setTimeout(()=>pushMsg("Load an applicant first (or click “Load my application”).",'bot'),180); return; }
+  if(LIVE_AI){
+    asking=true; const t=pushThinking();
+    try{ const a=await liveAsk(q); t.remove(); pushMsg(a,'bot'); }
+    catch(e){ t.remove(); pushMsg("⚠ Live Claude unavailable ("+String(e.message||e).slice(0,70)+") - showing the built-in answer instead.",'bot'); pushMsg(localAnswer(q),'bot'); }
+    asking=false;
+  } else {
+    setTimeout(()=>pushMsg(localAnswer(q),'bot'),320);
+  }
+}
+function localAnswer(q){ return state.applicant.isWilliam?answerWilliam(q):answerFromDocs(q,state.applicant); }
+function pushThinking(){
+  const chat=document.getElementById('chat');
+  const d=document.createElement('div'); d.className='msg bot';
+  d.innerHTML='<span class="who">'+(state.applicant?.isWilliam?'William':'Claude')+'</span><span class="spin"></span> thinking…';
+  chat.appendChild(d); chat.scrollTop=chat.scrollHeight; return d;
+}
+async function liveAsk(q){
+  const r=await fetch('./claude-proxy.php',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({mode:'ask', question:q, name:state.applicant.name, text:(state.applicant.text||'').slice(0,12000), is_william:!!state.applicant.isWilliam})});
+  const j=await r.json();
+  if(!j||!j.answer) throw new Error('no response from proxy');
+  if(/not configured|Live AI error|cross-origin|forbidden/i.test(j.answer)) throw new Error(j.answer.replace(/[()]/g,''));
+  return j.answer;
+}
+/* on load, verify the proxy + key are reachable and show status in the Ask header */
+async function checkLive(){
+  if(!LIVE_AI){ LIVE_STATUS=' <span class="live-warn">· local mode (LIVE_AI is off)</span>'; setAskContext(state.applicant); return; }
+  try{
+    const r=await fetch('./claude-proxy.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode:'ping'})});
+    const j=await r.json();
+    if(j&&j.ok&&j.key){ LIVE_STATUS=' <span class="live-ok">· ✓ live Claude connected</span>'; }
+    else if(j&&j.ok&&!j.key){ LIVE_STATUS=' <span class="live-warn">· ⚠ proxy reached but no API key set</span>'; }
+    else { LIVE_STATUS=' <span class="live-warn">· ⚠ live mode on, proxy not reachable</span>'; }
+  }catch(e){
+    LIVE_STATUS=' <span class="live-warn">· ⚠ live mode on, but proxy not reachable (must be served from your PHP host, not a local file)</span>';
+  }
+  setAskContext(state.applicant);
+}
+
+/* =========================================================
+   LOAD WILLIAM (demo)
+   ========================================================= */
+function loadWilliam(){
+  state.files = WILLIAM.files.map(f=>({name:f.name,status:'ok',text:f.text,image:false,ext:(f.name.split('.').pop()||'').toLowerCase(),blobUrl:''}));
+  state.url = WILLIAM.url;
+  document.getElementById('urlInput').value = WILLIAM.url;
+  state.applicant = {name:WILLIAM.name, text:WILLIAM.files.map(f=>f.text).join("\n\n")+"\n\n"+WILLIAM.url, isWilliam:true};
+  renderFiles();
+  grade();
+}
+document.getElementById('loadWill').addEventListener('click',loadWilliam);
+document.getElementById('navLoad').addEventListener('click',e=>{e.preventDefault();loadWilliam();});
+
+/* cursor-following gradient field - each blob eases toward the cursor at a
+   different rate, producing a staggered trailing effect. Idles with a slow
+   drift when the cursor is still. */
+(function bgfx(){
+  const fx=document.getElementById('bgfx'); if(!fx) return;
+  const blobs=[...fx.querySelectorAll('.blob')];
+  const ease=[0.14,0.09,0.055,0.032];
+  const target={x:innerWidth*0.5,y:innerHeight*0.42};
+  const pos=blobs.map(()=>({x:target.x,y:target.y}));
+  let moving=false, t=0;
+  addEventListener('pointermove',e=>{ target.x=e.clientX; target.y=e.clientY; moving=true; },{passive:true});
+  addEventListener('pointerleave',()=>{ moving=false; },{passive:true});
+  (function loop(){
+    t+=0.006;
+    if(!moving){ // gentle lissajous drift when idle
+      target.x=innerWidth*(0.5+0.22*Math.cos(t*0.9));
+      target.y=innerHeight*(0.45+0.18*Math.sin(t*1.3));
+    }
+    blobs.forEach((b,i)=>{
+      pos[i].x+=(target.x-pos[i].x)*ease[i];
+      pos[i].y+=(target.y-pos[i].y)*ease[i];
+      const r=b.offsetWidth/2;
+      b.style.transform='translate('+(pos[i].x-r).toFixed(1)+'px,'+(pos[i].y-r).toFixed(1)+'px)';
+    });
+    requestAnimationFrame(loop);
+  })();
+})();
+
+/* init */
+document.getElementById('yr').textContent=new Date().getFullYear();
+renderFiles(); setAskContext(null); checkLive();
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
