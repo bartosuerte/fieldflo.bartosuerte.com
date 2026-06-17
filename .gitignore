@@ -9,4 +9,5 @@ Thumbs.db
 *.log
 .vscode/
 .idea/
+.claude/
 .fuse_hidden*

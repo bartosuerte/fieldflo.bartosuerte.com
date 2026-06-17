@@ -1,0 +1,44 @@
+name: Deploy to SiteGround
+
+# Publishes the site to fieldflow.bartosuerte.com whenever you push to main.
+# Same proven FTPS setup as your resume.bartosuerte.com / review.bartosuerte.com repos.
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:        # also lets you trigger a deploy by hand from the Actions tab
+
+jobs:
+  ftp-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the latest code
+        uses: actions/checkout@v4
+
+      - name: Sync files to SiteGround over FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps           # encrypted transfer (SiteGround supports this on port 21)
+          port: 21
+          server-dir: /fieldflow.bartosuerte.com/public_html/   # live folder on SiteGround (confirm path in File Manager; trailing slash required)
+          # dry-run: true          # uncomment for a safe no-op preview run, then remove
+          #
+          # Files that live in the repo but must NOT be published to the web root.
+          # IMPORTANT: the live app/claude-proxy.php (your real API key) is gitignored
+          # and is NOT in this repo, so the action never uploads or deletes it -- it
+          # stays safely on the server. The two proxy lines below are belt-and-suspenders.
+          # NEVER set dangerous-clean-slate: true -- it would wipe the server-side proxy.
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/README.md
+            **/CLAUDE.md
+            **/PRD.md
+            **/DESIGN_SYSTEM.md
+            **/.DS_Store
+            **/.gitignore
+            app/claude-proxy.example.php
+            app/claude-proxy.php
