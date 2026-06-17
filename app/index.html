@@ -729,7 +729,7 @@ const WILLIAM={
   name:"William R. Barton",
   quote:"I'm a web, brand, and graphic designer actively moving into building with AI - I use Claude (cowork + Claude Code) to make real things, including this review tool and an in-progress finance app. I'd rather show the work than overclaim a title.",
   files:[
-    {name:"William_Barton_Resume.pdf", text:
+    {name:"William_Barton_Resume.pdf", src:"./William_Barton_Resume.pdf", text:
 `WILLIAM R. BARTON - Graphic & Web Designer
 Chattanooga, TN · barton@bartosuerte.com · bartosuerte.com · He/Him
 SUMMARY
@@ -750,12 +750,14 @@ One Tree Forest Films - Digital Designer & Photographer (2018-2020)
 Windship Trading - Junior Designer & Web Manager (2011-2016)
 - Managed an e-commerce platform end-to-end; grew online sales through optimized merchandising and clean UX.
 SKILLS: Web design & development (Webflow), graphic design, branding, photography & videography, visual layout & hierarchy, Claude AI workflow (cowork + Claude Code in VS Code - actively developing), GitHub, Figma, Adobe Suite (Photoshop, Illustrator, InDesign, Lightroom, Premiere, After Effects), Shopify, email marketing (Klaviyo), automation & integrations (Zapier, Google Workspace).`},
-    {name:"William_Barton_CoverNote.txt", text:
-`Why I'm a fit for the Senior Product Designer role:
-I'm a web, brand, and graphic designer with 15+ years of turning vague briefs into clean, usable, on-brand work, and I'm actively building my workflow around exactly what this role values - Claude (cowork + Claude Code) for prototyping and custom builds. I'm using it to make real things right now, including this review tool and an in-progress finance app, so AI isn't a buzzword for me; it's where I'm actively heading.
-I'll be honest: I don't have a published product portfolio yet, and the AI-augmented product I'd most want to show is still in progress. But I'd welcome the chance to walk you through how I'm building it, or to do a short live exercise on a real FieldFlō workflow - I'd rather show the thinking than tell you about it. Bias to action is the part of this role I'm most excited about.
-This space rewards systems thinking under real constraints: at Humble & Fume I rebuilt a legacy marketing system into a scalable, measurable framework inside a compliance-heavy, investor-relations environment. Different industry, same instinct - bring clarity to complex, high-stakes workflows.
-Portfolio / site: https://bartosuerte.com`}
+    {name:"William_Barton_Cover_Letter.pdf", src:"./William_Barton_Cover_Letter.pdf", text:
+`Why we should talk
+I'll be straight with you. I'm not a traditional product designer, and I don't have a published product portfolio yet. What I do have is fifteen years of turning vague briefs into clean, on-brand work, and a fast-growing habit of building with AI.
+I've been leaning hard into Claude Code. The Applicant Review Tool on my resume isn't a mockup; I designed and built it end to end in a few hours using a Claude-native workflow, to my own design system.
+I also know how to make complex things feel simple. I lead with hierarchy and clarity, prioritize progress over perfection, and I've turned messy systems into ones that actually work. At Humble & Fume I replaced a legacy web interface with a scalable framework using Webflow, Zapier, and Klaviyo and drove a 20% lift in email revenue on our retail site.
+If you need a perfectly conventional resume, I am probably not your person. If you want a designer with a strong eye, a bias to action, and a real passion for learning and building with AI, then let's talk.
+Sincerely, William R. Barton
+barton@bartosuerte.com · bartosuerte.com`}
   ],
   url:"https://bartosuerte.com"
 };
@@ -861,7 +863,13 @@ async function checkLive(){
    LOAD WILLIAM (demo)
    ========================================================= */
 function loadWilliam(){
-  state.files = WILLIAM.files.map(f=>({name:f.name,status:'ok',text:f.text,image:false,ext:(f.name.split('.').pop()||'').toLowerCase(),blobUrl:''}));
+  // Load William's real resume + cover letter PDFs as viewable documents.
+  // They are designed exports with no extractable text layer (the in-browser
+  // pdf.js reader returns nothing), so the demo grades the curated copy that
+  // mirrors them - instant and deterministic, with no per-click vision OCR.
+  // "View Doc" opens the actual PDF via its url (f.src).
+  state.files.forEach(f=>{ if(f.blobUrl && f.blobUrl.indexOf('blob:')===0) URL.revokeObjectURL(f.blobUrl); });
+  state.files = WILLIAM.files.map(f=>({name:f.name, status:'ok', text:f.text, image:false, ext:'pdf', blobUrl:f.src}));
   state.url = WILLIAM.url;
   document.getElementById('urlInput').value = WILLIAM.url;
   state.applicant = {name:WILLIAM.name, text:WILLIAM.files.map(f=>f.text).join("\n\n")+"\n\n"+WILLIAM.url, isWilliam:true};
