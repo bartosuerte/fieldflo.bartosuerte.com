@@ -14,6 +14,24 @@ jobs:
       - name: Get the latest code
         uses: actions/checkout@v5
 
+      - name: Generate keyed Claude proxy from the example
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          python3 - <<'PY'
+          import os, sys
+          key = os.environ.get("ANTHROPIC_API_KEY", "").strip()
+          if not key:
+              sys.exit("ERROR: ANTHROPIC_API_KEY secret is empty")
+          src = open("app/claude-proxy.example.php").read()
+          needle = "getenv('ANTHROPIC_API_KEY') ?: ''"
+          if needle not in src:
+              sys.exit("ERROR: key placeholder not found in app/claude-proxy.example.php")
+          out = src.replace(needle, "getenv('ANTHROPIC_API_KEY') ?: '" + key + "'", 1)
+          open("app/claude-proxy.php", "w").write(out)
+          print("Generated app/claude-proxy.php:", len(out), "bytes")
+          PY
+
       - name: Sync files to SiteGround over FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
@@ -25,11 +43,10 @@ jobs:
           server-dir: /fieldflo.bartosuerte.com/public_html/   # live folder on SiteGround (confirm path in File Manager; trailing slash required)
           # dry-run: true          # uncomment for a safe no-op preview run, then remove
           #
-          # Files that live in the repo but must NOT be published to the web root.
-          # IMPORTANT: the live app/claude-proxy.php (your real API key) is gitignored
-          # and is NOT in this repo, so the action never uploads or deletes it -- it
-          # stays safely on the server. The two proxy lines below are belt-and-suspenders.
-          # NEVER set dangerous-clean-slate: true -- it would wipe the server-side proxy.
+          # Files in the repo that must NOT be published to the web root.
+          # app/claude-proxy.php is generated in the step above (key injected from the
+          # ANTHROPIC_API_KEY secret) and IS published; the no-key example is not.
+          # NEVER set dangerous-clean-slate: true.
           exclude: |
             **/.git*
             **/.git*/**
@@ -41,4 +58,3 @@ jobs:
             **/.DS_Store
             **/.gitignore
             app/claude-proxy.example.php
-            app/claude-proxy.php

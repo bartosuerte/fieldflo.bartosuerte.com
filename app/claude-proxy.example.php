@@ -32,15 +32,6 @@ if ($origin) {
   }
 }
 
-// ---- tiny rate limit: 20 requests / 10 min per IP ----
-$ip = $_SERVER['REMOTE_ADDR'] ?? 'x';
-$bucket = sys_get_temp_dir().'/rl_'.md5($ip).'.json';
-$now = time(); $hits = [];
-if (is_file($bucket)) { $hits = json_decode(@file_get_contents($bucket), true) ?: []; }
-$hits = array_filter($hits, fn($t)=>$t > $now-600);
-if (count($hits) >= 20) { http_response_code(429); echo json_encode(['error'=>'rate_limited']); exit; }
-$hits[] = $now; @file_put_contents($bucket, json_encode(array_values($hits)));
-
 // ---- read request ----
 $in = json_decode(file_get_contents('php://input'), true) ?: [];
 $mode = $in['mode'] ?? 'ask';
@@ -94,12 +85,23 @@ if ($mode === 'fetch_url') {
   echo json_encode(['text'=>$text]); exit;
 }
 
-// Provide your key via the server env var ANTHROPIC_API_KEY, or paste it at deploy time. Do NOT commit a real key.
-$API_KEY = getenv('ANTHROPIC_API_KEY') ?: '';  // set ANTHROPIC_API_KEY on the server, or paste 'sk-ant-...' here at deploy time (never commit the real key)
+// The real key is injected at deploy time from the ANTHROPIC_API_KEY GitHub secret
+// (see .github/workflows/deploy.yml). To run locally, paste 'sk-ant-...' as the fallback. Never commit a real key.
+$API_KEY = getenv('ANTHROPIC_API_KEY') ?: '';
 if (!$API_KEY) { echo json_encode(['answer'=>'(Live AI not configured - paste your key into $API_KEY.)']); exit; }
 
 // quick connection test (no Claude call, no cost)
 if ($mode === 'ping') { echo json_encode(['ok'=>true, 'key'=> (strlen($API_KEY) > 10)]); exit; }
+
+// ---- rate limit: only real Claude calls count (ask / analyze / categories / tailor). ----
+// Free modes above (ping, fetch_url) do NOT consume the budget.
+$ip = $_SERVER['REMOTE_ADDR'] ?? 'x';
+$bucket = sys_get_temp_dir().'/rl_'.md5($ip).'.json';
+$now = time(); $hits = [];
+if (is_file($bucket)) { $hits = json_decode(@file_get_contents($bucket), true) ?: []; }
+$hits = array_filter($hits, fn($t)=>$t > $now-600);
+if (count($hits) >= 60) { http_response_code(429); echo json_encode(['error'=>'rate_limited','answer'=>'(Rate limit reached - wait a couple minutes and try again.)']); exit; }
+$hits[] = $now; @file_put_contents($bucket, json_encode(array_values($hits)));
 
 $name = trim($in['name'] ?? 'the applicant');
 $applicant_text = trim($in['text'] ?? '');
@@ -116,6 +118,7 @@ if ($mode === 'ocr') {
   $media = strtolower(trim($in['media_type'] ?? ''));
   $b64   = $in['data'] ?? '';
   if ($b64 === '') { echo json_encode(['text'=>'', 'error'=>'no_data']); exit; }
+  // guard against oversized uploads (base64 is ~33% larger than the file)
   if (strlen($b64) > 28000000) { echo json_encode(['text'=>'', 'error'=>'file_too_large']); exit; }
   if (strpos($media, 'pdf') !== false) {
     $block = ['type'=>'document', 'source'=>['type'=>'base64', 'media_type'=>'application/pdf', 'data'=>$b64]];
@@ -136,15 +139,22 @@ if ($mode === 'ocr') {
   curl_setopt_array($ch, [
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_POST => true,
-    CURLOPT_HTTPHEADER => ['content-type: application/json', 'x-api-key: '.$API_KEY, 'anthropic-version: 2023-06-01'],
+    CURLOPT_HTTPHEADER => [
+      'content-type: application/json',
+      'x-api-key: '.$API_KEY,
+      'anthropic-version: 2023-06-01',
+    ],
     CURLOPT_POSTFIELDS => json_encode($payload),
     CURLOPT_TIMEOUT => 60,
   ]);
   $res = curl_exec($ch);
+  $httpcode = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
   if ($res === false) { echo json_encode(['text'=>'', 'error'=>curl_error($ch)]); exit; }
   curl_close($ch);
   $data = json_decode($res, true);
-  if (isset($data['error'])) { echo json_encode(['text'=>'', 'error'=>($data['error']['message'] ?? 'api_error')]); exit; }
+  if ($httpcode !== 200 || isset($data['error'])) {
+    echo json_encode(['text'=>'', 'error'=>($data['error']['message'] ?? ('HTTP '.$httpcode))]); exit;
+  }
   echo json_encode(['text'=>($data['content'][0]['text'] ?? '')]); exit;
 }
 
@@ -165,15 +175,22 @@ if ($mode === 'name') {
   curl_setopt_array($ch, [
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_POST => true,
-    CURLOPT_HTTPHEADER => ['content-type: application/json', 'x-api-key: '.$API_KEY, 'anthropic-version: 2023-06-01'],
+    CURLOPT_HTTPHEADER => [
+      'content-type: application/json',
+      'x-api-key: '.$API_KEY,
+      'anthropic-version: 2023-06-01',
+    ],
     CURLOPT_POSTFIELDS => json_encode($payload),
     CURLOPT_TIMEOUT => 20,
   ]);
   $res = curl_exec($ch);
+  $httpcode = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
   if ($res === false) { echo json_encode(['answer'=>'Applicant', 'error'=>curl_error($ch)]); exit; }
   curl_close($ch);
   $data = json_decode($res, true);
-  if (isset($data['error'])) { echo json_encode(['answer'=>'Applicant', 'error'=>($data['error']['message'] ?? 'api_error')]); exit; }
+  if ($httpcode !== 200 || isset($data['error'])) {
+    echo json_encode(['answer'=>'Applicant', 'error'=>($data['error']['message'] ?? ('HTTP '.$httpcode))]); exit;
+  }
   $nm = trim($data['content'][0]['text'] ?? '');
   echo json_encode(['answer'=>($nm !== '' ? $nm : 'Applicant')]); exit;
 }
@@ -196,15 +213,22 @@ if ($mode === 'quote') {
   curl_setopt_array($ch, [
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_POST => true,
-    CURLOPT_HTTPHEADER => ['content-type: application/json', 'x-api-key: '.$API_KEY, 'anthropic-version: 2023-06-01'],
+    CURLOPT_HTTPHEADER => [
+      'content-type: application/json',
+      'x-api-key: '.$API_KEY,
+      'anthropic-version: 2023-06-01',
+    ],
     CURLOPT_POSTFIELDS => json_encode($payload),
     CURLOPT_TIMEOUT => 25,
   ]);
   $res = curl_exec($ch);
+  $httpcode = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
   if ($res === false) { echo json_encode(['answer'=>'', 'error'=>curl_error($ch)]); exit; }
   curl_close($ch);
   $data = json_decode($res, true);
-  if (isset($data['error'])) { echo json_encode(['answer'=>'', 'error'=>($data['error']['message'] ?? 'api_error')]); exit; }
+  if ($httpcode !== 200 || isset($data['error'])) {
+    echo json_encode(['answer'=>'', 'error'=>($data['error']['message'] ?? ('HTTP '.$httpcode))]); exit;
+  }
   echo json_encode(['answer'=>trim($data['content'][0]['text'] ?? '')]); exit;
 }
 
@@ -278,9 +302,15 @@ curl_setopt_array($ch, [
   CURLOPT_TIMEOUT => 30,
 ]);
 $res = curl_exec($ch);
-if ($res === false) { echo json_encode(['answer'=>'(Live AI error: '.curl_error($ch).')']); exit; }
+$httpcode = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+if ($res === false) { echo json_encode(['answer'=>'(Live AI error: '.curl_error($ch).')','error'=>'curl']); exit; }
 curl_close($ch);
 
 $data = json_decode($res, true);
-$text = $data['content'][0]['text'] ?? '(No response.)';
-echo json_encode(['answer'=>$text]);
+// surface the real upstream error instead of hiding it as "(No response.)"
+if ($httpcode !== 200 || isset($data['error'])) {
+  $msg = $data['error']['message'] ?? ('HTTP '.$httpcode);
+  echo json_encode(['answer'=>'(Claude API error: '.$msg.')','error'=>'api','status'=>$httpcode]); exit;
+}
+$text = $data['content'][0]['text'] ?? '';
+echo json_encode(['answer'=>($text !== '' ? $text : '(Claude returned an empty response.)')]);
