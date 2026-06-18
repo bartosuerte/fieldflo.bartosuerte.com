@@ -16,9 +16,9 @@
 window.SITE = {
   /* Browser tab title + meta description (SEO) */
   meta: {
-    title: "William R. Barton - Graphic & Web Designer",
+    title: "William R. Barton, Graphic & Web Designer",
     description:
-      "Interactive resume of William R. Barton, a graphic and web designer in Chattanooga, TN (EST) - brand, web, and AI-assisted builds.",
+      "Interactive resume of William R. Barton, a graphic and web designer in Chattanooga, TN (EST), working across brand, web, and AI-assisted builds.",
   },
 
   /* Top navigation bar */
@@ -73,7 +73,7 @@ window.SITE = {
     titleHtml: 'Why we should <span class="gold">talk</span>',
     paragraphs: [
       `I'll be straight with you. <mark class="hilite">I'm not a traditional product designer</mark>, and I don't have a published product portfolio yet. What I do have is fifteen years of turning vague briefs into clean, on-brand work, and a <mark class="hilite">fast-growing habit of building with AI.</mark>`,
-      `I've been <mark class="hilite">leaning hard into Claude Code</mark>. The Applicant Review Tool at the bottom of this page isn't a mockup, I <mark class="hilite">designed and built it end to end in a few hours</mark> using a Claude-native workflow, to my own design system.`,
+      `I've been <mark class="hilite">leaning hard into Claude Code</mark>. The Applicant Review Tool at the bottom of this page isn't a mockup. I <mark class="hilite">designed and built it end to end in a few hours</mark> using a Claude-native workflow, to my own design system. I treat working with AI as a craft I am actively learning, and I <mark class="hilite">follow current best practices for prompt engineering and token conservation</mark>, including a 10/80/10 split an Anthropic engineer proposed: plan in Fable, execute in Opus, and audit in Fable, returning to Opus for any debugging the audit surfaces.`,
       `I also know how to make complex things feel simple. I lead with hierarchy and clarity, <mark class="hilite">prioritize progress over perfection</mark>, and I've turned messy systems into ones that actually work. At Humble &amp; Fume I replaced a legacy web interface with a scalable framework using Webflow, Zapier, and Klaviyo <mark class="hilite">and drove a 20% lift in email revenue on our retail site</mark>.`,
       `If you need a perfectly conventional resume, I am probably not your person. If you want <mark class="hilite">a designer with a strong eye, a bias to action, and a real passion for learning and building with AI</mark>, then let's talk.`,
     ],
@@ -90,12 +90,12 @@ window.SITE = {
       {
         role: "Graphic & Web Designer",
         co: "Bartosuerte (Freelance)",
-        yr: "2009 - Present",
+        yr: "2009-Present",
         open: true,
         bullets: [
-          "Design and build responsive, on-brand websites end to end - from brief and wireframes to a shipped site - primarily in Webflow.",
+          "Design and build responsive, on-brand websites end to end in Webflow, from brief and wireframes through to a shipped site.",
           "Deliver full creative services across branding, graphic design, and photography for a recurring roster of clients.",
-          "Increasingly use Claude (cowork + Claude Code, in VS Code) to build custom features beyond Webflow's defaults.",
+          "Increasingly use Claude (cowork + Claude Code, in VS Code) to build custom features beyond Webflow's defaults, working in a structured Explore → Plan → Code → Commit loop for accurate, token-efficient output.",
           "Apply strong visual hierarchy and clean layout so visitors find what they need quickly.",
           "Build marketing automations and integrations (Klaviyo, Zapier, Google Workspace) connecting content and operations.",
         ],
@@ -103,9 +103,9 @@ window.SITE = {
       {
         role: "Creative Marketing Director",
         co: "Humble & Fume Inc. (Remote)",
-        yr: "2020 - 2022",
+        yr: "2020-2022",
         bullets: [
-          "Replaced legacy marketing systems with a scalable Webflow + Klaviyo framework that improved conversion tracking and campaign effectiveness - a systems redesign, not a reskin.",
+          "Replaced legacy marketing systems with a scalable Webflow + Klaviyo framework that improved conversion tracking and campaign effectiveness. It was a systems redesign, not a reskin.",
           "Owned communications in a compliance-sensitive, investor-relations-heavy environment.",
           "Drove a 20% increase in email marketing revenue through template and delivery/retention redesign.",
           "Shipped integrated campaigns across multiple channels with consistent messaging.",
@@ -114,7 +114,7 @@ window.SITE = {
       {
         role: "Digital Designer & Photographer",
         co: "One Tree Forest Films",
-        yr: "2018 - 2020",
+        yr: "2018-2020",
         bullets: [
           "Produced cross-platform digital assets and photography aligned to client specs and brand systems.",
           "Worked in fast-paced, deadline-driven production environments with a high attention to detail.",
@@ -123,7 +123,7 @@ window.SITE = {
       {
         role: "Junior Designer & Web Manager",
         co: "Windship Trading Co.",
-        yr: "2011 - 2016",
+        yr: "2011-2016",
         bullets: [
           "Managed an e-commerce platform end to end; grew online sales through optimized merchandising and clean UX.",
           "Produced and adapted design assets alongside senior designers.",
@@ -136,7 +136,7 @@ window.SITE = {
   skills: {
     eyebrow: "The toolkit",
     titleHtml: 'Skills &amp; <span class="gold">stack</span>',
-    sub: "Honest levels. Visual and web design are my core; the AI workflow is newer and growing fast, backed by real built work like the tool at the bottom of this page.",
+    sub: "Honest levels. Visual and web design are my core; the AI workflow is newer and growing fast, backed by real work like the tool at the bottom of this page.",
     groups: [
       {
         cat: "Visual & Brand",
@@ -153,9 +153,9 @@ window.SITE = {
         items: [
           ["Webflow", 80],
           ["Shopify", 80],
-          ["HTML / CSS / Java", 70],
+          ["HTML / CSS / JS", 70],
           ["Design Systems", 80],
-          ["Perfomance Optimization", 75],
+          ["Performance Optimization", 75],
         ],
       },
       {
@@ -170,7 +170,7 @@ window.SITE = {
       {
         cat: "Ways of working",
         items: [
-          ["Client Ccollaboration", 95],
+          ["Client Collaboration", 95],
           ["Project Management", 85],
           ["Creative Direction", 95],
           ["SOPs / Process", 90],
@@ -201,12 +201,12 @@ window.SITE = {
   services: {
     eyebrow: "Capabilities",
     titleHtml: 'How I can <span class="gold">help</span>',
-    sub: "A quick map of where I am most useful - from brand and web design to photography and AI-assisted builds.",
+    sub: "A quick map of where I am most useful, from brand and web design to photography and AI-assisted builds.",
     items: [
       {
         i: "Web Design & Build",
         h: "Websites, End to End",
-        p: "From brief and wireframes to a shipped, responsive site - primarily in Webflow, increasingly with custom Claude-built features.",
+        p: "From brief and wireframes to a shipped, responsive site, primarily in Webflow and increasingly with custom Claude-built features.",
       },
       {
         i: "Brand & Graphic Design",
@@ -221,7 +221,7 @@ window.SITE = {
       {
         i: "AI-assisted Builds",
         h: "Building with Claude",
-        p: "Functional prototypes and custom tools built in a Claude-native workflow - like the review tool at the bottom of this page.",
+        p: "Functional prototypes and custom tools built in a Claude-native workflow, like the review tool at the bottom of this page.",
       },
     ],
   },
@@ -305,7 +305,7 @@ window.SITE = {
     eyebrow: "Proof of work · built with Claude",
     titleHtml: 'The Applicant <span class="gold">Review Tool</span>',
     intro:
-      "I would rather build than describe. So I made a working tool with Claude: drop in any candidate's documents and it grades them against a job posting, then answers questions about them. The grading runs on a transparent, not-rigged engine; Claude powers the conversational answers. It is my clearest piece of AI-assisted work, and it is live.",
+      "I would rather build than describe. So I made a working tool with Claude: drop in any candidate's documents and it grades them against a job posting, then answers questions about them. The grading runs on a transparent, rules-based engine; Claude powers the conversational answers. It is my clearest piece of AI-assisted work, and it is live.",
     bullets: [
       "Drag-and-drop intake for PDF, DOCX, TXT and portfolio links, parsed in the browser",
       "Scores documents against a role across six categories",

@@ -62,12 +62,12 @@
   <div class="wrap">
     <div class="badge"><span class="dot"></span>Grading against: FieldFlō · Sr. Product Designer</div>
     <h1>APPLICANT<br><span class="l2">REVIEW TOOL</span></h1>
-    <p class="lead">Drop in a candidate's resume, cover letter, or portfolio link. The tool reads the documents and grades them against the FieldFlō Senior Product Designer posting - across six role-specific categories, with evidence pulled from their own words.</p>
+    <p class="lead">Drop in a candidate's resume, cover letter, or portfolio link. The tool reads the documents and grades them against the FieldFlō Senior Product Designer posting across six role-specific categories, with evidence pulled from their own words.</p>
 
     <div class="note-card">
       <div class="nh">↳ A note from William, to whoever's reading</div>
-      <p>I built this instead of just emailing a PDF. It grades <em>any</em> applicant - including me - fairly against your own posting, so drag in whoever you're weighing. If someone scores higher than I do, you should probably talk to them. But I figured the person who ships the team something useful before day one is at least worth a conversation.</p>
-      <div class="sig">- William R. Barton</div>
+      <p>I built this instead of just emailing a PDF. It grades any applicant, including me, fairly against your own posting, so drag in whoever you're weighing. If someone scores higher than I do, you should probably talk to them. But I figured the person who ships the team something useful before day one is at least worth a conversation.</p>
+      <div class="sig">William R. Barton</div>
     </div>
   </div>
 </header>
@@ -80,12 +80,12 @@
         <div class="drop" id="drop">
           <div class="ic">📄</div>
           <h3>Drag &amp; drop application files</h3>
-          <p>or click to browse - resume, cover letter, portfolio docs</p>
+          <p>or click to browse for a resume, cover letter, or portfolio docs</p>
           <div class="types">PDF · DOCX · TXT · MD &nbsp;·&nbsp; scanned PDFs &amp; images AI-scanned</div>
           <input type="file" id="fileInput" multiple accept=".pdf,.docx,.txt,.md,.png,.jpg,.jpeg,.webp,.gif" style="display:none" />
         </div>
         <div class="url-field">
-          <input id="urlInput" placeholder="Portfolio / website URL (optional) - e.g. https://…" />
+          <input id="urlInput" placeholder="Portfolio / website URL (optional, e.g. https://…)" />
         </div>
         <div class="intake-actions">
           <button class="btn btn-gold" id="gradeBtn" disabled>⚖️ Grade applicant</button>
@@ -131,11 +131,11 @@
   <div class="wrap reveal">
     <div class="eyebrow">Conversational</div>
     <h2 class="section-title">Ask the application <span class="gold">anything</span></h2>
-    <p class="section-sub">Curious about a specific skill, the AI tooling, or whether the candidate fits your stack? Ask directly - answers are pulled from the loaded documents. (With William loaded, you'll hear it in his voice.)</p>
+    <p class="section-sub">Curious about a specific skill, the AI tooling, or whether the candidate fits your stack? Ask directly. Answers are pulled from the loaded documents. (With William loaded, you'll hear it in his voice.)</p>
     <div class="ask-card">
       <div class="ask-ctx" id="askCtx">Currently answering about: <b>no applicant loaded</b></div>
       <div class="chat" id="chat">
-        <div class="msg bot"><span class="who">Tool</span>Load an applicant above, then ask me anything - how they use AI, whether they have a portfolio, how they fit this role.</div>
+        <div class="msg bot"><span class="who">Tool</span>Load an applicant above, then ask me anything: how they use AI, whether they have a portfolio, or how they fit this role.</div>
       </div>
       <div class="suggest" id="suggest"></div>
       <div class="ask-input">
@@ -152,10 +152,10 @@
     <div class="eyebrow">Transparency</div>
     <h2 class="section-title">How it works</h2>
     <div class="meta-note">
-      <h4>↳ Honest by design - because reasoning clearly about AI is the job</h4>
-      <p><b>Parsing:</b> Your files are read entirely <b>in your browser</b> (pdf.js for PDFs, mammoth.js for Word, native for text). Nothing is uploaded - no server, no storage, no tracking.</p>
-      <p><b>Grading:</b> A client-side relevance engine scores the documents against six categories derived from the FieldFlō posting, citing the exact phrases that matched. It's a real signal-coverage model - not a black box, and not rigged. A weak application will score weak, mine included.</p>
-      <p><b>Optional live Claude:</b> the same UI can call real Claude through a small server-side proxy for generative grading and answers - off by default to keep this free. This whole tool was itself designed and built with Claude.</p>
+      <h4>↳ Honest by design, because reasoning clearly about AI is the job</h4>
+      <p><b>Parsing:</b> Your files are read entirely <b>in your browser</b> (pdf.js for PDFs, mammoth.js for Word, native for text). Nothing is uploaded: no server, no storage, no tracking.</p>
+      <p><b>Grading:</b> A client-side relevance engine scores the documents against six categories derived from the FieldFlō posting, citing the exact phrases that matched. It's a real signal-coverage model, not a black box and not rigged. A weak application will score low, mine included.</p>
+      <p><b>Live Claude:</b> the same UI calls real Claude through a small server-side proxy for generative grading and answers. It is on for this demo. This whole tool was itself designed and built with Claude.</p>
     </div>
   </div>
 </section>
@@ -179,7 +179,7 @@
     </div>
     <div class="foot-meta">
       Built with Claude · in-browser parsing (pdf.js + mammoth.js) · client-side relevance engine · optional live-Claude via PHP proxy<br>
-      © <span id="yr"></span> William R. Barton - Applicant Review Tool.
+      © <span id="yr"></span> William R. Barton · Applicant Review Tool.
     </div>
   </div>
 </footer>
@@ -215,16 +215,16 @@ if(window.pdfjsLib){ pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloud
    CATEGORIES - derived from the FieldFlō Sr. Product Designer JD
    ========================================================= */
 const CATEGORIES=[
- {name:"AI-Native Workflow", why:"Looking for someone 'unapologetically AI-native' - Claude woven through daily design.",
+ {name:"AI-Native Workflow", why:"Looking for someone unapologetically AI-native, with Claude woven through daily design.",
   target:11, signals:[["claude code",3],["claude",3],["cowork",2],["cursor",2],["ai-native",3],["ai augmented",2],["ai-augmented",2],["prototyp",2],["github",2],["copilot",2],["llm",2],["machine learning",2],["prompt",2],["automation",1],[" ai ",2]]},
- {name:"Product Design Craft", why:"End-to-end product & UX - hierarchy, flows, usable interfaces.",
+ {name:"Product Design Craft", why:"End-to-end product and UX: hierarchy, flows, usable interfaces.",
   target:11, signals:[["information hierarchy",3],["product design",3],["user flow",2],["wireframe",2],["design system",2],["usability",2],["end-to-end",2],["interface",2],["ux",2],["ui",2],["user experience",2],["prototype",1]]},
  {name:"Systems Thinking & Workflows", why:"Reason across flows, states, edge cases, and multi-role workflows.",
   target:9, signals:[["systems thinking",3],["multi-role",2],["workflow",2],["edge case",2],["scalable",2],["framework",2],["integration",2],["complex",2],["states",1],["process",1],["system",1]]},
  {name:"B2B SaaS & Domain Fit", why:"B2B SaaS, ideally vertical / operational / compliance-heavy (construction, field service).",
   target:9, requires:["construction","subcontractor","field service","abatement","demolition","remediation","vertical"],
   signals:[["b2b",3],["saas",3],["construction",3],["subcontractor",3],["field service",3],["compliance",3],["abatement",2],["demolition",2],["remediation",2],["vertical",2],["investor relations",2],["regulated",2],["operations",1],["platform",1]]},
- {name:"Ownership & Bias to Action", why:"High-ownership, fast-moving - thinks in hours and days, and ships.",
+ {name:"Ownership & Bias to Action", why:"High-ownership and fast-moving: thinks in hours and days, and ships.",
   target:9, signals:[["bias to action",3],["ownership",2],["shipped",2],["ship",2],["launched",2],["drove",2],["autonomy",2],["independent",2],["fast",1],["end-to-end",1],["built",1],["own",1],["lead",1]]},
  {name:"Evidence & Portfolio", why:"A portfolio of shipped work plus concrete, measurable results.",
   target:8, signals:[["portfolio",2],["case study",3],["http",2],["behance",2],["dribbble",2],["figma",1],["%",2],["increase",1],["revenue",1],["results",1],["metric",2],["shipped",1],["example",1]]},
@@ -342,10 +342,10 @@ function renderFiles(){
     if(f.status==='parsing'){stat='<span class="spin"></span> reading…';}
     else if(f.status==='scanning'){stat='<span class="spin"></span> AI scanning…';}
     else if(f.status==='ok'){stat='✓ '+f.text.trim().split(/\s+/).length+' words'+(f.scanned?' · AI-scanned':'');cls='ok';}
-    else if(f.status==='image'){stat='image - listed, not scanned';}
-    else if(f.status==='scanfail'){stat='AI scan unavailable'+(f.err?' - '+esc(f.err):'');cls='err';}
+    else if(f.status==='image'){stat='image, listed but not scanned';}
+    else if(f.status==='scanfail'){stat='AI scan unavailable'+(f.err?': '+esc(f.err):'');cls='err';}
     else if(f.status==='empty'){stat='no text found';cls='err';}
-    else {stat='couldn\'t read - try TXT/paste';cls='err';}
+    else {stat='couldn\'t read, try TXT or paste';cls='err';}
     const canView = f.status!=='parsing' && (f.blobUrl || (f.text&&f.text.trim()));
     return `<div class="fitem"><div class="fic">${fileExt(f.name)}</div>
       <div class="fmeta"><div class="fname">${esc(f.name)}</div><div class="fstat ${cls}">${stat}</div></div>
@@ -395,7 +395,7 @@ function resetAll(){
   document.getElementById('results').style.display='none';
   document.getElementById('sitePreview').innerHTML='';
   document.getElementById('askInput').value='';
-  document.getElementById('chat').innerHTML='<div class="msg bot"><span class="who">Tool</span>Load an applicant above, then ask me anything - how they use AI, whether they have a portfolio, how they fit this role.</div>';
+  document.getElementById('chat').innerHTML='<div class="msg bot"><span class="who">Tool</span>Load an applicant above, then ask me anything: how they use AI, whether they have a portfolio, or how they fit this role.</div>';
   setAskContext(null); renderFiles(); window.scrollTo({top:0,behavior:'smooth'});
 }
 
@@ -456,8 +456,8 @@ function catSummary(cat,res){
   const found=res.matched.slice(0,4).join(", ");
   const lead={Excellent:"Excellent match.",Strong:"Strong match.",Moderate:"Moderate match.",Light:"Light coverage.",Minimal:"Minimal coverage."}[b]||"";
   let note="";
-  if(res.capped===60) note=" Capped - no vertical/construction domain terms found.";
-  else if(res.capped===45) note=" Capped - candidate states their portfolio is still in progress.";
+  if(res.capped===60) note=" Capped: no vertical/construction domain terms found.";
+  else if(res.capped===45) note=" Capped: candidate states their portfolio is still in progress.";
   return `${lead} The documents reference ${found}${res.matched.length>4?", and more":""}.${note}`;
 }
 
@@ -574,15 +574,15 @@ function renderSitePreview(){
   if(!state.url){ box.innerHTML=''; return; }
   let url=state.url; if(!/^https?:\/\//i.test(url)) url='https://'+url;
   let status, note;
-  if(SITE_REVIEW && SITE_REVIEW.ok){ status='<span class="se-status ok">✓ content reviewed - '+SITE_REVIEW.words+' words folded into the grade</span>'; note='Live mode: the page text was fetched server-side and scored alongside the documents.'; }
+  if(SITE_REVIEW && SITE_REVIEW.ok){ status='<span class="se-status ok">✓ content reviewed, '+SITE_REVIEW.words+' words folded into the grade</span>'; note='Live mode: the page text was fetched server-side and scored alongside the documents.'; }
   else if(SITE_REVIEW && !SITE_REVIEW.ok){
     const why = SITE_REVIEW.reason==='bot_challenge' ? 'the site returned a bot / JavaScript challenge to the automated request'
               : (SITE_REVIEW.status>=400 ? 'the site returned HTTP '+SITE_REVIEW.status+' to the automated request'
               : 'the site blocked the server-side request');
-    status='<span class="se-status">visual embed only - page text not read</span>';
-    note='Live mode is on, but '+why+'. This is normal with Cloudflare / bot protection: your browser passes the check, an automated fetch does not - so no page text (including any error page) is folded into the grade. The visual embed below still counts as a portfolio signal.';
+    status='<span class="se-status">visual embed only, page text not read</span>';
+    note='Live mode is on, but '+why+'. This is normal with Cloudflare / bot protection: your browser passes the check, an automated fetch does not, so no page text (including any error page) is folded into the grade. The visual embed below still counts as a portfolio signal.';
   }
-  else { status='<span class="se-status">visual embed - counts as a portfolio signal</span>'; note='Visual preview only. To have the tool read & grade the page text, enable live Claude (see “How it works”). Some sites also block being embedded.'; }
+  else { status='<span class="se-status">visual embed, counts as a portfolio signal</span>'; note='Visual preview only. To have the tool read & grade the page text, enable live Claude (see “How it works”). Some sites also block being embedded.'; }
   box.innerHTML=`<div class="site-embed">
     <div class="se-head">🔗 <b>Portfolio / website</b> ${esc(url)} ${status}<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">open ↗</a></div>
     <div class="se-frame">
@@ -701,7 +701,7 @@ function extractQuote(text){
 function detectSkills(text){
   const lower=" "+text.toLowerCase()+" ";
   const found=SKILL_LEXICON.filter(([_,terms])=>terms.some(t=>lower.includes(t))).map(([d])=>d);
-  return found.length? found.slice(0,12) : ["No standout skills auto-detected - review documents directly."];
+  return found.length? found.slice(0,12) : ["No standout skills auto-detected; review the documents directly."];
 }
 
 function animateRing(target){
@@ -726,29 +726,29 @@ gradeBtn.addEventListener('click',grade);
    ========================================================= */
 const WILLIAM={
   name:"William R. Barton",
-  quote:"I'm a web, brand, and graphic designer actively moving into building with AI - I use Claude (cowork + Claude Code) to make real things, including this review tool and an in-progress finance app. I'd rather show the work than overclaim a title.",
+  quote:"I'm a web, brand, and graphic designer actively moving into building with AI. I use Claude (cowork + Claude Code) to make real things, including this review tool and an in-progress finance app. I'd rather show the work than overclaim a title.",
   files:[
     {name:"William_Barton_Resume.pdf", src:"./William_Barton_Resume.pdf", text:
-`WILLIAM R. BARTON - Graphic & Web Designer
+`WILLIAM R. BARTON, Graphic & Web Designer
 Chattanooga, TN · barton@bartosuerte.com · bartosuerte.com · He/Him
 SUMMARY
-A web, brand, and graphic designer with 15+ years creating clean, on-brand digital work. I build primarily in Webflow and am actively transitioning to a Claude AI workflow - cowork + Claude Code in VS Code - for custom builds beyond a visual builder's limits, with working knowledge of GitHub for version control. Currently building a personal-finance web app with this workflow.
+A web, brand, and graphic designer with 15+ years creating clean, on-brand digital work. I build primarily in Webflow and am actively transitioning to a Claude AI workflow (cowork + Claude Code in VS Code) for custom builds beyond a visual builder's limits, with working knowledge of GitHub for version control. Currently building a personal-finance web app with this workflow.
 EXPERIENCE
-Bartosuerte - Graphic & Web Designer (2009-Present, Remote)
-- Design and build responsive, on-brand websites end-to-end - from brief and wireframes to a shipped site - primarily in Webflow.
+Bartosuerte, Graphic & Web Designer (2009-Present, Remote)
+- Design and build responsive, on-brand websites end-to-end in Webflow, from brief and wireframes through to a shipped site.
 - Deliver full creative services across branding, graphic design, and photography for a recurring roster of clients.
 - Increasingly use Claude (cowork + Claude Code, in VS Code) to build custom features beyond Webflow's defaults; version with GitHub.
 - Apply strong visual hierarchy and clean layout so visitors find what they need quickly.
 - Build marketing automations and integrations (Klaviyo, Zapier, Google Workspace) connecting content and operations.
-Humble & Fume - Creative Marketing Director (2020-2022, Remote)
-- Replaced legacy systems with a scalable Webflow + Klaviyo framework that improved conversion tracking and campaign effectiveness - a systems redesign, not a reskin.
+Humble & Fume, Creative Marketing Director (2020-2022, Remote)
+- Replaced legacy systems with a scalable Webflow + Klaviyo framework that improved conversion tracking and campaign effectiveness. A systems redesign, not a reskin.
 - Owned communications in a compliance-sensitive, investor-relations-heavy environment.
 - Drove a 20% increase in email marketing revenue.
-One Tree Forest Films - Digital Designer & Photographer (2018-2020)
+One Tree Forest Films, Digital Designer & Photographer (2018-2020)
 - Produced cross-platform digital assets and photography aligned to client specs and brand systems; fast-paced, deadline-driven production.
-Windship Trading - Junior Designer & Web Manager (2011-2016)
+Windship Trading, Junior Designer & Web Manager (2011-2016)
 - Managed an e-commerce platform end-to-end; grew online sales through optimized merchandising and clean UX.
-SKILLS: Web design & development (Webflow), graphic design, branding, photography & videography, visual layout & hierarchy, Claude AI workflow (cowork + Claude Code in VS Code - actively developing), GitHub, Figma, Adobe Suite (Photoshop, Illustrator, InDesign, Lightroom, Premiere, After Effects), Shopify, email marketing (Klaviyo), automation & integrations (Zapier, Google Workspace).`},
+SKILLS: Web design & development (Webflow), graphic design, branding, photography & videography, visual layout & hierarchy, Claude AI workflow (cowork + Claude Code in VS Code, actively developing), GitHub, Figma, Adobe Suite (Photoshop, Illustrator, InDesign, Lightroom, Premiere, After Effects), Shopify, email marketing (Klaviyo), automation & integrations (Zapier, Google Workspace).`},
     {name:"William_Barton_Cover_Letter.pdf", src:"./William_Barton_Cover_Letter.pdf", text:
 `Why we should talk
 I'll be straight with you. I'm not a traditional product designer, and I don't have a published product portfolio yet. What I do have is fifteen years of turning vague briefs into clean, on-brand work, and a fast-growing habit of building with AI.
@@ -765,14 +765,14 @@ barton@bartosuerte.com · bartosuerte.com`}
    ASK ENGINE (adapts to loaded applicant)
    ========================================================= */
 const WILLIAM_QA=[
-  {k:["ai","claude","tool","workflow","prototype","stack","cursor","github","code"], a:"Claude is my daily driver. I work concepts in cowork, then hand Claude Code a detailed build prompt, version source in GitHub, and refine in Cursor. I'm building a personal-finance SaaS product this exact way right now - so 'AI-native' isn't aspirational, it's how I already operate."},
-  {k:["portfolio","sample","shipped","example","published","work"], a:"Straight answer: I don't have a published product portfolio yet, and the AI-augmented product I'd most want to show is still in progress. But this very tool is an AI-augmented build, and I'd happily walk you through the finance app live - I'd rather show the thinking than just describe it."},
-  {k:["construction","subcontractor","field","domain","compliance","industry","abatement","demolition"], a:"I haven't worked construction directly, but I've designed inside compliance-heavy, high-stakes workflows - at Humble & Fume I owned communications in an investor-relations and cannabis-regulation environment. Same instinct your domain needs: clarity in complex, regulated, real-world processes."},
-  {k:["systems","thinking","complex","workflow","flows","edge"], a:"I think in systems. At Humble & Fume I replaced a legacy setup with a scalable Webflow + Klaviyo framework - designing the repeatable system, not a one-off page. I reason across flows, states, and roles."},
-  {k:["b2b","saas","product design","experience","years","background"], a:"15+ years across web, brand, and product, increasingly building functional products end-to-end. My titles read creative/marketing, but the work has shifted hard toward product: requirements, flows, prototypes, and shipped interfaces - now with AI in the loop."},
+  {k:["ai","claude","tool","workflow","prototype","stack","cursor","github","code"], a:"Claude is my daily driver. I work concepts in cowork, then hand Claude Code a detailed build prompt, version source in GitHub, and refine in Cursor. I'm building a personal-finance SaaS product this exact way right now, so 'AI-native' isn't aspirational, it's how I already operate."},
+  {k:["portfolio","sample","shipped","example","published","work"], a:"Straight answer: I don't have a published product portfolio yet, and the AI-augmented product I'd most want to show is still in progress. But this very tool is an AI-augmented build, and I'd happily walk you through the finance app live. I'd rather show the thinking than just describe it."},
+  {k:["construction","subcontractor","field","domain","compliance","industry","abatement","demolition"], a:"I haven't worked construction directly, but I've designed inside compliance-heavy, high-stakes workflows. At Humble & Fume I owned communications in an investor-relations and cannabis-regulation environment. Same instinct your domain needs: clarity in complex, regulated, real-world processes."},
+  {k:["systems","thinking","complex","workflow","flows","edge"], a:"I think in systems. At Humble & Fume I replaced a legacy setup with a scalable Webflow + Klaviyo framework, designing the repeatable system, not a one-off page. I reason across flows, states, and roles."},
+  {k:["b2b","saas","product design","experience","years","background"], a:"15+ years across web, brand, and product, increasingly building functional products end-to-end. My titles read creative/marketing, but the work has shifted hard toward product: requirements, flows, prototypes, and shipped interfaces, now with AI in the loop."},
   {k:["why","fit","hire","strong","good","interested","role"], a:"Three reasons: I already work AI-native (Claude all day), I think in systems under real constraints, and I ship. I'm most excited by the stage you're at: a deep product, an outdated UI with no design legacy to fight, and huge room for visible impact."},
   {k:["ui","ux","design","visual","hierarchy","usability"], a:"I hold UI and UX in tension: where does the eye go first, how many clicks does a task take, and is the same action scattered across three places when it should live in one? That human-factors lens is how I'd move a product off an engineer-built foundation."},
-  {k:["location","remote","where","based","time","hours"], a:"I'm in Chattanooga, TN (Eastern) and I work great remote - independent, self-directed, used to owning outcomes without hand-holding."},
+  {k:["location","remote","where","based","time","hours"], a:"I'm in Chattanooga, TN (Eastern) and I work great remote: independent, self-directed, and used to owning outcomes without hand-holding."},
   {k:["contact","email","reach","talk","call"], a:"Easiest is barton@bartosuerte.com or (512) 234-0620. Site: bartosuerte.com. Happy to do a short live exercise on a real workflow."},
 ];
 const SUGGEST_W=["How do they use AI in their work?","Do they have a portfolio?","Why are they a fit for product design?","Any compliance / regulated experience?","How do they think about UI vs UX?"];
@@ -783,7 +783,7 @@ function setAskContext(applicant){
   const ctx=document.getElementById('askCtx');
   document.getElementById('suggest').innerHTML='';
   if(!applicant){ ctx.innerHTML='Currently answering about: <b>no applicant loaded</b>'+LIVE_STATUS; renderSuggest([]); return; }
-  ctx.innerHTML=`Currently answering about: <b>${esc(applicant.name)}</b>`+(applicant.isWilliam?` - in his voice`:` - from loaded documents`)+LIVE_STATUS;
+  ctx.innerHTML=`Currently answering about: <b>${esc(applicant.name)}</b>`+(applicant.isWilliam?` · in his voice`:` · from loaded documents`)+LIVE_STATUS;
   renderSuggest(applicant.isWilliam?SUGGEST_W:SUGGEST_G);
 }
 function renderSuggest(list){
@@ -796,7 +796,7 @@ document.getElementById('askInput').addEventListener('keydown',e=>{ if(e.key==='
 function answerWilliam(q){
   const ql=q.toLowerCase(); let best=null,sc=0;
   WILLIAM_QA.forEach(e=>{ let s=0; e.k.forEach(k=>{ if(ql.includes(k))s+=2; }); if(s>sc){sc=s;best=e;} });
-  return best&&sc>0 ? best.a : "Good question - best answered directly: barton@bartosuerte.com. In short: 15+ years in design, now building products end-to-end with an AI-native (Claude) workflow.";
+  return best&&sc>0 ? best.a : "Good question, best answered directly: barton@bartosuerte.com. In short: 15+ years in design, now building products end-to-end with an AI-native (Claude) workflow.";
 }
 function answerFromDocs(q,applicant){
   const STOP=new Set("the a an and or to of in for with on at by we you your our as is are be will across both how that this not it its do does".split(" "));
@@ -822,7 +822,7 @@ async function sendAsk(text){
   if(LIVE_AI){
     asking=true; const t=pushThinking();
     try{ const a=await liveAsk(q); t.remove(); pushMsg(a,'bot'); }
-    catch(e){ t.remove(); pushMsg("⚠ Live Claude unavailable ("+String(e.message||e).slice(0,70)+") - showing the built-in answer instead.",'bot'); pushMsg(localAnswer(q),'bot'); }
+    catch(e){ t.remove(); pushMsg("⚠ Live Claude unavailable ("+String(e.message||e).slice(0,70)+"), showing the built-in answer instead.",'bot'); pushMsg(localAnswer(q),'bot'); }
     asking=false;
   } else {
     setTimeout(()=>pushMsg(localAnswer(q),'bot'),320);
