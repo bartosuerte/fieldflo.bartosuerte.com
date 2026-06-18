@@ -14,7 +14,7 @@ A dark, editorial-tech aesthetic: a near-black canvas, a single warm-gold accent
 ## 3. Color tokens
 | Token | Value | Use |
 |---|---|---|
-| `--bg` | `#0B0B0B` | Page canvas (near-black) |
+| `--bg` | `#101010` | Page canvas (near-black, matches the portfolio) |
 | `--surface` | `#141414` | Standard card / panel |
 | `--surface-2` | `#1A1A1A` | Raised or inset surface, quote blocks |
 | `--line` | `#262626` | Hairline borders, dividers (always 1px) |

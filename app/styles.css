@@ -1,6 +1,6 @@
 /* Applicant Review Tool — styles. Upload alongside index.html. */
 :root{
-    --bg:#0B0B0B; --surface:#141414; --surface-2:#1A1A1A; --line:#262626;
+    --bg:#101010; --surface:#141414; --surface-2:#1A1A1A; --line:#262626;
     --gold:#F8B828; --gold-dim:#C9941F; --white:#FFFFFF; --muted:#8A8A8A; --muted-2:#5E5E5E;
     --green:#37d67a; --red:#e0564b;
     --maxw:1180px;

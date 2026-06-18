@@ -1,0 +1,1499 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>FieldFlō Prep — Interview Quiz</title>
+    <meta name="description" content="Private interview-rehearsal quiz for William R. Barton's FieldFlō Sr. Product Designer interview." />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#101010" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="FieldFlō Prep" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="apple-touch-icon" href="favicon.svg" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ============================================================
+         FieldFlō Prep quiz — Bartosuerte Design System tokens.
+         Softer-black canvas per request (was #0B0B0B harsh near-black).
+         ============================================================ */
+      :root {
+        /* color — softened black canvas (#101010, matches the site + portfolio) */
+        --bg: #101010;          /* was #0B0B0B */
+        --surface: #141414;
+        --surface-2: #1a1a1a;
+        --surface-3: #202020;
+        --line: #262626;
+        --gold: #f8b828;
+        --gold-dim: #c9941f;
+        --gold-hi: #ffc945;
+        --white: #ffffff;
+        --text: #ececec;
+        --muted: #8a8a8a;
+        --muted-2: #5e5e5e;
+        --green: #37d67a;
+        --red: #e0564b;
+        --amber: #e0a23b;
+        --gold-08: rgba(248, 184, 40, 0.08);
+        --gold-10: rgba(248, 184, 40, 0.1);
+        --gold-14: rgba(248, 184, 40, 0.14);
+        --gold-18: rgba(248, 184, 40, 0.18);
+        --gold-22: rgba(248, 184, 40, 0.22);
+        --gold-35: rgba(248, 184, 40, 0.35);
+        --gold-40: rgba(248, 184, 40, 0.4);
+        --green-12: rgba(55, 214, 122, 0.12);
+        --green-40: rgba(55, 214, 122, 0.4);
+        --red-12: rgba(224, 86, 75, 0.12);
+        --red-40: rgba(224, 86, 75, 0.4);
+        --amber-12: rgba(224, 162, 59, 0.12);
+        --amber-40: rgba(224, 162, 59, 0.4);
+
+        /* type */
+        --display: "Anton", "Arial Narrow", sans-serif;
+        --body: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
+        --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+        --ls-eyebrow: 0.22em;
+        --ls-label: 0.14em;
+
+        /* shape */
+        --maxw: 720px;
+        --pad-wrap: 20px;
+        --r-card: 16px;
+        --r-card-lg: 18px;
+        --r-control: 10px;
+        --r-control-sm: 8px;
+        --r-pill: 999px;
+
+        /* effects */
+        --glass-bg: rgba(20, 20, 22, 0.55);
+        --glass-blur: blur(14px);
+        --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+        --t-fast: 0.15s;
+        --t-base: 0.18s;
+        --t-slow: 0.55s;
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html { background: var(--bg); -webkit-text-size-adjust: 100%; }
+      body {
+        background: transparent;
+        color: var(--text);
+        font-family: var(--body);
+        font-size: 15.5px;
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+        min-height: 100vh;
+        min-height: 100dvh;
+        padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+      }
+      a { color: inherit; text-decoration: none; }
+      button { font-family: inherit; cursor: pointer; }
+      ::selection { background: var(--gold); color: #000; }
+      .mono { font-family: var(--mono); }
+      .gold { color: var(--gold); }
+
+      /* drifting gold field (touch + idle) */
+      #bgfx { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+      #bgfx .blob {
+        position: absolute; top: 0; left: 0; border-radius: 50%;
+        filter: blur(70px); will-change: transform; mix-blend-mode: screen;
+      }
+      #bgfx .b1 { width: 440px; height: 440px; background: radial-gradient(circle, rgba(248,184,40,0.2), transparent 65%); opacity: 0.5; }
+      #bgfx .b2 { width: 340px; height: 340px; background: radial-gradient(circle, rgba(248,184,40,0.15), transparent 66%); opacity: 0.45; }
+      #bgfx .b3 { width: 260px; height: 260px; background: radial-gradient(circle, rgba(255,214,92,0.13), transparent 66%); opacity: 0.45; }
+      @media (prefers-reduced-motion: reduce) { #bgfx .blob { filter: blur(90px); } }
+
+      .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad-wrap); }
+
+      /* ---------- top bar ---------- */
+      header.bar {
+        position: sticky; top: 0; z-index: 50;
+        background: rgba(24, 24, 25, 0.82);
+        backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+        border-bottom: 1px solid var(--line);
+      }
+      .bar .wrap { display: flex; align-items: center; justify-content: space-between; height: 58px; gap: 12px; }
+      .brand { display: inline-flex; align-items: center; gap: 10px; }
+      .brand svg { width: 28px; height: 28px; flex: 0 0 auto; fill: var(--gold); }
+      .brand .wm { font-family: var(--mono); font-size: 11px; letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--white); line-height: 1.2; }
+      .brand .wm span { display: block; color: var(--muted); font-size: 9px; letter-spacing: 0.16em; margin-top: 2px; }
+      .bar-right { display: inline-flex; align-items: center; gap: 8px; }
+      .pill {
+        font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase;
+        color: var(--gold); background: var(--gold-10); border: 1px solid var(--gold-22);
+        padding: 5px 10px; border-radius: var(--r-pill); white-space: nowrap;
+      }
+      .icon-btn {
+        width: 34px; height: 34px; display: grid; place-items: center; border-radius: var(--r-control-sm);
+        background: transparent; border: 1px solid var(--line); color: var(--muted); transition: var(--t-base);
+      }
+      .icon-btn:hover { border-color: var(--gold-40); color: var(--gold); }
+      .icon-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+      /* ---------- view container ---------- */
+      main { padding: 26px 0 60px; }
+      .view { animation: fade 0.4s var(--ease-out) both; }
+      @keyframes fade { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+      @media (prefers-reduced-motion: reduce) { .view { animation: none; } }
+
+      .eyebrow { font-family: var(--mono); font-size: 11.5px; letter-spacing: var(--ls-eyebrow); text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+      .h-title { font-family: var(--display); font-weight: 400; text-transform: uppercase; line-height: 0.98; font-size: clamp(30px, 9vw, 46px); letter-spacing: 0.01em; }
+      .h-title .l2 { color: var(--gold); display: block; }
+      .lead { color: var(--muted); margin: 12px 0 4px; font-size: 15px; max-width: 52ch; }
+
+      /* ---------- buttons ---------- */
+      .btn {
+        display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+        font-weight: 700; font-size: 14px; letter-spacing: 0.02em;
+        padding: 13px 18px; border-radius: var(--r-control); border: 1px solid transparent;
+        transition: var(--t-base); white-space: nowrap; width: 100%;
+      }
+      .btn svg { width: 16px; height: 16px; }
+      .btn-gold { background: var(--gold); color: #000; }
+      .btn-gold:hover { background: var(--gold-hi); transform: translateY(-1px); }
+      .btn-gold svg { stroke: #000; fill: none; stroke-width: 2.2; }
+      .btn-outline { background: transparent; border-color: var(--gold); color: var(--white); }
+      .btn-outline:hover { background: var(--gold-14); color: var(--gold); }
+      .btn-ghost { background: transparent; border-color: var(--line); color: var(--text); }
+      .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+      .btn[disabled] { opacity: 0.4; pointer-events: none; }
+      .btn-row { display: grid; gap: 10px; margin-top: 16px; }
+      @media (min-width: 540px) { .btn-row.two { grid-template-columns: 1fr 1fr; } }
+
+      /* ---------- quick start ---------- */
+      .quick { display: grid; gap: 10px; margin: 22px 0 30px; }
+      .qcard {
+        display: flex; align-items: center; gap: 14px; text-align: left;
+        background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-card);
+        padding: 16px 16px; transition: var(--t-base); width: 100%; color: var(--text);
+      }
+      .qcard:hover { border-color: var(--gold-40); transform: translateY(-1px); }
+      .qcard .qi { width: 40px; height: 40px; border-radius: 10px; flex: 0 0 auto; display: grid; place-items: center; background: var(--gold-10); color: var(--gold); }
+      .qcard .qi svg { width: 20px; height: 20px; stroke: var(--gold); fill: none; stroke-width: 2; }
+      .qcard .qt { display: block; font-weight: 700; font-size: 15px; line-height: 1.25; }
+      .qcard .qs { display: block; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.04em; color: var(--muted); margin-top: 4px; text-transform: uppercase; }
+      .qcard .qarrow { margin-left: auto; color: var(--muted-2); font-family: var(--display); font-size: 20px; transition: var(--t-base); }
+      .qcard:hover .qarrow { color: var(--gold); transform: translateX(2px); }
+
+      .section-label { font-family: var(--mono); font-size: 11px; letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--muted); margin: 6px 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+
+      /* ---------- deck list ---------- */
+      .decks { display: grid; gap: 10px; }
+      .deck {
+        display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 12px;
+        background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-card);
+        padding: 15px 16px; transition: var(--t-base); width: 100%; text-align: left; color: var(--text);
+      }
+      .deck:hover { border-color: var(--gold-40); transform: translateY(-1px); }
+      .deck .dt { font-weight: 700; font-size: 15.5px; }
+      .deck .dm { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+      .deck .dm .best { color: var(--gold); }
+      .deck .dring { width: 44px; height: 44px; flex: 0 0 auto; }
+
+      /* ---------- settings toggles ---------- */
+      .toggles { display: grid; gap: 8px; margin-top: 22px; }
+      .toggle { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-control); padding: 12px 14px; }
+      .toggle .tl { font-size: 13.5px; font-weight: 600; }
+      .toggle .ts { font-family: var(--mono); font-size: 10px; color: var(--muted); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.04em; }
+      .sw { position: relative; width: 44px; height: 26px; flex: 0 0 auto; border-radius: 999px; background: var(--surface-3); border: 1px solid var(--line); transition: var(--t-base); }
+      .sw::after { content: ""; position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%; background: var(--muted); transition: var(--t-base); }
+      .sw.on { background: var(--gold-18); border-color: var(--gold-40); }
+      .sw.on::after { left: 20px; background: var(--gold); }
+
+      /* ---------- quiz screen ---------- */
+      .qhead { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+      .qhead .qdeck { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+      .qhead .qcount { font-family: var(--mono); font-size: 11px; color: var(--gold); }
+      .ptrack { height: 6px; background: var(--surface-3); border-radius: 6px; overflow: hidden; margin-bottom: 22px; }
+      .pfill { height: 100%; width: 0; background: linear-gradient(90deg, var(--gold-dim), var(--gold)); border-radius: 6px; transition: width 0.4s var(--ease-out); }
+
+      .qtag { display: inline-flex; align-items: center; gap: 7px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--gold-22); background: var(--gold-08); padding: 5px 10px; border-radius: var(--r-pill); margin-bottom: 14px; }
+      .qtag.card-tag { color: var(--amber); border-color: var(--amber-40); background: var(--amber-12); }
+      .qprompt { font-size: 19px; font-weight: 600; line-height: 1.4; margin-bottom: 8px; color: var(--white); }
+      .qprompt.big { font-family: var(--display); font-weight: 400; text-transform: none; font-size: clamp(22px, 6vw, 28px); line-height: 1.15; letter-spacing: 0.01em; }
+      .qsub { font-size: 13.5px; color: var(--muted); margin-bottom: 20px; }
+
+      /* MC options */
+      .opts { display: grid; gap: 10px; }
+      .opt {
+        display: flex; align-items: flex-start; gap: 12px; text-align: left; width: 100%;
+        background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-control);
+        padding: 14px 14px; font-size: 14.5px; color: var(--text); transition: var(--t-base); line-height: 1.4;
+      }
+      .opt:hover { border-color: var(--gold-40); }
+      .opt .key { font-family: var(--mono); font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 6px; width: 24px; height: 24px; display: grid; place-items: center; flex: 0 0 auto; transition: var(--t-base); }
+      .opt.correct { border-color: var(--green-40); background: var(--green-12); }
+      .opt.correct .key { border-color: var(--green-40); color: var(--green); }
+      .opt.wrong { border-color: var(--red-40); background: var(--red-12); }
+      .opt.wrong .key { border-color: var(--red-40); color: var(--red); }
+      .opt.locked { pointer-events: none; }
+      .opt.dim { opacity: 0.5; }
+      .opt .mark { margin-left: auto; flex: 0 0 auto; }
+      .opt .mark svg { width: 18px; height: 18px; }
+
+      /* card-type rehearsal */
+      .reveal-card { background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border: 1px dashed var(--gold-40); border-radius: var(--r-card); padding: 16px 16px; margin-top: 4px; }
+      .reveal-card .rl { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+      .beats { list-style: none; display: grid; gap: 8px; margin-bottom: 14px; }
+      .beats li { position: relative; padding-left: 20px; font-size: 14px; color: var(--text); line-height: 1.45; }
+      .beats li::before { content: "▸"; position: absolute; left: 0; color: var(--gold); }
+      .ideal { font-size: 14px; color: var(--text); line-height: 1.55; border-top: 1px solid var(--line); padding-top: 12px; }
+      .ideal .il { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 6px; }
+
+      /* explanation */
+      .explain { background: var(--surface-2); border: 1px solid var(--line); border-left: 2px solid var(--gold); border-radius: var(--r-control); padding: 13px 14px; margin-top: 14px; font-size: 13.8px; color: var(--text); line-height: 1.5; animation: fade 0.3s var(--ease-out) both; }
+      .explain .el { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 6px; }
+      .explain .src { display: block; margin-top: 8px; font-family: var(--mono); font-size: 11px; color: var(--muted-2); }
+
+      /* self-grade */
+      .grade-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 14px; }
+      .grade {
+        display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px 6px;
+        background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-control);
+        font-size: 12.5px; font-weight: 700; transition: var(--t-base); color: var(--text);
+      }
+      .grade small { font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 400; }
+      .grade.g-good:hover { border-color: var(--green-40); color: var(--green); }
+      .grade.g-mid:hover { border-color: var(--amber-40); color: var(--amber); }
+      .grade.g-bad:hover { border-color: var(--red-40); color: var(--red); }
+
+      .qnav { margin-top: 18px; }
+
+      /* ---------- results ---------- */
+      .result-top { text-align: center; padding: 12px 0 6px; }
+      .ring-wrap { width: 180px; height: 180px; margin: 8px auto 18px; position: relative; }
+      .ring-wrap .pct { position: absolute; inset: 0; display: grid; place-items: center; flex-direction: column; }
+      .ring-wrap .pct b { font-family: var(--display); font-size: 46px; color: var(--gold); line-height: 1; }
+      .ring-wrap .pct small { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+      .verdict { font-family: var(--display); text-transform: uppercase; font-size: 26px; color: var(--white); }
+      .verdict-sub { color: var(--muted); font-size: 14px; margin-top: 6px; max-width: 46ch; margin-left: auto; margin-right: auto; }
+      .tallies { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 24px 0 6px; }
+      .tally { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-card); padding: 14px 8px; text-align: center; }
+      .tally b { font-family: var(--display); font-size: 30px; line-height: 1; display: block; }
+      .tally small { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 6px; display: block; }
+      .tally.good b { color: var(--green); }
+      .tally.mid b { color: var(--amber); }
+      .tally.bad b { color: var(--red); }
+
+      .empty { text-align: center; padding: 40px 10px; color: var(--muted); }
+      .empty svg { width: 40px; height: 40px; stroke: var(--gold); fill: none; stroke-width: 1.5; margin-bottom: 14px; }
+
+      .foot { text-align: center; font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; color: var(--muted-2); text-transform: uppercase; margin-top: 40px; line-height: 1.8; }
+
+      /* a2hs hint */
+      .a2hs { display: none; align-items: center; gap: 10px; background: var(--surface-2); border: 1px solid var(--gold-22); border-radius: var(--r-card); padding: 12px 14px; margin: 0 0 18px; font-size: 13px; color: var(--text); }
+      .a2hs.show { display: flex; }
+      .a2hs svg { width: 18px; height: 18px; flex: 0 0 auto; stroke: var(--gold); fill: none; stroke-width: 2; }
+      .a2hs .x { margin-left: auto; color: var(--muted); font-family: var(--mono); padding: 2px 6px; }
+    </style>
+  </head>
+  <body>
+    <!-- logo symbol -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <symbol id="logoB" viewBox="0 0 351 351">
+        <path d="M316,35v281H35V35h281M349.8,0H1.3C.6,0,0,.6,0,1.3v348.4c0,.7.6,1.3,1.3,1.3h348.4c.7,0,1.3-.6,1.3-1.3V1.3c0-.7-.5-1.3-1.2-1.3h0Z" />
+        <path d="M132.4,273.6c-27.8-8.6-42.3-27.3-42.3-54s1.1-15.6,3.9-22c4.5-10.9,11.4-19.2,20.9-25.6-10-9.7-15.3-23.4-15.3-40.4s5.3-29.2,15.6-39.5c12.5-12.8,30-19.2,52.9-19.2h92.9v205.1h-97.7c-11.7.1-22.3-1.3-30.9-4.4h0ZM220.3,238.6v-44h-57c-11.7,0-20.3,2.5-25.9,7.5-4.7,4.2-7,9.2-7,15.9s2.2,11.4,6.7,14.8c5,3.9,13.1,5.8,23.7,5.8h59.5ZM220.3,155.9v-43.7h-54.5c-9.5,0-15.8,2.2-20.3,7-1.9,2-3.1,3.9-3.9,6.1-1.1,2.5-1.4,5.8-1.4,9.5s.5,6.1,1.9,8.9c2.5,5.3,8.1,12.2,25.9,12.2h52.3Z" />
+      </symbol>
+    </svg>
+
+    <div id="bgfx" aria-hidden="true">
+      <div class="blob b1"></div>
+      <div class="blob b2"></div>
+      <div class="blob b3"></div>
+    </div>
+
+    <header class="bar">
+      <div class="wrap">
+        <a class="brand" href="#/" aria-label="FieldFlō Prep home">
+          <svg><use href="#logoB" /></svg>
+          <span class="wm">FieldFlō Prep<span>Interview Rehearsal</span></span>
+        </a>
+        <div class="bar-right">
+          <span class="pill" id="streakPill" hidden></span>
+          <button class="icon-btn" id="homeBtn" title="Decks" aria-label="Back to decks">
+            <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="wrap" id="app"></div>
+    </main>
+
+    <!-- ============================================================
+         QUIZ BANK  (verified question bank — replace block only)
+         ============================================================ -->
+    <script id="quiz-bank" type="application/json">
+{
+  "decks": [
+    {
+      "key": "money",
+      "title": "The Three Money Answers",
+      "questions": [
+        {
+          "id": "money-card-probabilistic-systems",
+          "type": "card",
+          "prompt": "We need someone who's designed for systems with AI or probabilistic components. Have you?",
+          "beats": [
+            "Say yes, then point to the Applicant Review Tool as proof",
+            "Separated a deterministic transparent score from Claude's qualitative AI read",
+            "Showed confidence and uncertainty, labeled the AI-generated parts",
+            "Fails honestly when the model is unreachable, tells the user and falls back",
+            "Human in the loop with an Ask box",
+            "Close by mapping it to the JD: how suggestions are presented, how uncertainty is communicated, where humans stay in the loop, made on something live"
+          ],
+          "ideal": "Yes, I have, in the Applicant Review Tool I built and shipped. I separated a deterministic, transparent score from Claude's qualitative read, and I labeled the AI-generated parts so users know what came from the model. I show confidence and uncertainty rather than a false single number, and when the model is unreachable it fails honestly, it tells the user and falls back instead of pretending. I kept a human in the loop with an Ask box. Those are exactly your JD's decisions, how suggestions are presented, how confidence and uncertainty are communicated, where humans stay in the loop. I made them, on something live.",
+          "explanation": "This is the single most important answer. Lead with yes plus the Tool, then walk the four AI-UX beats in the JD's own language and land on made them, on something live. Never say no and stop.",
+          "source": "deterministic score vs labeled AI read; confidence/uncertainty shown; fails honestly when the model's unreachable; human-in-the-loop \"Ask\" box"
+        },
+        {
+          "id": "money-card-b2b-saas-gap",
+          "type": "card",
+          "prompt": "You don't have B2B SaaS experience. Two years is a hard requirement. Talk to me.",
+          "beats": [
+            "Concede the literal gap in one line: I won't pretend the two years is there",
+            "Trade up to compliance and IR-heavy work at Humble & Fume, risk isn't abstract to me",
+            "Ramp in days, own outcomes end to end",
+            "Close on productive in week one over a credential you don't have",
+            "Never invent SaaS experience, never deflate"
+          ],
+          "ideal": "I won't pretend the two years is there. What I will point to is that my work at Humble & Fume was compliance and IR-heavy, so risk and rigor aren't abstract to me. I ramp in days and I own outcomes end to end, that's how freelance works. I'd rather show you I'm productive in week one than claim a credential I don't have.",
+          "explanation": "Concede in one sentence, then trade up to adjacent strengths and ramp speed. The whole move is one honest line, then pivot, never invent SaaS experience and never deflate.",
+          "source": "Concede in one line, then trade up. \"I won't pretend the two years is there.\""
+        },
+        {
+          "id": "money-card-ai-in-workflow",
+          "type": "card",
+          "prompt": "How do you actually use AI in your workflow today?",
+          "beats": [
+            "Be operational, not vague",
+            "Concept and pressure-test in Claude Cowork",
+            "Build with Claude Code via a detailed build prompt",
+            "Version in GitHub",
+            "Refine against your own design system",
+            "Idea to live in hours, close on AI is the medium I design in, a first-class teammate"
+          ],
+          "ideal": "I'll be specific. I concept and pressure-test the idea in Claude Cowork, then hand Claude Code a detailed build prompt, version it in GitHub, and refine it against my own design system. With the Review Tool that took an idea to live in hours. AI isn't a step in my process, it's the medium I design in. A first-class teammate, like you said.",
+          "explanation": "Win with the operational toolchain, Cowork to Claude Code to GitHub to design system, and land the one-line framing. Be specific and operational, never vague.",
+          "source": "Concept in Cowork -> build with Claude Code -> version in GitHub -> refine to your design system."
+        },
+        {
+          "id": "money-mc-saas-first-move",
+          "type": "mc",
+          "prompt": "When the B2B SaaS gap comes up, what is the FIRST move?",
+          "options": [
+            "Concede the gap in one line, then trade up",
+            "Reframe Humble & Fume as SaaS product design",
+            "Lead with the Review Tool walkthrough first",
+            "List the adjacent strengths before anything else"
+          ],
+          "answer": 0,
+          "explanation": "The structure is concede in one line, then trade up. The single honest line, I won't pretend the two years is there, comes first, before the pivot to compliance work, ramp speed, and outcomes.",
+          "source": "Concede in one line, then trade up."
+        },
+        {
+          "id": "money-mc-ai-ux-not-a-beat",
+          "type": "mc",
+          "prompt": "Which is NOT one of the AI-UX beats for the probabilistic-systems answer?",
+          "options": [
+            "A guaranteed accuracy percentage for every AI score",
+            "A deterministic score separated from the labeled AI read",
+            "Confidence and uncertainty shown to the user",
+            "A human-in-the-loop Ask box"
+          ],
+          "answer": 0,
+          "explanation": "The four beats are the deterministic vs labeled AI read, confidence and uncertainty shown, failing honestly when the model is unreachable, and the human-in-the-loop Ask box. A guaranteed accuracy percentage is the opposite of the honest uncertainty the Tool communicates.",
+          "source": "deterministic score vs labeled AI read; confidence/uncertainty shown; fails honestly when the model's unreachable; human-in-the-loop \"Ask\" box"
+        },
+        {
+          "id": "money-mc-ai-workflow-framing",
+          "type": "mc",
+          "prompt": "What is the one-line framing that closes the AI-in-workflow answer?",
+          "options": [
+            "AI isn't a step in my process, it's the medium I design in",
+            "AI is a tool I reach for when the brief is messy",
+            "AI is how I ramp into a new domain in days",
+            "AI is a step I added to speed up my process"
+          ],
+          "answer": 0,
+          "explanation": "The closing line is AI isn't a step in my process, it's the medium I design in, a first-class teammate, like you said. The distractors either contradict it (a step) or borrow framing from other answers (ramp speed, messy briefs).",
+          "source": "AI isn't a step in my process, it's the medium I design in. A first-class teammate, like you said."
+        }
+      ]
+    },
+    {
+      "key": "pillars",
+      "title": "The Three Pillars",
+      "questions": [
+        {
+          "id": "pillars-name-all-three",
+          "type": "mc",
+          "prompt": "What are the three pillars every interview answer should ladder back to?",
+          "options": [
+            "AI-native for real, clarity from chaos, ownership plus bias to action",
+            "B2B SaaS depth, domain expertise, traditional portfolio breadth",
+            "Fast prototyping, stakeholder management, visual polish",
+            "Conventional resume, long tenure, multi-screen case studies"
+          ],
+          "answer": 0,
+          "explanation": "The source lists them directly: 1 AI-native for real, 2 Clarity from chaos, 3 Ownership plus action. The distractors are either the real gaps (B2B SaaS, domain, portfolio) or generic traits, which is the opposite of what the pillars trade on.",
+          "source": "THREE PILLARS: 1. AI-native for real ... 2. Clarity from chaos ... 3. Ownership + action"
+        },
+        {
+          "id": "pillars-one-maps-to",
+          "type": "mc",
+          "prompt": "Pillar 1, AI-native for real, maps to which specific thing in the source?",
+          "options": [
+            "The JD's #1 required trait, the one others fake",
+            "The compliance and IR-heavy work at Humble & Fume",
+            "The fresh-eyes advantage on a brutally complex domain",
+            "The Who Will Thrive Here operating style"
+          ],
+          "answer": 0,
+          "explanation": "The source ties pillar 1 to the JD's number one required trait that most candidates fake. Compliance work belongs to the B2B SaaS pivot, fresh eyes to the domain pivot, and Who Will Thrive Here to pillar 3.",
+          "source": "AI-native for real - Ship with Claude in hours. The JD's #1 trait, the one others fake"
+        },
+        {
+          "id": "pillars-two-maps-to",
+          "type": "mc",
+          "prompt": "Pillar 2, clarity from chaos, is best summarized as which capability?",
+          "options": [
+            "Translate messy inputs into clear, opinionated interfaces",
+            "Own outcomes end to end with no hand-holding",
+            "Treat AI as a first-class teammate in the workflow",
+            "Concede the SaaS gap, then trade up to ramp speed"
+          ],
+          "answer": 0,
+          "explanation": "Pillar 2 is turning vague briefs and messy systems into clean, usable work, translating messy inputs into clear opinionated interfaces. Owning outcomes is pillar 3, AI as teammate is pillar 1, and conceding the SaaS gap is the neutralize-and-pivot move.",
+          "source": "translate messy inputs into clear, opinionated interfaces"
+        },
+        {
+          "id": "pillars-three-maps-to",
+          "type": "mc",
+          "prompt": "Pillar 3, ownership plus bias to action, maps to which part of the JD and what behavior?",
+          "options": [
+            "Who Will Thrive Here, own outcomes end to end with no hand-holding",
+            "Document extraction and copilots, present AI suggestions clearly",
+            "The 2-plus years required bullet, concede then reframe",
+            "Fresh-eyes advantage, pair it with a 30-day learning plan"
+          ],
+          "answer": 0,
+          "explanation": "Pillar 3 ties freelance ownership to the operating style under Who Will Thrive Here, owning outcomes end to end. Document extraction and copilots map to pillar 1, the 2-year bullet is the SaaS gap, and fresh eyes is the domain pivot.",
+          "source": "Ownership + bias to action (freelance means you own outcomes end-to-end with no hand-holding - the operating style under \"Who Will Thrive Here\")"
+        },
+        {
+          "id": "pillars-core-reframe-recite",
+          "type": "card",
+          "prompt": "Recite the core reframe from memory, the one sentence you say to yourself before every answer.",
+          "beats": [
+            "Not a product designer who's learning AI",
+            "Instead an AI-native builder",
+            "Who does the work of product design end to end",
+            "Shipping real interfaces",
+            "Done that substance for fifteen years under different titles"
+          ],
+          "ideal": "I'm not a product designer who's learning AI. I'm an AI-native builder who does the work of product design end to end, shipping real interfaces, and I've done that substance for fifteen years under different titles.",
+          "explanation": "Coaching note: lead with the flip, not a hedge. The AI fluency is the rare thing you own and the product-design vocabulary is the catch-up, so say it as a confident identity statement, not an apology.",
+          "source": "I'm not a product designer learning AI. I'm an AI-native builder who's done the substance of product design for 15 years - under different titles."
+        }
+      ]
+    },
+    {
+      "key": "gaps",
+      "title": "The Gap Playbook",
+      "questions": [
+        {
+          "id": "gaps-biggest-gap",
+          "type": "mc",
+          "prompt": "Across the six true gaps, which one is called out as the biggest, the one tied to the 2+ years required bullet?",
+          "options": [
+            "No B2B SaaS product-design experience",
+            "No traditional product-design portfolio",
+            "Zero domain exposure to construction and abatement",
+            "Title and track read creative, not product designer"
+          ],
+          "answer": 0,
+          "explanation": "Section 2 lists No B2B SaaS product-design experience as gap 1 and explicitly labels it the biggest gap, tied to the required 2+ years bullet. The other three are real gaps too, but none is named the biggest.",
+          "source": "No B2B SaaS product-design experience - the \"2+ years\" required bullet. Biggest gap."
+        },
+        {
+          "id": "gaps-not-a-gap",
+          "type": "mc",
+          "prompt": "Which item should William treat as NOT a gap and not raise in the interview?",
+          "options": [
+            "Location, Chattanooga TN, he is eligible",
+            "No multi-role workflow design experience",
+            "Tenure as a product designer near zero formal years",
+            "No vertical SaaS exposure in the trades"
+          ],
+          "answer": 0,
+          "explanation": "Section 2 ends with NOT A GAP: Location. Chattanooga is not on the excluded-states list, the role is remote/hybrid, he is eligible, and the instruction is don't raise it. The other three are listed as real gaps.",
+          "source": "NOT A GAP: Location (Chattanooga, TN not on excluded-states list; remote/hybrid; eligible; don't raise it)."
+        },
+        {
+          "id": "gaps-classify-domain",
+          "type": "mc",
+          "prompt": "How does the playbook classify William's exposure to construction, field service, and specialty subcontracting like demolition and abatement?",
+          "options": [
+            "A real gap, the domain is all new",
+            "Not a gap, his Humble & Fume work covers it",
+            "Not a gap, fresh eyes are an asset here",
+            "A real gap only for the finance personas"
+          ],
+          "answer": 0,
+          "explanation": "Section 2 names zero domain exposure as gap 3, a real gap. The fresh-eyes framing is a strategy for answering Q5, not a reason to reclassify it as not a gap, and Humble & Fume was compliance/IR-heavy, not construction.",
+          "source": "Zero domain exposure - construction, field service, specialty subcontracting (demolition/abatement/remediation) are all new."
+        },
+        {
+          "id": "gaps-never-volunteer",
+          "type": "mc",
+          "prompt": "What does the footer principle say William should do about his weaknesses when the interviewer has not asked?",
+          "options": [
+            "Never volunteer a weakness unprompted",
+            "List all six gaps up front to seem honest",
+            "Lead with the biggest gap to disarm them",
+            "Mention location early so it is off the table"
+          ],
+          "answer": 0,
+          "explanation": "The footer principle and the strategic principle throughout both state never volunteer a weakness unprompted, alongside never lie and trade on the rarest thing you bring. Volunteering or listing gaps unprompted is exactly the NEVER behavior.",
+          "source": "NEVER VOLUNTEER A WEAKNESS UNPROMPTED"
+        },
+        {
+          "id": "gaps-classify-shipped",
+          "type": "card",
+          "prompt": "The LinkedIn summary claimed you have no portfolio or product design work. An interviewer repeats that to you. Is it a real gap? Answer the way the playbook frames it.",
+          "explanation": "Coaching note: this is the only PARTLY INACCURATE verdict. Concede the narrow truth (no case-study portfolio) while correcting the false part (you have a live shipped product). Do not over-concede into the bigger No-B2B-SaaS gap.",
+          "source": "PARTLY INACCURATE (shipped artifact yes; no case-study portfolio).",
+          "beats": [
+            "The claim is only partly true, so split it cleanly",
+            "I do have a live shipped product, review.bartosuerte.com, plus bartosuerte.com",
+            "What I do not have is a traditional multi-screen case-study portfolio",
+            "Reframe: one tool I built end to end beats a stack of mockups I did not ship",
+            "Pivot to going deep on the tool as a full case study"
+          ],
+          "ideal": "That claim is only half right, so let me split it. I do have a live shipped product, review.bartosuerte.com, plus my site at bartosuerte.com, both real and clickable. What I do not have is a traditional portfolio of multi-screen flows with written case studies. I would rather show you one thing I designed and shipped end to end than a binder of screens that never went live. So let me walk you deep through that tool, the problem, the users, the key decisions, and where it goes next."
+        },
+        {
+          "id": "gaps-honesty-saas",
+          "type": "card",
+          "prompt": "The interviewer says: you don't have B2B SaaS experience, and two years is a hard requirement, talk to me. Walk the honesty-test answer.",
+          "explanation": "Coaching note: this is the biggest, ACCURATE gap. Concede the literal gap in one line, never invent SaaS experience, reframe to compliance/IR-heavy Humble & Fume, close on ramp speed and week-one productivity.",
+          "source": "I'd rather show you I'm productive in week one than claim a credential I don't have.",
+          "beats": [
+            "Concede the literal gap in one sentence, no deflating",
+            "I will not pretend the two years is there",
+            "Reframe to adjacent strength: compliance and IR-heavy work at Humble & Fume, risk is not abstract",
+            "Close on ramping in days and owning outcomes",
+            "Land on productive in week one over claiming a credential"
+          ],
+          "ideal": "I won't pretend the two years of B2B SaaS is there, because it isn't, and I'm not going to invent it. What I will point to is adjacent: my work at Humble & Fume was compliance and IR-heavy, so risk and regulated detail aren't abstract to me. And as a freelancer I ramp in days and own the outcome end to end. I'd rather show you I'm productive in week one than claim a credential I don't have."
+        }
+      ]
+    },
+    {
+      "key": "lnn",
+      "title": "Lead / Neutralize / Never",
+      "questions": [
+        {
+          "id": "lnn-review-tool-case-study",
+          "type": "mc",
+          "prompt": "In the interview, how should William handle the Applicant Review Tool?",
+          "options": [
+            "LEAD WITH it as a case study",
+            "NEUTRALIZE-THEN-PIVOT away from it",
+            "NEVER SAY it, keep it off the table",
+            "Mention it only if asked directly"
+          ],
+          "answer": 0,
+          "explanation": "The cheat sheet lists the Review Tool under LEAD WITH, framed as a case study rather than a portfolio piece. It is the single live artifact that proves AI-native work, so it leads, never gets neutralized or hidden.",
+          "source": "The Review Tool as a case study (not a portfolio piece)"
+        },
+        {
+          "id": "lnn-claim-saas-experience",
+          "type": "mc",
+          "prompt": "Claiming B2B SaaS experience that William does not actually have falls into which bucket?",
+          "options": [
+            "LEAD WITH",
+            "NEUTRALIZE-THEN-PIVOT",
+            "NEVER SAY",
+            "Save it for the close"
+          ],
+          "answer": 2,
+          "explanation": "Inventing SaaS experience is a NEVER, tied to the footer principle to never lie. The SaaS gap is real and gets conceded once then pivoted, but it is never fabricated.",
+          "source": "Claim SaaS experience you don't have"
+        },
+        {
+          "id": "lnn-concede-saas-pivot",
+          "type": "mc",
+          "prompt": "Conceding the B2B SaaS gap one time and then trading up to AI-native fluency and ramp speed is an example of which move?",
+          "options": [
+            "LEAD WITH",
+            "NEUTRALIZE-THEN-PIVOT",
+            "NEVER SAY",
+            "DO BEFORE THE CALL"
+          ],
+          "answer": 1,
+          "explanation": "Conceding the gap once then pivoting to strengths is the textbook NEUTRALIZE-THEN-PIVOT pattern: B2B SaaS concede once then AI-native plus ramp speed.",
+          "source": "B2B SaaS: concede once -> AI-native + ramp speed"
+        },
+        {
+          "id": "lnn-knock-traditional-designers",
+          "type": "mc",
+          "prompt": "Taking a shot at traditional product designers to make William look better belongs in which bucket?",
+          "options": [
+            "LEAD WITH",
+            "NEUTRALIZE-THEN-PIVOT",
+            "NEVER SAY",
+            "ASK THEM"
+          ],
+          "answer": 2,
+          "explanation": "Knocking traditional designers is an explicit NEVER. The strategy wins by being undeniably specific, not by tearing others down.",
+          "source": "Knock \"traditional\" designers"
+        },
+        {
+          "id": "lnn-claude-chain",
+          "type": "mc",
+          "prompt": "The Claude chain Cowork -> Code -> GitHub -> design system should be used how?",
+          "options": [
+            "LEAD WITH it as proof of AI-native workflow",
+            "NEUTRALIZE-THEN-PIVOT past it quickly",
+            "NEVER SAY it, it sounds too technical",
+            "Only raise it if they ask about tools"
+          ],
+          "answer": 0,
+          "explanation": "The Claude toolchain is listed under LEAD WITH and is the operational proof of the JD's number one trait, AI-nativeness, the thing others fake.",
+          "source": "Claude chain: Cowork -> Code -> GitHub -> your design system"
+        },
+        {
+          "id": "lnn-title-different-labels",
+          "type": "card",
+          "prompt": "The interviewer pushes on William's job titles: his background reads creative and marketing, not product designer. Classify how to handle the title gap, then deliver the line.",
+          "explanation": "Coaching note: the title gap is a NEUTRALIZE-THEN-PIVOT, not a NEVER and not something to lead with. Name it confidently as a labeling difference, then redefine the underlying work as product design substance. Do not get defensive or treat product design as foreign.",
+          "beats": [
+            "Classify the title gap as NEUTRALIZE-THEN-PIVOT",
+            "State the line: different labels, same substance",
+            "Redefine the work as product design: vague brief, map the flow, make hierarchy and default decisions, ship a real interface",
+            "Note the label is the new part, the substance is fifteen years old",
+            "Land on the AI-native edge that is hard to hire for",
+            "Do not get defensive or treat product design as foreign"
+          ],
+          "ideal": "That is a NEUTRALIZE-THEN-PIVOT for me, different labels, same substance. My titles say creative and web, but the work underneath has been product design for years: take a vague brief, map the flow, make the hierarchy and default decisions, and ship a real usable interface end to end. The label is new, the substance is not. What I add that is hard to hire for is that I already build the way you say you want to work, Claude-native and shipping in hours.",
+          "source": "Title: \"different labels, same substance\""
+        }
+      ]
+    },
+    {
+      "key": "interview",
+      "title": "Interview Q&A: Trap & Strategy",
+      "questions": [
+        {
+          "id": "interview-q1-mc-testing",
+          "type": "mc",
+          "prompt": "Q1: 'Your background is creative and marketing, this is a senior product role. Why should we think you can do it?' What is this question really testing?",
+          "options": [
+            "Whether you can recite the FieldFlo job description back to them",
+            "Your self-awareness, can you own the title gap without getting defensive or caving",
+            "Whether you have a multi-screen portfolio ready to show",
+            "How many years of formal product design tenure you carry"
+          ],
+          "answer": 1,
+          "explanation": "DOC B labels Q1 'SELF-AWARENESS' and the trap is 'getting defensive, or conceding too much.' It is a test of how you handle the title gap, not a request for the JD, the portfolio, or a tenure count.",
+          "source": "Q1 SELF-AWARENESS"
+        },
+        {
+          "id": "interview-q1-mc-strategy",
+          "type": "mc",
+          "prompt": "Q1: After they question your creative and marketing background, what is the right strategy?",
+          "options": [
+            "Apologize for the title mismatch, then list every gap you are aware of",
+            "Argue that product design is overrated and titles do not matter at all",
+            "Name it confidently, redefine the work as substance, end on the AI edge",
+            "Pivot immediately to salary so you do not dwell on the weakness"
+          ],
+          "answer": 2,
+          "explanation": "DOC B's strategy for Q1 is to 'name it confidently, redefine the work as substance, end on the AI edge.' The other paths violate the rules against over-apologizing, knocking traditional designers, and volunteering weakness.",
+          "source": "name it confidently, redefine the work as substance, end on the AI edge"
+        },
+        {
+          "id": "interview-q2-mc-importance",
+          "type": "mc",
+          "prompt": "Q2: 'We need someone who has designed for systems with AI or probabilistic components. Have you?' How should you treat this question, and why?",
+          "options": [
+            "As the single most important answer, walk the AI-UX decisions in their exact language",
+            "As a yes/no required bullet, answer 'no' honestly and move on quickly",
+            "As a portfolio question, list all 15 years of work before the tool",
+            "As a trap, deflect to your B2B SaaS adjacent experience instead"
+          ],
+          "answer": 0,
+          "explanation": "DOC B marks Q2 the 'single most important answer' and the trap is 'saying no and stopping, you HAVE done this, in the tool.' The strategy is to walk the AI-UX decisions in their exact language. Answering no, listing breadth, or deflecting all miss it.",
+          "source": "rehearse cold, single most important answer"
+        },
+        {
+          "id": "interview-q2-mc-beats",
+          "type": "mc",
+          "prompt": "Q2: Which set of beats correctly captures the AI-UX decisions to walk through for the Applicant Review Tool?",
+          "options": [
+            "Pixel-perfect mockups, a brand refresh, a color system, and motion specs",
+            "Deterministic transparent score vs Claude's labeled read, fails honestly when unreachable, human in the loop via Ask box",
+            "Two years of SaaS metrics, churn dashboards, and an onboarding funnel",
+            "A construction lifecycle map from field to office to finance personas"
+          ],
+          "answer": 1,
+          "explanation": "DOC A and B give the exact beats: a deterministic transparent score separated from Claude's labeled qualitative read, fails honestly when the model is unreachable, and a human-in-the-loop 'Ask' box. The other options describe unrelated work.",
+          "source": "separated a deterministic transparent score from Claude's qualitative read"
+        },
+        {
+          "id": "interview-q3-mc-trap",
+          "type": "mc",
+          "prompt": "Q3: 'You do not have B2B SaaS experience. Two years is a hard requirement. Talk to me.' What is the trap to avoid?",
+          "options": [
+            "Conceding the gap in a single sentence before reframing",
+            "Inventing SaaS experience, or deflating about the gap",
+            "Mentioning the compliance and IR-heavy Humble & Fume work",
+            "Closing on how fast you ramp and own outcomes"
+          ],
+          "answer": 1,
+          "explanation": "DOC B names Q3 the 'HONESTY TEST' and its trap is 'inventing SaaS experience, or deflating.' Conceding in one line, citing Humble & Fume, and closing on ramp speed are the correct strategy, not traps.",
+          "source": "inventing SaaS experience, or deflating"
+        },
+        {
+          "id": "interview-q4-mc-spine",
+          "type": "mc",
+          "prompt": "Q4: 'Walk me through your product design portfolio.' What is the correct case-study spine order to use on the tool?",
+          "options": [
+            "Outcome -> Tradeoffs -> AI-UX decisions -> Key decisions -> Users -> Problem",
+            "Problem -> Users -> Key decisions -> AI-UX decisions -> Tradeoffs -> Outcome and next",
+            "Users -> Problem -> Outcome -> AI-UX decisions -> Key decisions -> Tradeoffs",
+            "Problem -> AI-UX decisions -> Outcome -> Users -> Tradeoffs -> Key decisions"
+          ],
+          "answer": 1,
+          "explanation": "DOC B gives the exact spine: Problem -> Users -> Key decisions -> AI-UX decisions -> Tradeoffs -> Outcome and next. The trap is apologizing for thin volume, so you go deep on ONE thing in this order.",
+          "source": "Problem -> Users -> Key decisions -> AI-UX decisions -> Tradeoffs -> Outcome"
+        },
+        {
+          "id": "interview-q5-mc-strategy",
+          "type": "mc",
+          "prompt": "Q5: 'This domain is brutally complex and you have zero exposure. Concern?' What is the right strategy?",
+          "options": [
+            "Fake enough domain knowledge to sound credible on abatement and OSHA",
+            "Turn fresh eyes into an asset, pair it with a 30-day learning plan, show you have started",
+            "Concede the domain gap is fatal and pivot to your AI strengths only",
+            "Promise to learn the domain fully before touching any pixels or users"
+          ],
+          "answer": 1,
+          "explanation": "DOC B's Q5 strategy is to 'turn fresh eyes into an asset, pair with a 30-day learning plan, show you have started.' The trap is faking domain knowledge, and the source says you have already read up on FieldFlo and the abatement workflow.",
+          "source": "turn fresh eyes into an asset, pair with a 30-day learning plan"
+        },
+        {
+          "id": "interview-q1-card-self-awareness",
+          "type": "card",
+          "prompt": "Q1 CARD (rehearse spoken): They open with 'Your background is creative and marketing, this is a senior product role. Why should we think you can do it?' Deliver your answer out loud.",
+          "beats": [
+            "Name the title gap confidently without getting defensive or apologizing",
+            "Redefine the underlying work as product design substance for years, vague brief to shipped interface",
+            "List the substance: map the flow, set hierarchy and default decisions, ship a usable interface end to end",
+            "Frame the label as new and the substance as not new",
+            "Close on the AI edge, you already build the way they say they want to work, Claude-native, shipping in hours"
+          ],
+          "ideal": "My titles say creative and web, but the work underneath has been product design for years. Vague brief comes in, I map the flow, I make the hierarchy and default decisions, and I ship a real usable interface end to end. The label is new, the substance is not. What I add that is hard to hire for is that I already build the way you say you want to work, Claude-native, shipping in hours.",
+          "explanation": "Coaching note: own the gap in one confident line, then move fast to substance and land on the AI edge. Do not over-apologize, list gaps unprompted, or knock traditional designers.",
+          "source": "the work underneath has been product design for years"
+        },
+        {
+          "id": "interview-q5-card-learning",
+          "type": "card",
+          "prompt": "Q5 CARD (rehearse spoken): They press 'This domain is brutally complex and you have zero exposure. Concern?' Deliver your answer out loud.",
+          "beats": [
+            "Do not fake domain knowledge, acknowledge it is new honestly",
+            "Turn fresh eyes into an asset rather than a liability",
+            "Pair it with a concrete 30-day learning plan",
+            "Show you have already started, read up on FieldFlo and the abatement workflow",
+            "Sequence the plan: shadow field and office users, read compliance flows, map field-to-finance lifecycle before touching pixels"
+          ],
+          "ideal": "It is fair, the domain is new to me and I will not pretend otherwise. But fresh eyes are an asset here, I ask the questions an insider stopped asking. I have already started, I have read up on FieldFlo and the abatement workflow, and I have a 30-day plan: shadow field and office users, read the compliance flows, and map the field-to-finance lifecycle before I touch a single pixel.",
+          "explanation": "Coaching note: never fake the domain. Convert the gap into a fresh-eyes asset, prove momentum with the homework you have already done, and show a sequenced learning plan.",
+          "source": "turn fresh eyes into an asset, pair with a 30-day learning plan, show you've started"
+        }
+      ]
+    },
+    {
+      "key": "linkedin",
+      "title": "LinkedIn Reality Check",
+      "questions": [
+        {
+          "id": "linkedin-claude-verdict",
+          "type": "mc",
+          "prompt": "LinkedIn's AI summary flagged \"heavy hands-on use of Claude, no concrete examples.\" What is the correct verdict on this claim?",
+          "options": [
+            "INACCURATE, your strongest area, scored zero",
+            "ACCURATE, you have no concrete Claude examples",
+            "PARTLY INACCURATE, you use Claude but not daily",
+            "INACCURATE, but it is a minor miss"
+          ],
+          "answer": 0,
+          "explanation": "You use Claude (Cowork plus Claude Code) daily, version in GitHub, and built the Applicant Review Tool end to end in hours. This is your strongest area and the AI scored it zero, so the verdict is INACCURATE. The other options either accept the false claim or downplay the severity of the miss.",
+          "source": "VERDICT: INACCURATE (your strongest area, scored zero)"
+        },
+        {
+          "id": "linkedin-portfolio-verdict",
+          "type": "mc",
+          "prompt": "For the claim \"no portfolio or product design work mentioned,\" what is the verdict and why?",
+          "options": [
+            "INACCURATE, you have a full case-study portfolio",
+            "ACCURATE, you have no shipped work to show",
+            "PARTLY INACCURATE, shipped artifact yes, no case-study portfolio",
+            "PARTLY INACCURATE, portfolio exists but is not live"
+          ],
+          "answer": 2,
+          "explanation": "You have a live shipped product (review.bartosuerte.com) plus bartosuerte.com, so the claim is not fully wrong. But there is no body of multi-screen flows with case studies, so it is not fully right either. The verdict is PARTLY INACCURATE: shipped artifact yes, no case-study portfolio.",
+          "source": "VERDICT: PARTLY INACCURATE (shipped artifact yes; no case-study portfolio)"
+        },
+        {
+          "id": "linkedin-aiml-verdict",
+          "type": "mc",
+          "prompt": "LinkedIn claimed \"no mention of AI/ML product features.\" What is the verdict?",
+          "options": [
+            "INACCURATE, the tool is AI features that map to the JD",
+            "ACCURATE, the tool has no real AI features",
+            "PARTLY INACCURATE, AI features exist but are not shipped",
+            "PARTLY INACCURATE, the features are ML but not product"
+          ],
+          "answer": 0,
+          "explanation": "The Applicant Review Tool is built of AI features: document extraction, AI grading, and copilot-style Q&A with human-in-the-loop. These map directly to the JD's \"document extraction, copilots,\" so the claim is INACCURATE. The distractors wrongly concede or soften the point.",
+          "source": "VERDICT: INACCURATE (maps to JD's \"document extraction, copilots\")"
+        },
+        {
+          "id": "linkedin-real-gaps-verdict",
+          "type": "mc",
+          "prompt": "Two LinkedIn claims are \"no B2B SaaS experience\" and \"no vertical SaaS / multi-role / subcontracting.\" What is the verdict on these two?",
+          "options": [
+            "Both INACCURATE, Humble & Fume covers them",
+            "B2B SaaS ACCURATE, vertical SaaS INACCURATE",
+            "Both PARTLY INACCURATE, adjacent work counts",
+            "Both ACCURATE, they are real gaps"
+          ],
+          "answer": 3,
+          "explanation": "Humble & Fume was compliance and IR heavy, but the role was creative and marketing, not SaaS product design, so the B2B SaaS claim is ACCURATE. Nothing touches construction, field to office to finance personas, or the trades, so the vertical SaaS claim is also ACCURATE. Both are real gaps.",
+          "source": "VERDICT: ACCURATE (real gaps)"
+        },
+        {
+          "id": "linkedin-score-and-first-action",
+          "type": "mc",
+          "prompt": "The \"Job match is low\" verdict scored 0 of 3 required and 0 of 5 preferred. What explains that score, and what is the highest-leverage first action?",
+          "options": [
+            "The resume is weak, so rewrite the resume first",
+            "The profile was incomplete, so fix LinkedIn first",
+            "The skills are missing, so take a SaaS course first",
+            "The link was broken, so confirm the live link first"
+          ],
+          "answer": 1,
+          "explanation": "The 0 of 3 required and 0 of 5 preferred score was built from the incomplete LinkedIn profile, not the resume. You are being filtered out for an incomplete profile, not a weak one, so the highest-leverage first action is to fix LinkedIn (add Claude, the tool, GitHub). The distractors misdiagnose the cause.",
+          "source": "built from your incomplete LinkedIn profile, not your resume"
+        }
+      ]
+    },
+    {
+      "key": "close",
+      "title": "The Close & Principles",
+      "questions": [
+        {
+          "id": "close-card-one-line",
+          "type": "card",
+          "prompt": "Deliver the one-line close. The interviewer says, \"Anything you want to leave us with?\" Give your closing line cold.",
+          "explanation": "Coaching note: do not rush it. Concede underdog status in one breath, then flip immediately to the rarest thing you bring (AI as teammate plus bias to action), and end on the concrete afternoon offer so they picture you working. Land it confident, no apology.",
+          "beats": [
+            "Concede you are not the conventional pick, once, without apologizing",
+            "Name what they said they want: someone who already treats AI as a teammate and ships with a bias to action",
+            "Frame it as how you already work, not a skill you are promising to develop",
+            "Close on the concrete offer: give me a real FieldFlo workflow and I will show you in an afternoon"
+          ],
+          "ideal": "I know I'm not the conventional pick. But you're building something new, and you said you want someone who already treats AI as a teammate and ships with a bias to action. That's not a skill I'm promising to develop, it's how I already work. Give me a real FieldFlo workflow and I'll show you in an afternoon.",
+          "source": "I know I'm not the conventional pick."
+        },
+        {
+          "id": "close-mc-three-principles",
+          "type": "mc",
+          "prompt": "The footer principle names the three strategic rules you carry through every answer. Which trio is correct?",
+          "options": [
+            "Never lie, never volunteer a weakness unprompted, trade on the rarest thing you bring",
+            "Never lie, always lead with your gaps, match the conventional candidate",
+            "Concede every requirement, apologize early, knock traditional designers",
+            "Promise to develop AI skills, list all gaps upfront, raise your location"
+          ],
+          "answer": 0,
+          "explanation": "The footer principle reads: never lie, never volunteer a weakness unprompted, trade on the rarest thing you bring. The other options invert the NEVER list (over-apologizing, listing gaps unprompted, knocking traditional designers) or contradict the strategy of owning the rare AI-native edge.",
+          "source": "NEVER LIE; NEVER VOLUNTEER A WEAKNESS UNPROMPTED; TRADE ON THE RAREST THING YOU BRING."
+        },
+        {
+          "id": "close-mc-checklist-priority",
+          "type": "mc",
+          "prompt": "On the pre-interview checklist in priority order, what is item number one, the highest-leverage move?",
+          "options": [
+            "Fix LinkedIn, the highest-leverage hour you will spend",
+            "Rehearse the tool walkthrough cold",
+            "Do 90 minutes of abatement and OSHA domain homework",
+            "Mock one AI-augmented FieldFlo screen as an optional gap-closer"
+          ],
+          "answer": 0,
+          "explanation": "Item one is Fix LinkedIn, called the highest leverage because you are filtered out for an incomplete profile, not a weak one. Rehearsing the tool walkthrough is item two, domain homework is item four, and the mock screen is the optional item five, all real but lower priority.",
+          "source": "Fix LinkedIn (highest leverage)"
+        },
+        {
+          "id": "close-mc-rehearse-second",
+          "type": "mc",
+          "prompt": "After fixing LinkedIn, what is the number two item on the pre-interview checklist?",
+          "options": [
+            "Rehearse the tool walkthrough cold",
+            "Send the three questions to ask them",
+            "Confirm Chattanooga eligibility before the call",
+            "Knock the traditional designers off their portfolios"
+          ],
+          "answer": 0,
+          "explanation": "Item two is rehearse the tool walkthrough cold, the money answer covering Q2 and Q4. The questions to ask them are the last checklist item, location is explicitly not a gap and should not be raised, and knocking traditional designers is on the NEVER list.",
+          "source": "Rehearse the tool walkthrough (Q2 + Q4) cold"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+
+    <script>
+      /* ===========================================================
+         FieldFlō Prep — quiz controller
+         =========================================================== */
+      (function () {
+        "use strict";
+        var BANK = JSON.parse(document.getElementById("quiz-bank").textContent);
+        var DECKS = BANK.decks;
+        var STORE_KEY = "fieldflo-quiz-v1";
+        var app = document.getElementById("app");
+        var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        /* ---------- persistence ---------- */
+        function load() {
+          try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; }
+          catch (e) { return {}; }
+        }
+        function save(s) { try { localStorage.setItem(STORE_KEY, JSON.stringify(s)); } catch (e) {} }
+        var state = load();
+        state.settings = state.settings || { shuffle: true, hideExplain: false };
+        state.best = state.best || {};       // deckKey -> best percent
+        state.last = state.last || {};       // deckKey -> last percent
+        state.misses = state.misses || {};   // questionId -> true
+        if (!state.a2hsDismissed) state.a2hsDismissed = false;
+
+        /* ---------- helpers ---------- */
+        function esc(s) {
+          return String(s == null ? "" : s)
+            .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+        function shuffle(arr) {
+          var a = arr.slice();
+          for (var i = a.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var t = a[i]; a[i] = a[j]; a[j] = t;
+          }
+          return a;
+        }
+        function allQuestions() {
+          var out = [];
+          DECKS.forEach(function (d) {
+            d.questions.forEach(function (q) {
+              out.push(Object.assign({ _deck: d.title, _key: d.key }, q));
+            });
+          });
+          return out;
+        }
+        function deckByKey(k) {
+          for (var i = 0; i < DECKS.length; i++) if (DECKS[i].key === k) return DECKS[i];
+          return null;
+        }
+        function ringSVG(pct, size) {
+          var s = size || 44;
+          var deg = Math.round((pct / 100) * 360);
+          var inner = s - 10;
+          return (
+            '<div style="width:' + s + "px;height:" + s + 'px;border-radius:50%;background:conic-gradient(var(--gold) ' +
+            deg + "deg, var(--surface-3) " + deg + 'deg);display:grid;place-items:center">' +
+            '<div style="width:' + inner + "px;height:" + inner +
+            'px;border-radius:50%;background:var(--surface);display:grid;place-items:center;font-family:var(--mono);font-size:' +
+            (s > 100 ? 0 : 10) + 'px;color:var(--gold)">' + (s > 100 ? "" : pct) + "</div></div>"
+          );
+        }
+
+        /* ---------- session ---------- */
+        var session = null; // {title,key,questions,idx,results:{id->score},answered:bool,mode}
+
+        function startSession(opts) {
+          var qs = opts.questions.slice();
+          if (state.settings.shuffle) qs = shuffle(qs);
+          session = {
+            title: opts.title, key: opts.key || "mixed", mode: opts.mode || "deck",
+            questions: qs, idx: 0, results: {}, answered: false, picked: null, revealed: false
+          };
+          location.hash = "#/quiz";
+          renderQuiz();
+        }
+
+        /* ===================== VIEWS ===================== */
+
+        function renderHome() {
+          session = null;
+          var totalQ = allQuestions().length;
+          var missCount = Object.keys(state.misses).length;
+
+          var a2hs = "";
+          var isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+          var standalone = window.navigator.standalone || window.matchMedia("(display-mode: standalone)").matches;
+          if (isiOS && !standalone && !state.a2hsDismissed) {
+            a2hs =
+              '<div class="a2hs show"><svg viewBox="0 0 24 24"><path d="M12 16V4M12 4l-4 4M12 4l4 4"/><path d="M4 20h16"/></svg>' +
+              "<span>Tip: tap Share, then <b>Add to Home Screen</b> to use this like an app.</span>" +
+              '<button class="x" id="a2hsX" aria-label="dismiss">✕</button></div>';
+          }
+
+          var quick =
+            '<div class="quick">' +
+            qcard("mixed", "Mixed quiz", totalQ + " questions · all decks", icon("shuffle")) +
+            qcard("money", "Money answers", "rehearse the 3 critical answers", icon("target")) +
+            (missCount
+              ? qcard("misses", "Review my misses", missCount + " to clean up", icon("repeat"))
+              : "") +
+            "</div>";
+
+          var deckHTML = DECKS.map(function (d) {
+            var best = state.best[d.key];
+            var last = state.last[d.key];
+            var meta =
+              '<span>' + d.questions.length + " Q</span>" +
+              (best != null ? '<span class="best">best ' + best + "%</span>" : "<span>not started</span>") +
+              (last != null ? "<span>last " + last + "%</span>" : "");
+            return (
+              '<button class="deck" data-deck="' + d.key + '">' +
+              '<div><div class="dt">' + esc(d.title) + '</div><div class="dm">' + meta + "</div></div>" +
+              '<div class="dring">' + (best != null ? ringSVG(best, 44) : ringSVG(0, 44)) + "</div>" +
+              "</button>"
+            );
+          }).join("");
+
+          var t = state.settings;
+          var toggles =
+            '<div class="toggles">' +
+            toggle("shuffle", "Shuffle questions", "randomize order each run", t.shuffle) +
+            toggle("hideExplain", "Hide explanations", "rehearse mode, no coaching notes", t.hideExplain) +
+            "</div>";
+
+          app.innerHTML =
+            '<section class="view">' +
+            a2hs +
+            '<div class="eyebrow">Interview Rehearsal · FieldFlō Sr. Product Designer</div>' +
+            '<h1 class="h-title">Game Plan<span class="l2">Quiz</span></h1>' +
+            '<p class="lead">Drill the cheat sheet and the gap playbook until the money answers are cold. Tap an option to lock it in; rehearse the long answers out loud, then grade yourself.</p>' +
+            quick +
+            '<div class="section-label">Decks</div>' +
+            '<div class="decks">' + deckHTML + "</div>" +
+            toggles +
+            '<div class="foot">Never lie · Never volunteer a weakness unprompted · Trade on the rarest thing you bring</div>' +
+            "</section>";
+
+          // wire
+          Array.prototype.forEach.call(app.querySelectorAll(".qcard"), function (el) {
+            el.addEventListener("click", function () { quickStart(el.getAttribute("data-q")); });
+          });
+          Array.prototype.forEach.call(app.querySelectorAll(".deck"), function (el) {
+            el.addEventListener("click", function () {
+              var d = deckByKey(el.getAttribute("data-deck"));
+              if (d) startSession({ title: d.title, key: d.key, questions: tagged(d), mode: "deck" });
+            });
+          });
+          Array.prototype.forEach.call(app.querySelectorAll(".toggle"), function (el) {
+            el.addEventListener("click", function () {
+              var k = el.getAttribute("data-t");
+              state.settings[k] = !state.settings[k];
+              save(state);
+              el.querySelector(".sw").classList.toggle("on", state.settings[k]);
+            });
+          });
+          var x = document.getElementById("a2hsX");
+          if (x) x.addEventListener("click", function () {
+            state.a2hsDismissed = true; save(state);
+            var n = x.closest(".a2hs"); if (n) n.classList.remove("show");
+          });
+        }
+
+        function tagged(d) {
+          return d.questions.map(function (q) { return Object.assign({ _deck: d.title, _key: d.key }, q); });
+        }
+        function qcard(q, title, sub, ic) {
+          return (
+            '<button class="qcard" data-q="' + q + '">' +
+            '<span class="qi">' + ic + "</span>" +
+            '<span><span class="qt">' + esc(title) + '</span><span class="qs">' + esc(sub) + "</span></span>" +
+            '<span class="qarrow">→</span></button>'
+          );
+        }
+        function toggle(k, label, sub, on) {
+          return (
+            '<div class="toggle" data-t="' + k + '"><div><div class="tl">' + esc(label) +
+            '</div><div class="ts">' + esc(sub) + '</div></div><div class="sw' + (on ? " on" : "") + '"></div></div>'
+          );
+        }
+
+        function quickStart(q) {
+          if (q === "mixed") startSession({ title: "Mixed quiz", key: "mixed", questions: allQuestions(), mode: "mixed" });
+          else if (q === "misses") {
+            var all = allQuestions().filter(function (x) { return state.misses[x.id]; });
+            if (!all.length) return renderHome();
+            startSession({ title: "Review misses", key: "misses", questions: all, mode: "misses" });
+          } else {
+            var d = deckByKey(q);
+            if (d) startSession({ title: d.title, key: d.key, questions: tagged(d), mode: "deck" });
+          }
+        }
+
+        function icon(name) {
+          var p = {
+            shuffle: '<path d="M16 3h5v5"/><path d="M4 20L21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/>',
+            target: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',
+            repeat: '<path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>'
+          };
+          return '<svg viewBox="0 0 24 24">' + p[name] + "</svg>";
+        }
+
+        /* ---------- quiz ---------- */
+        function renderQuiz() {
+          if (!session) return renderHome();
+          var q = session.questions[session.idx];
+          var n = session.questions.length;
+          var pct = Math.round((session.idx / n) * 100);
+
+          var body;
+          if (q.type === "card") body = renderCard(q);
+          else body = renderMC(q);
+
+          app.innerHTML =
+            '<section class="view">' +
+            '<div class="qhead"><span class="qdeck">' + esc(session.mode === "deck" ? q._deck || session.title : session.title) +
+            '</span><span class="qcount">' + (session.idx + 1) + " / " + n + "</span></div>" +
+            '<div class="ptrack"><div class="pfill" style="width:' + pct + '%"></div></div>' +
+            body +
+            "</section>";
+
+          if (q.type === "card") wireCard(q);
+          else wireMC(q);
+          updateStreak();
+        }
+
+        function renderMC(q) {
+          var opts = q._order || (q._order = q.options.map(function (_, i) { return i; }));
+          if (state.settings.shuffle && !q._shuffled) {
+            q._order = shuffle(opts); q._shuffled = true; opts = q._order;
+          }
+          var letters = ["A", "B", "C", "D", "E"];
+          var html =
+            '<div class="qtag">' + tagIcon("zap") + " Multiple choice</div>" +
+            '<div class="qprompt">' + esc(q.prompt) + "</div>" +
+            '<div class="opts">';
+          opts.forEach(function (origIdx, pos) {
+            html +=
+              '<button class="opt" data-i="' + origIdx + '">' +
+              '<span class="key">' + letters[pos] + "</span>" +
+              "<span>" + esc(q.options[origIdx]) + "</span>" +
+              '<span class="mark"></span></button>';
+          });
+          html += "</div>";
+          html += '<div id="afterMC"></div>';
+          return html;
+        }
+
+        function wireMC(q) {
+          var opts = app.querySelectorAll(".opt");
+          Array.prototype.forEach.call(opts, function (el) {
+            el.addEventListener("click", function () { answerMC(q, parseInt(el.getAttribute("data-i"), 10)); });
+          });
+        }
+
+        function answerMC(q, choice) {
+          if (session.answered) return;
+          session.answered = true;
+          var correct = choice === q.answer;
+          session.results[q.id] = correct ? 1 : 0;
+          if (!correct) state.misses[q.id] = true;
+          else if (state.misses[q.id]) delete state.misses[q.id];
+          save(state);
+
+          var opts = app.querySelectorAll(".opt");
+          Array.prototype.forEach.call(opts, function (el) {
+            var i = parseInt(el.getAttribute("data-i"), 10);
+            el.classList.add("locked");
+            if (i === q.answer) { el.classList.add("correct"); el.querySelector(".mark").innerHTML = check(); }
+            else if (i === choice) { el.classList.add("wrong"); el.querySelector(".mark").innerHTML = cross(); }
+            else el.classList.add("dim");
+          });
+
+          var after = document.getElementById("afterMC");
+          var ex = "";
+          if (!state.settings.hideExplain && q.explanation) {
+            ex =
+              '<div class="explain"><span class="el">' + (correct ? "Why" : "Correct answer") + "</span>" +
+              esc(q.explanation) +
+              (q.source ? '<span class="src">source: ' + esc(q.source) + "</span>" : "") +
+              "</div>";
+          }
+          after.innerHTML = ex + '<div class="qnav">' + nextBtn() + "</div>";
+          document.getElementById("nextBtn").addEventListener("click", next);
+          updateStreak();
+        }
+
+        function renderCard(q) {
+          var html =
+            '<div class="qtag card-tag">' + tagIcon("mic") + " Rehearse out loud</div>" +
+            '<div class="qprompt big">' + esc(q.prompt) + "</div>" +
+            '<div class="qsub">Say your answer out loud, then reveal the beats and grade yourself honestly.</div>' +
+            '<div id="cardArea"><button class="btn btn-outline" id="revealBtn">' + tagIcon("eye") + " Reveal beats &amp; model answer</button></div>";
+          return html;
+        }
+
+        function wireCard(q) {
+          document.getElementById("revealBtn").addEventListener("click", function () { revealCard(q); });
+        }
+
+        function revealCard(q) {
+          var beats = (q.beats || []).map(function (b) { return "<li>" + esc(b) + "</li>"; }).join("");
+          var ideal = q.ideal
+            ? '<div class="ideal"><span class="il">Model answer</span>' + esc(q.ideal) + "</div>"
+            : "";
+          var src = q.source && !state.settings.hideExplain ? '<div class="explain"><span class="el">Source</span>' + esc(q.source) + "</div>" : "";
+          document.getElementById("cardArea").innerHTML =
+            '<div class="reveal-card"><div class="rl">Hit these beats</div><ul class="beats">' + beats + "</ul>" + ideal + "</div>" +
+            src +
+            '<div class="grade-row">' +
+            '<button class="grade g-good" data-g="1">Nailed it<small>full</small></button>' +
+            '<button class="grade g-mid" data-g="0.5">Partial<small>half</small></button>' +
+            '<button class="grade g-bad" data-g="0">Missed<small>review</small></button>' +
+            "</div>";
+          Array.prototype.forEach.call(app.querySelectorAll(".grade"), function (el) {
+            el.addEventListener("click", function () { gradeCard(q, parseFloat(el.getAttribute("data-g"))); });
+          });
+        }
+
+        function gradeCard(q, score) {
+          if (session.answered) return;
+          session.answered = true;
+          session.results[q.id] = score;
+          if (score < 1) state.misses[q.id] = true;
+          else if (state.misses[q.id]) delete state.misses[q.id];
+          save(state);
+          var area = document.getElementById("cardArea");
+          area.insertAdjacentHTML("beforeend", '<div class="qnav">' + nextBtn() + "</div>");
+          document.getElementById("nextBtn").addEventListener("click", next);
+          // mark chosen grade
+          Array.prototype.forEach.call(app.querySelectorAll(".grade"), function (el) {
+            if (parseFloat(el.getAttribute("data-g")) === score) {
+              el.style.borderColor = score === 1 ? "var(--green-40)" : score === 0.5 ? "var(--amber-40)" : "var(--red-40)";
+              el.style.color = score === 1 ? "var(--green)" : score === 0.5 ? "var(--amber)" : "var(--red)";
+            } else el.style.opacity = "0.45";
+            el.style.pointerEvents = "none";
+          });
+          updateStreak();
+        }
+
+        function nextBtn() {
+          var last = session.idx >= session.questions.length - 1;
+          return '<button class="btn btn-gold" id="nextBtn">' + (last ? "See results " + arrow() : "Next question " + arrow()) + "</button>";
+        }
+
+        function next() {
+          if (session.idx >= session.questions.length - 1) return renderResults();
+          session.idx++; session.answered = false; session.picked = null;
+          window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+          renderQuiz();
+        }
+
+        /* ---------- streak pill ---------- */
+        function updateStreak() {
+          var pill = document.getElementById("streakPill");
+          if (!pill || !session) return;
+          var scored = Object.keys(session.results).length;
+          if (scored === 0) { pill.hidden = true; return; }
+          var correct = 0; for (var id in session.results) correct += session.results[id];
+          pill.hidden = false;
+          pill.textContent = Math.round((correct / scored) * 100) + "% · " + scored + " done";
+        }
+
+        /* ---------- results ---------- */
+        function renderResults() {
+          var n = session.questions.length;
+          var pts = 0, good = 0, mid = 0, bad = 0;
+          session.questions.forEach(function (q) {
+            var s = session.results[q.id];
+            if (s == null) s = 0;
+            pts += s;
+            if (s >= 1) good++; else if (s >= 0.5) mid++; else bad++;
+          });
+          var pct = Math.round((pts / n) * 100);
+
+          // persist best/last for real decks
+          if (session.key && session.key !== "mixed" && session.key !== "misses") {
+            state.last[session.key] = pct;
+            if (state.best[session.key] == null || pct > state.best[session.key]) state.best[session.key] = pct;
+            save(state);
+          }
+
+          var verdict, sub;
+          if (pct >= 90) { verdict = "Cold."; sub = "You can run this in the room. Send the tool, fix LinkedIn, and walk in."; }
+          else if (pct >= 70) { verdict = "Almost there"; sub = "Solid. Tighten the misses below and rehearse the money answers once more out loud."; }
+          else if (pct >= 50) { verdict = "Getting warm"; sub = "The structure is landing. Re-run your misses, then drill the three pillars and the gap pivots."; }
+          else { verdict = "Run it again"; sub = "Go back to the cheat sheet, then retake. The money answers should be reflex, not recall."; }
+
+          var missList = session.questions.filter(function (q) { return (session.results[q.id] || 0) < 1; });
+          var reviewBtn = missList.length
+            ? '<button class="btn btn-outline" id="reviewBtn">' + tagIcon("repeat") + " Review " + missList.length + " miss" + (missList.length > 1 ? "es" : "") + "</button>"
+            : "";
+
+          app.innerHTML =
+            '<section class="view"><div class="result-top">' +
+            '<div class="eyebrow" style="text-align:center">' + esc(session.title) + " · result</div>" +
+            '<div class="ring-wrap" id="ringWrap"></div>' +
+            '<div class="verdict">' + verdict + "</div>" +
+            '<div class="verdict-sub">' + sub + "</div>" +
+            "</div>" +
+            '<div class="tallies">' +
+            '<div class="tally good"><b>' + good + "</b><small>nailed</small></div>" +
+            '<div class="tally mid"><b>' + mid + "</b><small>partial</small></div>" +
+            '<div class="tally bad"><b>' + bad + "</b><small>missed</small></div>" +
+            "</div>" +
+            '<div class="btn-row two">' +
+            reviewBtn +
+            '<button class="btn btn-gold" id="retryBtn">' + tagIcon("repeat") + " Retry</button>" +
+            "</div>" +
+            '<div class="btn-row"><button class="btn btn-ghost" id="decksBtn">All decks</button></div>' +
+            '<div class="foot">Trade on the rarest thing you bring</div>' +
+            "</section>";
+
+          animateRing(pct);
+          document.getElementById("retryBtn").addEventListener("click", function () {
+            startSession({ title: session.title, key: session.key, questions: session.questions.map(stripRuntime), mode: session.mode });
+          });
+          document.getElementById("decksBtn").addEventListener("click", renderHome);
+          var rb = document.getElementById("reviewBtn");
+          if (rb) rb.addEventListener("click", function () {
+            startSession({ title: "Review misses", key: "misses", questions: missList.map(stripRuntime), mode: "misses" });
+          });
+          var pill = document.getElementById("streakPill"); if (pill) pill.hidden = true;
+        }
+
+        function stripRuntime(q) {
+          var c = Object.assign({}, q);
+          delete c._order; delete c._shuffled;
+          return c;
+        }
+
+        function animateRing(pct) {
+          var wrap = document.getElementById("ringWrap");
+          var inner =
+            '<div style="position:absolute;inset:0;border-radius:50%;background:conic-gradient(var(--gold) 0deg, var(--surface-3) 0deg)"></div>' +
+            '<div style="position:absolute;inset:12px;border-radius:50%;background:var(--surface);border:1px solid var(--line)"></div>' +
+            '<div class="pct"><b id="pctNum">0</b><small>score</small></div>';
+          wrap.innerHTML = inner;
+          var arc = wrap.firstChild;
+          var num = document.getElementById("pctNum");
+          if (reduce) {
+            arc.style.background = "conic-gradient(var(--gold) " + (pct * 3.6) + "deg, var(--surface-3) " + (pct * 3.6) + "deg)";
+            num.textContent = pct; return;
+          }
+          var start = null, dur = 900;
+          function step(ts) {
+            if (!start) start = ts;
+            var p = Math.min((ts - start) / dur, 1);
+            var eased = 1 - Math.pow(1 - p, 3);
+            var cur = Math.round(eased * pct);
+            arc.style.background = "conic-gradient(var(--gold) " + (cur * 3.6) + "deg, var(--surface-3) " + (cur * 3.6) + "deg)";
+            num.textContent = cur;
+            if (p < 1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+        }
+
+        /* ---------- tiny icons ---------- */
+        function tagIcon(name) {
+          var p = {
+            zap: '<path d="M13 2L3 14h7l-1 8 10-12h-7z" fill="currentColor" stroke="none"/>',
+            mic: '<path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M5 10a7 7 0 0 0 14 0"/><path d="M12 17v4"/>',
+            eye: '<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/>',
+            repeat: '<path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>'
+          };
+          return '<svg viewBox="0 0 24 24" width="14" height="14" style="vertical-align:-2px;stroke:currentColor;fill:none;stroke-width:2;display:inline-block">' + p[name] + "</svg>";
+        }
+        function arrow() { return '<svg viewBox="0 0 24 24" width="16" height="16" style="stroke:currentColor;fill:none;stroke-width:2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'; }
+        function check() { return '<svg viewBox="0 0 24 24" width="18" height="18" style="stroke:var(--green);fill:none;stroke-width:2.4"><path d="M20 6L9 17l-5-5"/></svg>'; }
+        function cross() { return '<svg viewBox="0 0 24 24" width="18" height="18" style="stroke:var(--red);fill:none;stroke-width:2.4"><path d="M18 6L6 18M6 6l12 12"/></svg>'; }
+
+        /* ---------- keyboard (desktop) ---------- */
+        document.addEventListener("keydown", function (e) {
+          if (!session) return;
+          var q = session.questions[session.idx];
+          if (!q) return;
+          if (!session.answered && q.type === "mc") {
+            var map = { "1": 0, "2": 1, "3": 2, "4": 3, "a": 0, "b": 1, "c": 2, "d": 3 };
+            var k = e.key.toLowerCase();
+            if (map[k] != null && map[k] < q.options.length) {
+              var btn = app.querySelector('.opt[data-i="' + (q._order ? q._order[map[k]] : map[k]) + '"]');
+              if (btn) btn.click();
+            }
+          } else if ((e.key === "Enter" || e.key === " ") && session.answered) {
+            var nb = document.getElementById("nextBtn"); if (nb) { e.preventDefault(); nb.click(); }
+          }
+        });
+
+        /* ---------- nav ---------- */
+        document.getElementById("homeBtn").addEventListener("click", function (e) { e.preventDefault(); location.hash = "#/"; });
+        document.querySelector(".brand").addEventListener("click", function (e) { e.preventDefault(); location.hash = "#/"; });
+        window.addEventListener("hashchange", route);
+        function route() {
+          if (location.hash === "#/quiz" && session) renderQuiz();
+          else renderHome();
+        }
+
+        /* ---------- drifting blobs ---------- */
+        (function blobs() {
+          if (reduce) return;
+          var els = document.querySelectorAll("#bgfx .blob");
+          var W = window.innerWidth, H = window.innerHeight;
+          window.addEventListener("resize", function () { W = window.innerWidth; H = window.innerHeight; });
+          var pts = [];
+          for (var i = 0; i < els.length; i++) pts.push({ x: W * (0.3 + 0.2 * i), y: H * (0.25 + 0.18 * i), tx: W * 0.5, ty: H * 0.4, sp: 0.012 + i * 0.006 });
+          var target = { x: W * 0.5, y: H * 0.35 };
+          window.addEventListener("pointermove", function (e) { target.x = e.clientX; target.y = e.clientY; }, { passive: true });
+          var idle = 0;
+          function tick() {
+            idle += 0.01;
+            for (var i = 0; i < pts.length; i++) {
+              var p = pts[i];
+              var dx = target.x + Math.cos(idle * (0.5 + i * 0.3)) * 80 - p.x;
+              var dy = target.y + Math.sin(idle * (0.4 + i * 0.3)) * 80 - p.y;
+              p.x += dx * p.sp; p.y += dy * p.sp;
+              var el = els[i];
+              el.style.transform = "translate(" + (p.x - el.offsetWidth / 2) + "px," + (p.y - el.offsetHeight / 2) + "px)";
+            }
+            requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+        })();
+
+        /* ---------- go ---------- */
+        renderHome();
+      })();
+    </script>
+  </body>
+</html>

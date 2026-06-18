@@ -7,7 +7,7 @@
 
 /* ---------- TOKENS: color ---------- */
 :root{
-  --bg:#0B0B0B; --surface:#141414; --surface-2:#1A1A1A; --line:#262626;
+  --bg:#101010; --surface:#141414; --surface-2:#1A1A1A; --line:#262626;
   --gold:#F8B828; --gold-dim:#C9941F; --gold-hi:#FFC945;
   --white:#FFFFFF; --muted:#8A8A8A; --muted-2:#5E5E5E;
   --green:#37D67A; --red:#E0564B; --amber:#E0A23B;

@@ -1,0 +1,14 @@
+{
+  "name": "FieldFlō Prep — Interview Quiz",
+  "short_name": "FieldFlō Prep",
+  "description": "Private interview-rehearsal quiz for the FieldFlō Sr. Product Designer interview.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#101010",
+  "theme_color": "#101010",
+  "icons": [
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
