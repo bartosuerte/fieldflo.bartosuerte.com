@@ -131,7 +131,7 @@ For Barton: that culture maps cleanly onto the self-built application artifacts.
 - Other Flō products beyond FlōTime, and where the suite branding is headed.
 - Platform pricing. Still not published by FieldFlō; they lead with the savings claim, not a price. Competitor pricing gives only rough anchors.
 - The regulatory claims in the FlōTime section. Verify independently before citing. Do not parrot specific legal assertions about any state.
-- Careers and team. A /fieldflo-careers page exists; read it for open roles, culture signals, and any design-team detail. CBInsights has a FieldFlō company page with headcount and financials if a deeper dig is useful. Known from prep notes: Corey (lead product designer, doing the hiring).
+- Careers and team. A /fieldflo-careers page exists; read it for open roles, culture signals, and any design-team detail. CBInsights has a FieldFlō company page with headcount and financials if a deeper dig is useful.
 
 ## Sources
 

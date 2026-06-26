@@ -25,7 +25,7 @@
 | 2015-2017 | **Co-founder & Head of Product, Olivia**, an AI personal-finance assistant, **acquired by Nubank** | Founder energy + AI-native before it was a buzzword. He respects people who build lean and own everything. |
 | 2019-2022 | **Director of PM, DISCO**, legal e-discovery, public company, deep **AI/ML** product work | He has shipped real AI features with real uncertainty. He'll probe your AI-UX thinking with authority. |
 | 2022-2025 | **VP Product, FieldRoutes** (a ServiceTitan company, vertical SaaS for pest control / lawn care), then **Head of Product, MarketingPro at ServiceTitan** | **This is the big one: he has built the FieldFlō playbook before**, vertical SaaS for the trades, field → office workflows, at scale. He knows this buyer cold. |
-| Jan 2026 → | **CPO, FieldFlō** | Brand-new in seat, building the product org (hiring a Sr PM and designers), proving the AI-native thesis. |
+| Jan 2026 → | **CPO, FieldFlō** | Brand-new in seat, building out the product org and proving the AI-native thesis. |
 
 **His own stated north star (use his words back to him, honestly):**
 > "Time tracking, safety and project documentation are the backbone of every job, in every U.S. state. Our ultimate goal is to remove friction from those workflows so teams can simply focus on the work at hand."
@@ -49,9 +49,9 @@ Colleagues across his career consistently describe the same person; his 2026 hir
 
 ## 4. What he's under pressure to do right now (read the moment)
 
-He's a **first-time-at-this-company CPO, ~6 months in, post-$35M Mainsail raise, in "the next few quarters will define the category" mode.** He is building a product org and needs people who make a small team ship more. He is not hiring a pair of hands to execute Corey's specs; the company says the product team "sets its own priorities and owns outcomes end-to-end."
+He's a **first-time-at-this-company CPO, ~6 months in, post-$35M Mainsail raise, in "the next few quarters will define the category" mode.** He is building a product org and needs people who make a small team ship more. The company says the product team "sets its own priorities and owns outcomes end-to-end," so he is looking for owners, not order-takers.
 
-**What that means for your interview with him:** his lens is altitude, judgment, ownership, business sense, AI-thesis fit, and whether you raise the team's output, more than portfolio-craft minutiae (that's likely Corey's lane). Bring strategy and proof, not a pixel tour. (If he does go deep on craft, you have it, but don't lead there with him.)
+**What that means for your interview with him:** his lens is altitude, judgment, ownership, business sense, AI-thesis fit, and whether you raise the team's output, more than portfolio-craft minutiae. Bring strategy and proof, not a pixel tour. (If he does go deep on craft, you have it, but don't lead there with him.)
 
 ---
 
@@ -72,7 +72,7 @@ No inflation. Where it's a stretch, it's marked.
 ## 6. What repels Atul, the traps this interviewer creates
 
 1. **Fluffing or bluffing, fatal.** He maps flows and reasons about feasibility; inflated claims die on the first follow-up, and the company explicitly prizes direct communication. Never claim B2B-SaaS product tenure or "product designer" years you don't have. Your honest reframe ("different label, same substance, here's the working proof") is not a fallback; with him it's the stronger play.
-2. **Hand-wavy AI talk.** "I'm very AI-native" with no toolchain is exactly what he's screening out (he's hiring against fakers). Give the specific pipeline, the specific decisions.
+2. **Hand-wavy AI talk.** "I'm very AI-native" with no toolchain is the kind of claim an engineer-exec will test hard; his public hiring posts emphasize real, demonstrated AI fluency. Give the specific pipeline, the specific decisions.
 3. **Design-as-decoration.** If you talk aesthetics without workflow/business rationale, you lose the engineer-exec. He said it himself: design should "meaningfully shape how the business actually runs."
 4. **Faking the domain.** He built FieldRoutes and ServiceTitan, he knows the trades buyer better than almost anyone. Do **not** perform abatement expertise. Show respect for the field → office → finance complexity, lean on your real "I get fluent in new industries fast" track record, and have a credible learn-first plan.
 5. **Signaling slowness.** "I'd research for a month before touching anything" is the wrong music for a man who repeats "hours and days." Bias to action, which is true for you, is the right note.

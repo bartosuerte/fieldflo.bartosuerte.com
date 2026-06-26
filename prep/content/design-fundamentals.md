@@ -31,7 +31,7 @@ A clean way to frame "good product design" out loud, the four lenses (from IDEO 
 | **Viable** | Does it make business sense? | Product / business |
 | **Feasible** | Can we actually build it? | Engineering |
 
-Your edge: you cover **desirable + usable** at a high craft level, and you can hold the other two in your head. Corey said he wants a designer stronger than himself who can also think through flows. This framing is you saying exactly that without bragging.
+Your edge: you cover **desirable + usable** at a high craft level, and you can hold the other two in your head. A lead designer hiring to raise the bar wants someone strong on craft who can also reason through flows, and this framing lets you say exactly that without bragging.
 
 ---
 
@@ -135,7 +135,7 @@ Bring the thinking, drop the bureaucracy: heavyweight waterfall deliverables, ex
 
 ## 4. A runbook for a timed design exercise
 
-If a design exercise comes up, treat it like any other: read the prompt carefully (2-3 times), spend the bulk of your time on interaction and flows, and leave a slice at the end for visual polish toward the FieldFlō aesthetic. Lean on Claude where it genuinely helps. The plan below is proportional, so it works for any time window, scale each block to whatever you are given.
+If a design exercise comes up, treat it like any other: read the prompt carefully (2-3 times), spend the bulk of your time on interaction and flows, and leave a slice at the end for visual polish (toward the FieldFlō aesthetic if the prompt is about their product). Lean on Claude where it genuinely helps. The plan below is proportional, so it works for any time window, scale each block to whatever you are given.
 
 | Share of time | Phase | What you produce | Notes |
 |---|---|---|---|
@@ -143,10 +143,10 @@ If a design exercise comes up, treat it like any other: read the prompt carefull
 | **~15%** | **Frame** | One sharp problem statement + 1-2 JTBD statements + a short list of "How Might We." Note assumptions explicitly. | Naming assumptions is a senior tell. |
 | **~25%** | **Diverge** | 3-4 rough solution directions (boxes-and-arrows / quick sketches). Pick one and write why, tie to user + constraint + business. | The "why you chose what you chose" answer is written here, in real time. Keep the rejected options, they're proof of rigor. |
 | **~30%** | **Flows & interaction** | The core user flow end-to-end + key screens as wireframes. Handle the unhappy paths: empty, error, offline, edge cases. | Interaction depth is where it is won. Edge/error states are where you out-design most candidates. |
-| **~20%** | **Craft pass** | Apply the FieldFlō visual aesthetic to the hero screens. Polish hierarchy, spacing, the peak moment. | The polish pass. Don't gold-plate everything, make the 1-2 screens that matter shine (Peak-End Rule). |
+| **~20%** | **Craft pass** | Apply a clean, fitting visual aesthetic to the hero screens (lean toward the FieldFlō look if the prompt is about their product). Polish hierarchy, spacing, the peak moment. | The polish pass. Don't gold-plate everything, make the 1-2 screens that matter shine (Peak-End Rule). |
 | (rolling) | **Narrate** | Keep a running 5-8 line log of decisions + tradeoffs. | This becomes your walkthrough script. Decisions you can't explain don't count. |
 
-**How to use Claude honestly inside it** (they want to see this): use it to pressure-test your problem framing, generate option breadth fast, draft microcopy/error states, and sanity-check against Nielsen's heuristics, then **say out loud where your judgment overrode it.** "I had Claude generate six empty-state options; I killed five because they added words a foreman doesn't need." That sentence is the whole job description in one breath.
+**How to use Claude honestly inside it** (this is exactly the AI-native judgment the role is about): use it to pressure-test your problem framing, generate option breadth fast, draft microcopy/error states, and sanity-check against Nielsen's heuristics, then **say out loud where your judgment overrode it.** "I had Claude generate six empty-state options; I killed five because they added words a foreman doesn't need." That sentence is the whole job description in one breath.
 
 ---
 
@@ -154,7 +154,7 @@ If a design exercise comes up, treat it like any other: read the prompt carefull
 
 ### Three questions to be ready for
 1. **What was your process?** → walk the Double Diamond, briefly, with your decisions at each step.
-2. **How did you come to understand the design problem?** → the 0:00-0:30 work: re-reading, reframing, naming the user + context + constraints + assumptions.
+2. **How did you come to understand the design problem?** → the opening block of your time: re-reading, reframing, naming the user + context + constraints + assumptions.
 3. **Why did you come up with what you came up with?** → the decision log: options considered → the one you chose → the tradeoff you accepted.
 
 ### The answer structure (use for almost any design question)
@@ -250,7 +250,7 @@ You don't have time to read books before this interview. Here's the triage.
 
 **Any design answer, this structure:** Problem → Constraints → Options I considered → Decision + why → Tradeoff I accepted → How I'd validate.
 
-**The three questions they'll ask:** What was your process? How did you understand the problem? Why this solution? Answer all three from your live decision log.
+**Three questions worth being ready for:** What was your process? How did you understand the problem? Why this solution? Answer all three from your live decision log.
 
 **AI-native one-liner:** "AI expands my options and speed; fundamentals are how I tell good options from bad ones, and that gap gets more valuable as the tools improve."
 

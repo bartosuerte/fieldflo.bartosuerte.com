@@ -26,4 +26,4 @@ Everything for the FieldFlō Senior Product Designer process, in one place, buil
 
 ## If a design exercise comes up
 
-Approach it like any other design problem. Spend most of your time on interaction, flows, and the unhappy paths, leave a slice for visual polish, and keep a live decision log so you can answer the three questions every reviewer asks: your process, your read of the problem, and why you chose the solution you did. Lean on Claude for breadth, then say out loud where your judgment overrode it.
+Approach it like any other design problem. Spend most of your time on interaction, flows, and the unhappy paths, leave a slice for visual polish, and keep a live decision log so you can clearly explain your process, your read of the problem, and why you chose the solution you did, the things any reviewer is likely to want to understand. Lean on Claude for breadth, then say out loud where your judgment overrode it.
