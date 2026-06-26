@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Interview Prep · FieldFlō</title>
+    <meta name="description" content="Private interview-prep reference for William R. Barton's FieldFlō Sr. Product Designer loop." />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#101010" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Prep" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="apple-touch-icon" href="favicon.svg" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="prep.css?v=4" />
+  </head>
+  <body>
+    <a class="skip-link" href="#article">Skip to content</a>
+    <div class="bgfx" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <button id="hamburger" class="icon-btn hamburger" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">≡</button>
+      <a class="brand" href="#/overview" aria-label="Interview Prep home">
+        <span class="brand-mark" aria-hidden="true">B</span>
+        <span class="brand-title">Interview Prep</span>
+      </a>
+      <div class="topbar-spacer"></div>
+      <button class="search-box" data-open-search aria-label="Search (press /)">
+        <span class="sb-ico" aria-hidden="true">⌕</span>
+        <span class="sb-text">Search</span>
+        <span class="sb-key" aria-hidden="true">/</span>
+      </button>
+      <button class="icon-btn search-icon" data-open-search aria-label="Search">⌕</button>
+    </header>
+
+    <div class="shell">
+      <aside id="sidebar" class="sidebar" aria-label="Documentation navigation"></aside>
+
+      <main id="main" class="main">
+        <nav id="breadcrumb" class="breadcrumb" aria-label="Breadcrumb"></nav>
+        <div id="updated" class="updated" hidden></div>
+        <details id="tocMobile" class="toc-mobile" hidden>
+          <summary>On this page</summary>
+          <div id="tocMobileList" class="toc-list"></div>
+        </details>
+        <article id="article" class="article" tabindex="-1"></article>
+        <nav id="pager" class="pager" aria-label="Page navigation"></nav>
+      </main>
+
+      <aside id="toc" class="toc" aria-label="On this page" hidden>
+        <div class="toc-head">On this page</div>
+        <div id="tocList" class="toc-list"></div>
+      </aside>
+    </div>
+
+    <div id="scrim" class="scrim" aria-hidden="true"></div>
+
+    <div id="searchOverlay" class="search-overlay" role="dialog" aria-modal="true" aria-label="Search">
+      <div class="search-panel">
+        <div class="search-bar">
+          <span class="search-ico" aria-hidden="true">⌕</span>
+          <input id="searchInput" class="search-input" type="text" placeholder="Search all pages..." autocomplete="off" spellcheck="false" />
+          <button id="searchClose" class="search-close" aria-label="Close search">esc</button>
+        </div>
+        <div id="searchResults" class="search-results"></div>
+      </div>
+    </div>
+
+    <script src="prep.config.js?v=1"></script>
+    <script src="lib/marked.min.js"></script>
+    <script src="lib/dompurify.min.js"></script>
+    <script src="app.js?v=7"></script>
+  </body>
+</html>

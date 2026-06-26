@@ -1,0 +1,5 @@
+# fieldflo.bartosuerte.com
+# The interactive resume (/) and the Applicant Review Tool (/app) are public.
+# The interview-prep docs (/prep) are private and must not be indexed.
+User-agent: *
+Disallow: /prep

@@ -1,0 +1,14 @@
+{
+  "name": "FieldFlō Interview Prep",
+  "short_name": "Prep",
+  "description": "Private interview-prep reference for the FieldFlō Sr. Product Designer loop.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#101010",
+  "theme_color": "#101010",
+  "icons": [
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
