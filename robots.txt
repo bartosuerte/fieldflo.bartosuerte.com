@@ -1,5 +1,5 @@
 # fieldflo.bartosuerte.com
-# The interactive resume (/) and the Applicant Review Tool (/app) are public.
-# The interview-prep docs (/prep) are private and must not be indexed.
+# /prep is kept out of search via its noindex meta + X-Robots-Tag header,
+# so it is deliberately not named here (naming it would advertise the path).
 User-agent: *
-Disallow: /prep
+Disallow:

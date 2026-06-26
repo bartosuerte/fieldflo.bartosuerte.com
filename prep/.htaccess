@@ -1,34 +1,21 @@
-# /prep/.htaccess — gate the interview-prep docs behind HTTP Basic Auth.
-# The password file (.htpasswd_prep) lives on the SERVER ONLY and is NEVER committed.
+# /prep/.htaccess
+# Password protection intentionally REMOVED (Barton's call, 2026-06-26).
+# The interview-prep docs are unlinked from the public site and noindexed,
+# but are now publicly READABLE by anyone who has the URL (dossiers and
+# strategy included). This is private-by-obscurity, not authenticated.
 #
-# ONE-TIME SETUP on SiteGround (pick A or B):
-#
-#   A) Keep this .htaccess (version-controlled) and just create the password file.
-#      Via Site Tools > Devs > SSH (or File Manager terminal):
-#        htpasswd -c /home/customer/www/fieldflo.bartosuerte.com/.htpasswd_prep barton
-#      It prompts for a password. Use -c ONLY the first time (it creates the file);
-#      drop -c on any later edit so you do not wipe the file.
-#      Then confirm the AuthUserFile path below matches where you created it. On
-#      SiteGround Site Tools the home path is /home/customer/www/<domain>/...
-#      If your account's absolute path differs, update the AuthUserFile line.
-#
-#   B) GUI alternative (no SSH): Site Tools > Security > Protected URLs, point it at
-#      /prep and set a user/password there. That tool writes its OWN .htaccess +
-#      .htpasswd with the correct server paths — so if you use B, DELETE the
-#      AuthType/AuthName/AuthUserFile/Require block below and keep only the header.
-#
-# Until the password file exists, Apache denies /prep (it fails CLOSED), so the
-# sensitive content is never served to the public. That is the safe default.
+# To re-gate later, restore a Basic Auth block here and create a server-only
+# password file (kept OUT of the repo so deploys never overwrite it):
+#   AuthType Basic
+#   AuthName "Interview Prep"
+#   AuthUserFile "/home/customer/www/fieldflo.bartosuerte.com/.htpasswd_prep"
+#   Require valid-user
+# then on the server: htpasswd -c /home/customer/www/fieldflo.bartosuerte.com/.htpasswd_prep barton
 
-AuthType Basic
-AuthName "Interview Prep"
-AuthUserFile "/home/customer/www/fieldflo.bartosuerte.com/.htpasswd_prep"
-Require valid-user
-
-# Defense in depth: tell crawlers not to index, even if auth is ever lifted.
+# Keep /prep out of search indexes even though it is open.
 <IfModule mod_headers.c>
   Header set X-Robots-Tag "noindex, nofollow"
 </IfModule>
 
-# No directory listings under /prep.
+# No directory listings (so /prep/content/ cannot be browsed).
 Options -Indexes
