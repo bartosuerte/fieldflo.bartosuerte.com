@@ -16,7 +16,7 @@ The "Job match is low" assessment scored you **0 of 3 required** and **0 of 5 pr
 | LinkedIn AI claim | Reality (per your resume + the tool) | Verdict |
 |---|---|---|
 | "Heavy hands-on use of Claude, no concrete examples" | You use Claude (Cowork + Claude Code) daily, version in GitHub, and **designed + built the Applicant Review Tool end-to-end in hours** to your own design system. | **Inaccurate**, this is your single strongest area, scored as a zero. |
-| "No portfolio or specific product design work mentioned" | You have a live, shipped product (review.bartosuerte.com) plus bartosuerte.com. | **Partly inaccurate**, you have a shipped artifact; what's missing is a traditional multi-screen case-study portfolio. |
+| "No portfolio or specific product design work mentioned" | You have a live, shipped product (review.bartosuerte.com) plus bartosuerte.com. | **Partly inaccurate**, you have a shipped artifact; what's missing is a traditional multi-screen design portfolio. |
 | "No mention of AI/ML product features" | The Applicant Review Tool **is** an AI feature set: document extraction/parsing, AI grading, and a copilot-style Q&A with human-in-the-loop. | **Inaccurate**, it maps directly to the JD's "document extraction, copilots" line. |
 | "No B2B SaaS experience" | Humble & Fume was compliance/investor-relations-heavy, but your role was creative/marketing, not SaaS product design. | **Accurate**, real gap (see §2). |
 | "No vertical SaaS / multi-role / specialty subcontracting" | Nothing in your record touches construction, field→office→finance personas, or the trades. | **Accurate**, real gaps (see §2). |
@@ -55,7 +55,7 @@ This flips every gap. You're not "under-qualified for senior product design." Yo
 ### Lead with / neutralize / never say
 
 **Lead with (spend your airtime here):**
-- The Applicant Review Tool as a product design case study, not a portfolio piece, a proof of how you work.
+- The Applicant Review Tool as a product-design walkthrough, not a portfolio piece, a proof of how you work.
 - Concrete Claude workflow specifics (Cowork for concepting → Claude Code for the build → GitHub for versioning → your own design system).
 - The AI-UX decisions you made in the tool (this is the bridge to "AI/probabilistic systems" experience, see §4 Q2).
 
@@ -119,8 +119,8 @@ For each: what they're really testing, the trap, your strategy, and a sample ans
 
 - Really testing: Depth of design thinking across real work.
 - Trap: Apologizing for thin volume.
-- Strategy: Quality over quantity. Go deep on ONE thing (the tool) as a full case study, then reference breadth (15 yrs of shipped client work, the Humble & Fume systems redesign).
-- Case-study spine to rehearse: **Problem** (let a hiring team grade any applicant fairly against a posting) → **Users** (recruiter + applicant) → **Key decisions** (six role-derived categories, transparent scoring, evidence pulled from the candidate's own words) → **AI-UX decisions** (Q2 above) → **Tradeoffs** (deterministic vs generative; free/local vs live-AI) → **Outcome & next** (shipped, live, in use; what you'd add with more time). Then: "Underneath that is fifteen years of shipping client sites end to end and one full systems redesign at Humble & Fume, happy to go there too."
+- Strategy: Quality over quantity. Go deep on ONE thing (the tool) as a full design walkthrough, then reference breadth (15 yrs of shipped client work, the Humble & Fume systems redesign).
+- Walkthrough spine to rehearse: **Problem** (let a hiring team grade any applicant fairly against a posting) → **Users** (recruiter + applicant) → **Key decisions** (six role-derived categories, transparent scoring, evidence pulled from the candidate's own words) → **AI-UX decisions** (Q2 above) → **Tradeoffs** (deterministic vs generative; free/local vs live-AI) → **Outcome & next** (shipped, live, in use; what you'd add with more time). Then: "Underneath that is fifteen years of shipping client sites end to end and one full systems redesign at Humble & Fume, happy to go there too."
 
 ---
 

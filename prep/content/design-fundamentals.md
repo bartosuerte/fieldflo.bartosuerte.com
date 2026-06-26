@@ -1,14 +1,14 @@
-# Product Design Fundamentals, Interview & Case-Study Primer
+# Product Design Fundamentals & Interview Primer
 Built for your FieldFlō interviews · June 26, 2026
 
-The goal of this doc isn't to turn you into a textbook PM. You already have the craft. This gives you the **language and process spine** to articulate what you already do intuitively, a **2-hour runbook** for the case study, and the **AI-native angle** that's your actual differentiator here. Skim it, don't study it.
+The goal of this doc isn't to turn you into a textbook PM. You already have the craft. This gives you the **language and process spine** to articulate what you already do intuitively, a **practical runbook** for any timed design exercise, and the **AI-native angle** that's your actual differentiator here. Skim it, don't study it.
 
 ---
 
 ## 0. How to use this today
 
 - **10 minutes before the interview:** read §1 (the reframe) and §8 (the one-pager). That's the whole thing compressed.
-- **During the 2-hour case study:** run §4 as a checklist. Keep it open in a second window.
+- **During any timed design exercise:** run §4 as a checklist. Keep it open in a second window.
 - **If they ask "what's your process / why did you choose this":** §5 has the answer structures.
 - **The differentiator they care about:** §6. Don't skip it. "AI-savvy + real design judgment" is the exact thing they're hiring for.
 
@@ -20,7 +20,7 @@ The single most important mental shift to project in interviews:
 
 > **Product design isn't making screens. It's closing the gap between what a user is trying to do and what the system forces them to do.** Screens are just one output.
 
-Junior designers talk about what they made. Senior designers talk about the problem, the constraints, the options they considered, and why they chose what they chose. That last part is literally what Alan said they'll grill you on.
+Junior designers talk about what they made. Senior designers talk about the problem, the constraints, the options they considered, and why they chose what they chose. That last part is exactly what strong interviewers probe for.
 
 A clean way to frame "good product design" out loud, the four lenses (from IDEO / standard product thinking):
 
@@ -97,11 +97,11 @@ Most designers treat accessibility as compliance. Reframe it as **designing for 
 
 ---
 
-## 3. The process spine (the engine for your case study)
+## 3. The process spine (the engine for any design exercise)
 
 You already do this intuitively. Here's the named version so you can narrate it.
 
-### The Double Diamond (the backbone of any case-study story)
+### The Double Diamond (the backbone of any design story)
 Two diamonds, each diverging then converging:
 
 1. **Discover** (diverge), explore the problem space. Who's the user, what's actually going wrong, what's the context?
@@ -114,7 +114,7 @@ The senior move is naming which diamond you're in and **why you narrowed where y
 ### Jobs To Be Done (JTBD), frame the user's actual goal
 > When [situation], I want to [motivation], so I can [expected outcome].
 
-e.g. "When I finish a job site at end of day, I want to log crew hours in under a minute, so I can leave without paperwork following me home." JTBD keeps you focused on the outcome, not the feature. Drop one of these in the case study and it signals maturity.
+e.g. "When I finish a job site at end of day, I want to log crew hours in under a minute, so I can leave without paperwork following me home." JTBD keeps you focused on the outcome, not the feature. Drop one of these into a design exercise and it signals maturity.
 
 ### Problem framing tools
 - **"How Might We…"**, turn a problem into an open design question. "How might we let a foreman log hours without typing?"
@@ -122,7 +122,7 @@ e.g. "When I finish a job site at end of day, I want to log crew hours in under 
 - **Reframing**, the requested solution is rarely the real problem. Show you can tell the difference (gently, don't reject their prompt, expand it).
 
 ### The artifact ladder (low → high fidelity, cheap → expensive)
-Proto-persona → journey map → **user flow / wireflow** → low-fi wireframes → interaction/prototype → hi-fi visual → validation. The principle: **stay low-fidelity as long as possible.** You validate the thinking before you spend time on pixels. For a 2-hour case study this discipline is survival.
+Proto-persona → journey map → **user flow / wireflow** → low-fi wireframes → interaction/prototype → hi-fi visual → validation. The principle: **stay low-fidelity as long as possible.** You validate the thinking before you spend time on pixels. Under time pressure this discipline is survival.
 
 ### Validation
 - **Heuristic evaluation**, check your own design against Nielsen's 10.
@@ -133,17 +133,17 @@ Bring the thinking, drop the bureaucracy: heavyweight waterfall deliverables, ex
 
 ---
 
-## 4. The 2-hour case-study runbook
+## 4. A runbook for a timed design exercise
 
-Alan's intel: ~2-hour window, real FieldFlō project, complex prompt (read it 2-3x), they want **1.5 hrs on interaction/UX, last 0.5 hr on design flair close to the FF aesthetic**, and leaning on Claude is encouraged. Here's a timebox that maps to that and to the questions they'll ask.
+If a design exercise comes up, treat it like any other: read the prompt carefully (2-3 times), spend the bulk of your time on interaction and flows, and leave a slice at the end for visual polish toward the FieldFlō aesthetic. Lean on Claude where it genuinely helps. The plan below is proportional, so it works for any time window, scale each block to whatever you are given.
 
-| Time | Phase | What you produce | Notes |
+| Share of time | Phase | What you produce | Notes |
 |---|---|---|---|
-| **0:00-0:15** | **Understand** | Re-read prompt 2x. Write the problem in your own words + who the user is + the context-of-use + constraints + what success looks like. | This 15 min is the "how did you understand the problem" answer. Use Claude to pressure-test your read of the prompt, not to do your thinking. |
-| **0:15-0:30** | **Frame** | One sharp problem statement + 1-2 JTBD statements + a short list of "How Might We." Note assumptions explicitly. | Naming assumptions is a senior tell. |
-| **0:30-1:00** | **Diverge** | 3-4 rough solution directions (boxes-and-arrows / quick sketches). Pick one and write why, tie to user + constraint + business. | The "why you chose what you chose" answer is written here, in real time. Keep the rejected options, they're proof of rigor. |
-| **1:00-1:30** | **Flows & interaction** | The core user flow end-to-end + key screens as wireframes. Handle the unhappy paths: empty, error, offline, edge cases. | This is the 1.5-hr "interaction" focus Alan flagged. Edge/error states are where you out-design most candidates. |
-| **1:30-2:00** | **Craft pass** | Apply FF visual aesthetic to the hero screens. Polish hierarchy, spacing, the peak moment. | The 0.5-hr "flair." Don't gold-plate everything, make the 1-2 screens that matter shine (Peak-End Rule). |
+| **~10%** | **Understand** | Re-read the prompt twice. Write the problem in your own words + who the user is + the context-of-use + constraints + what success looks like. | This first block is the "how did you understand the problem" answer. Use Claude to pressure-test your read of the prompt, not to do your thinking. |
+| **~15%** | **Frame** | One sharp problem statement + 1-2 JTBD statements + a short list of "How Might We." Note assumptions explicitly. | Naming assumptions is a senior tell. |
+| **~25%** | **Diverge** | 3-4 rough solution directions (boxes-and-arrows / quick sketches). Pick one and write why, tie to user + constraint + business. | The "why you chose what you chose" answer is written here, in real time. Keep the rejected options, they're proof of rigor. |
+| **~30%** | **Flows & interaction** | The core user flow end-to-end + key screens as wireframes. Handle the unhappy paths: empty, error, offline, edge cases. | Interaction depth is where it is won. Edge/error states are where you out-design most candidates. |
+| **~20%** | **Craft pass** | Apply the FieldFlō visual aesthetic to the hero screens. Polish hierarchy, spacing, the peak moment. | The polish pass. Don't gold-plate everything, make the 1-2 screens that matter shine (Peak-End Rule). |
 | (rolling) | **Narrate** | Keep a running 5-8 line log of decisions + tradeoffs. | This becomes your walkthrough script. Decisions you can't explain don't count. |
 
 **How to use Claude honestly inside it** (they want to see this): use it to pressure-test your problem framing, generate option breadth fast, draft microcopy/error states, and sanity-check against Nielsen's heuristics, then **say out loud where your judgment overrode it.** "I had Claude generate six empty-state options; I killed five because they added words a foreman doesn't need." That sentence is the whole job description in one breath.
@@ -152,7 +152,7 @@ Alan's intel: ~2-hour window, real FieldFlō project, complex prompt (read it 2-
 
 ## 5. Interview articulation
 
-### The three questions they will ask (Alan told you these)
+### Three questions to be ready for
 1. **What was your process?** → walk the Double Diamond, briefly, with your decisions at each step.
 2. **How did you come to understand the design problem?** → the 0:00-0:30 work: re-reading, reframing, naming the user + context + constraints + assumptions.
 3. **Why did you come up with what you came up with?** → the decision log: options considered → the one you chose → the tradeoff you accepted.
@@ -164,7 +164,7 @@ That sequence makes you sound senior every time. Most candidates skip "options I
 
 ### Read the room: Atul vs. Corey
 - **Atul (CPO, ex-engineer, built FieldRoutes/ServiceTitan, serious, listens deeply, PM rigor).** Lead with the **problem, constraints, tradeoffs, and feasibility.** Be concise; he weighs his words and respects people who do too. Don't oversell, he'll spot it. If you're unsure, say so and reason out loud; he values thinking over polish.
-- **Corey (wants a designer stronger than himself, craft-oriented).** Show **taste, systems thinking, and detail**, talk hierarchy, restraint, the aesthetic-usability effect, how you'd build a consistent component language across ~13 modules. He'll enjoy a peer-level craft conversation.
+- **Corey (Lead Product Designer, craft-oriented, hiring to raise the design bar).** Show **taste, systems thinking, and detail**, talk hierarchy, restraint, the aesthetic-usability effect, how you'd build a consistent component language across ~13 modules. He'll enjoy a peer-level craft conversation.
 
 ### Vocabulary cheat sheet (so the "lingo" is fluent, not forced)
 Affordance · signifier · conceptual model · mental model · information architecture (IA) · user flow / wireflow · progressive disclosure · happy path / unhappy path · edge case · empty / error / loading state · error prevention vs. recovery · heuristic evaluation · fidelity (low/hi) · design system / tokens / components · cognitive load · friction · north-star metric · guardrails · jobs-to-be-done · divergent/convergent.
@@ -217,7 +217,7 @@ You don't have time to read books before this interview. Here's the triage.
 - **Re-read §8 of this doc.** Honestly the best use of the 10 minutes.
 
 ### After today / this week (to actually deepen)
-- **The Shape of AI**, shapeof.ai. The reference library of UX patterns for AI products (onboarding, trust, failure states, human-in-the-loop). Directly relevant to FieldFlō's AI features. Browse it before the case study if you have an hour.
+- **The Shape of AI**, shapeof.ai. The reference library of UX patterns for AI products (onboarding, trust, failure states, human-in-the-loop). Directly relevant to FieldFlō's AI features. Browse it before any design exercise if you have time.
 - **Google PAIR, People + AI Guidebook** (pair.withgoogle.com/guidebook), the practical playbook for designing AI/probabilistic features (trust, errors, feedback). Pairs perfectly with your AI-native pitch.
 - **Teresa Torres, Continuous Discovery Habits**, the modern answer to "how do I keep talking to users and tie decisions to outcomes." This is the process language Atul will respect.
 

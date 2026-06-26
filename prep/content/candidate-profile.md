@@ -33,7 +33,7 @@ Three pillars every answer ladders to:
 - **Arc:** Windship Trading (e-commerce, brand and site, garage to multi-warehouse) to film production in Chicago (brand docuseries, including Gatorade Player of the Year) to Creative Marketing Director at Humble and Fume to freelance since 2022 going deep on Claude.
 - **Builds in:** Webflow and Shopify, now moving to a custom Claude Code workflow for builds beyond Webflow's defaults.
 - **Location:** Chattanooga, Tennessee, Eastern time. Eligible state, no sponsorship needed.
-- **Referral path:** Friend Alan (Sam), a FieldFlō PM, has vouched to Corey (Lead Product Designer, the hiring manager).
+- **Referral:** a warm introduction to the hiring manager, Corey (Lead Product Designer).
 
 ---
 
